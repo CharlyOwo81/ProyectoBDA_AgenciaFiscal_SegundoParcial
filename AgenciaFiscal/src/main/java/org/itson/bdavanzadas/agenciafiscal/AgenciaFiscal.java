@@ -4,12 +4,12 @@
 
 package org.itson.bdavanzadas.agenciafiscal;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.ContribuyenteDAO;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.ContribuyenteNuevoDTO;
+import java.util.GregorianCalendar;
+import static org.itson.bdavanzadas.agenciafiscal_dominio.TipoLicencia.ESTANDAR;
+import org.itson.bdavanzadas.agenciafiscal_dominio.TramiteLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.LicenciaDAO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.TramiteLicenciaNuevaDTO;
 
 /**
  *
@@ -17,14 +17,24 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.ContribuyenteNuevoD
  */
 public class AgenciaFiscal {
 
-    public static void main(String[] args) throws ParseException {
-        String fechaString = "1998-12-31"; // Fecha en formato "yyyy-MM-dd"
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date fecha = sdf.parse(fechaString);
-        
-        ContribuyenteDAO contriDAO= new ContribuyenteDAO(); 
-        Contribuyente contri = contriDAO.agregarContribuyente(
-                new ContribuyenteNuevoDTO("YEPY981231RF5","Yolanda", "Yépiz", "Puentes", 
-                        "6432134567", fecha));
+    public static void main(String[] args){
+//        try {
+//            String fechaString = "1970-03-21"; // Fecha en formato "yyyy-MM-dd"
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//            Date fecha = sdf.parse(fechaString);
+//            
+//            
+//            ContribuyenteDAO contriDAO= new ContribuyenteDAO();
+////            Contribuyente contri = contriDAO.agregarContribuyente(
+////                    new ContribuyenteNuevoDTO("RUCJ700321WE2",
+////                            "José", "Ruíz", "Chávez","6432133124", fecha, true));
+//        } catch (ParseException ex) {
+//            Logger.getLogger(AgenciaFiscal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        GregorianCalendar calendario = new GregorianCalendar();
+        Date fecha = calendario.getTime();
+        LicenciaDAO licenciaDAO = new LicenciaDAO();
+        TramiteLicencia nuevaLicencia = licenciaDAO.agregarLicencia(new TramiteLicenciaNuevaDTO(1, ESTANDAR, 600F, fecha));
     }
 }
