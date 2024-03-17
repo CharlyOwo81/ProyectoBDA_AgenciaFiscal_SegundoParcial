@@ -26,12 +26,14 @@ public class ContribuyenteDAO implements IContribuyenteDAO{
         
         tx.begin();
         Contribuyente contribuyente = new Contribuyente(
+                            contribuyenteNuevo.getCURP(),
                             contribuyenteNuevo.getRFC(),        
                             contribuyenteNuevo.getNombre(),        
                             contribuyenteNuevo.getApellido_paterno(),        
                             contribuyenteNuevo.getApellido_materno(),        
                             contribuyenteNuevo.getTelefono(),        
-                            contribuyenteNuevo.getFecha_nacimiento());      
+                            contribuyenteNuevo.getFecha_nacimiento(),
+                            contribuyenteNuevo.isDiscapacidad());      
         em.persist(contribuyente);
         tx.commit();
         em.close();

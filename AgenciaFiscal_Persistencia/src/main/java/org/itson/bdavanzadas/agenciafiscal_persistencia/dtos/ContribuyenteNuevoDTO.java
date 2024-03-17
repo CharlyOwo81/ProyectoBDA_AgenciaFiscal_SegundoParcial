@@ -12,19 +12,31 @@ import java.util.Date;
  */
 public class ContribuyenteNuevoDTO {
     private String RFC;
+    private String CURP;
     private String nombre;
     private String apellido_paterno;
     private String apellido_materno;
     private String telefono;
     private Date fecha_nacimiento;
+    private boolean discapacidad;
 
-    public ContribuyenteNuevoDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento) {
+    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad) {
         this.RFC = RFC;
+        this.CURP = CURP;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+    }
+
+    public String getCURP() {
+        return CURP;
+    }
+
+    public void setCURP(String CURP) {
+        this.CURP = CURP;
     }
 
     public String getRFC() {
@@ -74,4 +86,13 @@ public class ContribuyenteNuevoDTO {
     public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
     }
+
+    public boolean isDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
+    }
+    
 }
