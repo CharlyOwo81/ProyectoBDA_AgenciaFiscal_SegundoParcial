@@ -32,6 +32,9 @@ public class Contribuyente implements Serializable {
     @Column (name= "RFC", nullable = false, length = 13, unique = true)
     private String RFC;
     
+    @Column (name= "CURP", nullable = false, length = 18, unique = true)
+    private String CURP;
+    
     @Column (name = "nombre", nullable = false, length = 200)
     private String nombre;
     
@@ -47,17 +50,30 @@ public class Contribuyente implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column (name = "fecha_nacimiento", nullable = false)
     private Date fecha_nacimiento;
+    
+    @Column (name ="discapacidad", nullable = false)
+    private boolean discapacidad;
 
     public Contribuyente() {
     }
 
-    public Contribuyente(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento) {
+    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad) {
         this.RFC = RFC;
+        this.CURP = CURP;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+    }
+
+    public String getCURP() {
+        return CURP;
+    }
+
+    public void setCURP(String CURP) {
+        this.CURP = CURP;
     }
     
     public Long getId() {
@@ -114,6 +130,14 @@ public class Contribuyente implements Serializable {
 
     public void setFecha_nacimiento(Date fecha_nacimiento) {
         this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    public boolean isDiscapacidad() {
+        return discapacidad;
+    }
+
+    public void setDiscapacidad(boolean discapacidad) {
+        this.discapacidad = discapacidad;
     }
     
     @Override
