@@ -18,6 +18,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.TramiteLicenciaNuev
 public class AgenciaFiscal {
 
     public static void main(String[] args){
+        
 //        try {
 //            String fechaString = "1970-03-21"; // Fecha en formato "yyyy-MM-dd"
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
