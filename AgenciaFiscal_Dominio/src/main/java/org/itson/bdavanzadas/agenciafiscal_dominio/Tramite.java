@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_tramite")
-@Table (name = "tramite")
+@Table (name = "tramites")
 public class Tramite implements Serializable {
 
     @Id

@@ -5,6 +5,7 @@
     <class>org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente</class>
     <class>org.itson.bdavanzadas.agenciafiscal_dominio.Tramite</class>
     <class>org.itson.bdavanzadas.agenciafiscal_dominio.TramiteLicencia</class>
+    <class>org.itson.bdavanzadas.agenciafiscal_dominio.Vehiculo</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/proyectobda_agenciafiscal?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

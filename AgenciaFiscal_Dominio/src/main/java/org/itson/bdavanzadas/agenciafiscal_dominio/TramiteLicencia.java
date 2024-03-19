@@ -4,14 +4,13 @@
  */
 package org.itson.bdavanzadas.agenciafiscal_dominio;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -20,13 +19,8 @@ import javax.persistence.Table;
  * @author gamaliel
  */
 @Entity
-@DiscriminatorValue("licencia")
-@Table(name = "licencia")
+@DiscriminatorValue("Licencia")
 public class TramiteLicencia extends Tramite implements Serializable {
-
-    @Id
-    @Column (name = "id_tramite_licencia")
-    private Long id;
     
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_licencia", nullable = false)
@@ -45,14 +39,6 @@ public class TramiteLicencia extends Tramite implements Serializable {
         this.vigencia = vigencia;
     }
     
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public TipoLicencia getTipo_licencia() {
         return tipo_licencia;
     }
@@ -68,30 +54,4 @@ public class TramiteLicencia extends Tramite implements Serializable {
     public void setVigencia(Integer vigencia) {
         this.vigencia = vigencia;
     }
-    
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TramiteLicencia)) {
-            return false;
-        }
-        TramiteLicencia other = (TramiteLicencia) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "org.itson.bdavanzadas.agenciafiscal_dominio.TramiteLicencia[ id=" + id + " ]";
-    }
-    
 }

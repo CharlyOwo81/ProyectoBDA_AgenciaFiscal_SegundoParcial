@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  * @author gamaliel
  */
 @Entity
-@Table (name = "contribuyente")
+@Table (name = "contribuyentes")
 public class Contribuyente implements Serializable {
 
     
