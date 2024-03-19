@@ -25,7 +25,6 @@ import javax.persistence.Table;
 public class TramiteLicencia extends Tramite implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_tramite_licencia")
     private Long id;
     
