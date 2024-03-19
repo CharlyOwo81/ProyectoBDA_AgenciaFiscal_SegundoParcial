@@ -22,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @DiscriminatorValue("licencia")
 @Table(name = "licencia")
-public class TramiteLicencia extends Tramite {
+public class TramiteLicencia extends Tramite implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
