@@ -37,19 +37,25 @@ public class Tramite implements Serializable {
     private Float costo;
     
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fecha_emision", nullable =false)
+    @Column(name = "fecha_emision", nullable = false)
     private Date fecha_emision; 
     
     @Temporal(TemporalType.TIMESTAMP)
-    @Column (name = "fecha_recepcion", nullable = true)
+    @Column (name = "fecha_recepcion", nullable = false)
     private Date fecha_recepcion;
+    
+    
+    @Column(name = "contribuyente", nullable = true)
+    private Contribuyente contribuyente;
 
     public Tramite() {
     }
-    
-    public Tramite(Float costo, Date fecha_emision) {
+
+    public Tramite(Float costo, Date fecha_emision, Date fecha_recepcion, Contribuyente contribuyente) {
         this.costo = costo;
         this.fecha_emision = fecha_emision;
+        this.fecha_recepcion = fecha_recepcion;
+        this.contribuyente = contribuyente;
     }
     
     public Long getId() {
@@ -83,7 +89,15 @@ public class Tramite implements Serializable {
     public void setFecha_recepcion(Date fecha_recepcion) {
         this.fecha_recepcion = fecha_recepcion;
     }
-    
+
+    public Contribuyente getContribuyente() {
+        return contribuyente;
+    }
+
+    public void setContribuyente(Contribuyente contribuyente) {
+        this.contribuyente = contribuyente;
+    }
+           
     @Override
     public int hashCode() {
         int hash = 0;

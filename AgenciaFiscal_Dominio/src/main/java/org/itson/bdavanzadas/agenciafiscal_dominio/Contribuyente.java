@@ -6,11 +6,14 @@ package org.itson.bdavanzadas.agenciafiscal_dominio;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,10 +57,14 @@ public class Contribuyente implements Serializable {
     @Column (name ="discapacidad", nullable = false)
     private boolean discapacidad;
 
+    @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
+    @Column (name = "licencia", nullable = true)
+    private List<Tramite> licencia;
+    
     public Contribuyente() {
     }
 
-    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad) {
+    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
         this.CURP = CURP;
         this.nombre = nombre;
@@ -66,8 +73,21 @@ public class Contribuyente implements Serializable {
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
         this.discapacidad = discapacidad;
+        this.licencia = licencia;
     }
 
+    public List<Tramite> getLicencia() {
+        return licencia;
+    }
+
+    public void setLicencia(List<Tramite> licencia) {
+        this.licencia = licencia;
+    }
+
+    public void agregarTramite(Tramite tramite) {
+        this.licencia.add(tramite);
+    }
+    
     public String getCURP() {
         return CURP;
     }
