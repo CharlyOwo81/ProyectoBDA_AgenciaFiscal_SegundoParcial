@@ -30,7 +30,8 @@ public class PanelLicencia extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnRegresar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
         lblBienvenido = new javax.swing.JLabel();
         lblTitulo1 = new javax.swing.JLabel();
@@ -39,8 +40,6 @@ public class PanelLicencia extends javax.swing.JPanel {
         lblReportes = new javax.swing.JLabel();
         lblConsultas = new javax.swing.JLabel();
         lblTramites = new javax.swing.JLabel();
-        lblLogoHacienda = new javax.swing.JLabel();
-        lblLogoSonora = new javax.swing.JLabel();
         lblTramites1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
@@ -49,17 +48,29 @@ public class PanelLicencia extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnRegresar.setBorder(null);
-        btnRegresar.setBorderPainted(false);
-        btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnRegresar.setOpaque(false);
-        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setBorder(null);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setOpaque(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegresarActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 368, 137, 40));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 485, 137, 40));
+
+        btnContinuar.setBorder(null);
+        btnContinuar.setBorderPainted(false);
+        btnContinuar.setContentAreaFilled(false);
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContinuar.setOpaque(false);
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
+        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 485, 137, 40));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelLicencia.png"))); // NOI18N
         lblFondo.setToolTipText("");
@@ -100,12 +111,6 @@ public class PanelLicencia extends javax.swing.JPanel {
         lblTramites.setText("Regresar");
         add(lblTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
-        lblLogoHacienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoHacienda.png"))); // NOI18N
-        add(lblLogoHacienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-
-        lblLogoSonora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoSonora.png"))); // NOI18N
-        add(lblLogoSonora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
-
         lblTramites1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblTramites1.setForeground(new java.awt.Color(255, 255, 255));
         lblTramites1.setText("Trámites");
@@ -117,20 +122,23 @@ public class PanelLicencia extends javax.swing.JPanel {
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 250, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
-    }//GEN-LAST:event_btnRegresarActionPerformed
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContinuarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnContinuar;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblConsultas;
     private javax.swing.JLabel lblContribuyentes;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JLabel lblLogoHacienda;
-    private javax.swing.JLabel lblLogoSonora;
     private javax.swing.JLabel lblReportes;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;

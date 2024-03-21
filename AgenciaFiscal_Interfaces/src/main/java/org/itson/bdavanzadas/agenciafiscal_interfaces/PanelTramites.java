@@ -46,8 +46,6 @@ public class PanelTramites extends javax.swing.JPanel {
         lblReportes = new javax.swing.JLabel();
         lblConsultas = new javax.swing.JLabel();
         lblTramites = new javax.swing.JLabel();
-        lblLogoHacienda = new javax.swing.JLabel();
-        lblLogoSonora = new javax.swing.JLabel();
         lblTexto1 = new javax.swing.JLabel();
         lblTexto2 = new javax.swing.JLabel();
         lblTramites1 = new javax.swing.JLabel();
@@ -185,12 +183,6 @@ public class PanelTramites extends javax.swing.JPanel {
         lblTramites.setText("Regresar");
         add(lblTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, -1));
 
-        lblLogoHacienda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoHacienda.png"))); // NOI18N
-        add(lblLogoHacienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
-
-        lblLogoSonora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoSonora.png"))); // NOI18N
-        add(lblLogoSonora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
-
         lblTexto1.setFont(new java.awt.Font("Montserrat", 0, 20)); // NOI18N
         lblTexto1.setForeground(new java.awt.Color(116, 71, 48));
         lblTexto1.setText(" · Licencia");
@@ -248,8 +240,6 @@ public class PanelTramites extends javax.swing.JPanel {
     private javax.swing.JLabel lblConsultas;
     private javax.swing.JLabel lblContribuyentes;
     private javax.swing.JLabel lblFondo;
-    private javax.swing.JLabel lblLogoHacienda;
-    private javax.swing.JLabel lblLogoSonora;
     private javax.swing.JLabel lblReportes;
     private javax.swing.JLabel lblTexto;
     private javax.swing.JLabel lblTexto1;

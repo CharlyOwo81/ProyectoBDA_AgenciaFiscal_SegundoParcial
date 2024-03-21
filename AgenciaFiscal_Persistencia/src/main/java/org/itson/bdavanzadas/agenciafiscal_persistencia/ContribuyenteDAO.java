@@ -28,7 +28,6 @@ public class ContribuyenteDAO implements IContribuyenteDAO{
         eManager.getTransaction().begin();
         
         Contribuyente contribuyente = new Contribuyente(
-                            contribuyenteNuevo.getCURP(),
                             contribuyenteNuevo.getRFC(),        
                             contribuyenteNuevo.getNombre(),        
                             contribuyenteNuevo.getApellido_paterno(),        

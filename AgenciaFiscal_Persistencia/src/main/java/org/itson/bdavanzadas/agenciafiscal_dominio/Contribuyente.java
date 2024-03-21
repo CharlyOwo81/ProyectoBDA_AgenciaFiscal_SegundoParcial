@@ -26,8 +26,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table (name = "contribuyentes")
 public class Contribuyente implements Serializable {
+    public Contribuyente() {
+    }
 
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_contribuyente")
@@ -36,19 +37,16 @@ public class Contribuyente implements Serializable {
     @Column (name= "RFC", nullable = false, length = 13, unique = true)
     private String RFC;
     
-    @Column (name= "CURP", nullable = false, length = 18, unique = true)
-    private String CURP;
-    
-    @Column (name = "nombre", nullable = false, length = 200)
+    @Column (name = "nombre", nullable = false, length = 50)
     private String nombre;
     
-    @Column (name = "apellido_paterno", nullable = false, length = 200)
+    @Column (name = "apellido_paterno", nullable = false, length = 30)
     private String apellido_paterno;
     
-    @Column (name = "apellido_materno", nullable = false, length = 200)
+    @Column (name = "apellido_materno", nullable = false, length = 30)
     private String apellido_materno;
     
-    @Column (name = "telefono", nullable = false, length = 13)
+    @Column (name = "telefono", nullable = false, length = 10)
     private String telefono;
     
     @Temporal(TemporalType.DATE)
@@ -62,12 +60,9 @@ public class Contribuyente implements Serializable {
     @JoinColumn (name = "licencia", nullable = true)
     private List<Tramite> licencia;
     
-    public Contribuyente() {
-    }
 
-    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
+    public Contribuyente(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
-        this.CURP = CURP;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -77,9 +72,8 @@ public class Contribuyente implements Serializable {
         this.licencia = licencia;
     }
 
-    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
+    public Contribuyente(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
         this.RFC = RFC;
-        this.CURP = CURP;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -98,14 +92,6 @@ public class Contribuyente implements Serializable {
 
     public void agregarTramite(Tramite tramite) {
         this.licencia.add(tramite);
-    }
-    
-    public String getCURP() {
-        return CURP;
-    }
-
-    public void setCURP(String CURP) {
-        this.CURP = CURP;
     }
     
     public Long getId() {
@@ -171,8 +157,6 @@ public class Contribuyente implements Serializable {
     public void setDiscapacidad(ContribuyenteDiscapacidad discapacidad) {
         this.discapacidad = discapacidad;
     }
-
-    
     
     @Override
     public int hashCode() {
