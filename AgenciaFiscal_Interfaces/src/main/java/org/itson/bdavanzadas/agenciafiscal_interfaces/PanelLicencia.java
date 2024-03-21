@@ -30,6 +30,7 @@ public class PanelLicencia extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnRegresar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
         lblBienvenido = new javax.swing.JLabel();
         lblTitulo1 = new javax.swing.JLabel();
@@ -47,6 +48,18 @@ public class PanelLicencia extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setPreferredSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnRegresar.setBorder(null);
+        btnRegresar.setBorderPainted(false);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setOpaque(false);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 368, 137, 40));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelLicencia.png"))); // NOI18N
         lblFondo.setToolTipText("");
@@ -104,8 +117,13 @@ public class PanelLicencia extends javax.swing.JPanel {
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 250, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblConsultas;
