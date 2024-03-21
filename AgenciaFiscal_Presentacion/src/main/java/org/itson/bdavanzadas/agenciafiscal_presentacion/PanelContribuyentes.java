@@ -1,4 +1,4 @@
-package org.itson.bdavanzadas.agenciafiscal_interfaces;
+package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 /**
  *

@@ -1,4 +1,4 @@
-package org.itson.bdavanzadas.agenciafiscal_interfaces;
+package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 
 import javax.swing.JOptionPane;
@@ -30,7 +30,6 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Red Única de Trámites");
-        setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setResizable(false);
 
