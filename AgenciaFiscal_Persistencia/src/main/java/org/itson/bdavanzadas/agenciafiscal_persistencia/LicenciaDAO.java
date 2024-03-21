@@ -30,7 +30,9 @@ public class LicenciaDAO implements ILicenciaDAO{
                 licenciaNueva.getTipo_licencia(),
                 licenciaNueva.getVigencia(),
                 licenciaNueva.getCosto(),
-                licenciaNueva.getFecha_emision()
+                licenciaNueva.getFecha_emision(),
+                licenciaNueva.getFecha_recepcion(),
+                licenciaNueva.getContribuyente()
         );      
         em.persist(licencia);
         tx.commit();

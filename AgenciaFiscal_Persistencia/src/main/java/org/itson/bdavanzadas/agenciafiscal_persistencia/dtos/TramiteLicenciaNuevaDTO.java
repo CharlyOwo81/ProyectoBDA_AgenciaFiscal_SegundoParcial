@@ -5,6 +5,7 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.dtos;
 
 import java.util.Date;
+import org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_dominio.TipoLicencia;
 
 /**
@@ -15,8 +16,8 @@ public class TramiteLicenciaNuevaDTO extends TramiteNuevoDTO{
     private Integer vigencia;
     private TipoLicencia tipo_licencia;
 
-    public TramiteLicenciaNuevaDTO(Integer vigencia, TipoLicencia tipo_licencia, Float costo,  Date fecha_emision) {
-        super(costo, fecha_emision);
+    public TramiteLicenciaNuevaDTO(Integer vigencia, TipoLicencia tipo_licencia, Float costo, Date fecha_emision, Date fecha_recepcion, Contribuyente contribuyente) {
+        super(costo, fecha_emision, fecha_recepcion, contribuyente);
         this.vigencia = vigencia;
         this.tipo_licencia = tipo_licencia;
     }

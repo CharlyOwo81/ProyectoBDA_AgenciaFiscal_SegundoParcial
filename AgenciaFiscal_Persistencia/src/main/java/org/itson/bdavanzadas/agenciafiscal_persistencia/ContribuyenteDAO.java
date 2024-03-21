@@ -33,7 +33,8 @@ public class ContribuyenteDAO implements IContribuyenteDAO{
                             contribuyenteNuevo.getApellido_materno(),        
                             contribuyenteNuevo.getTelefono(),        
                             contribuyenteNuevo.getFecha_nacimiento(),
-                            contribuyenteNuevo.isDiscapacidad());      
+                            contribuyenteNuevo.isDiscapacidad(),
+                            contribuyenteNuevo.getLicencia());      
         em.persist(contribuyente);
         tx.commit();
         em.close();
