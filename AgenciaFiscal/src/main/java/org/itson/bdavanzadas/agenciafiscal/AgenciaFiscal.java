@@ -35,7 +35,7 @@ public class AgenciaFiscal {
 
         GregorianCalendar calendario = new GregorianCalendar();
         Date fecha = calendario.getTime();
-        LicenciaDAO licenciaDAO = new LicenciaDAO();
-        TramiteLicencia nuevaLicencia = licenciaDAO.agregarLicencia(new TramiteLicenciaNuevaDTO(1, ESTANDAR, 600F, fecha));
+//        LicenciaDAO licenciaDAO = new LicenciaDAO();
+//        TramiteLicencia nuevaLicencia = licenciaDAO.agregarLicencia(new TramiteLicenciaNuevaDTO(1, ESTANDAR, 600F, fecha));
     }
 }

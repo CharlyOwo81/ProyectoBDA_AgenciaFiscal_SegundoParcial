@@ -4,16 +4,20 @@
  */
 package org.itson.bdavanzadas.agenciafiscal_interfaces;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author rover
  */
-public class InicioVista extends javax.swing.JPanel {
+public class PanelInicio extends javax.swing.JPanel {
+    private  FramePrincipal framePrincipal;
 
     /**
      * Creates new form Inicio
      */
-    public InicioVista() {
+    public PanelInicio(FramePrincipal framePrincipal) {
+        this.framePrincipal = framePrincipal;
         initComponents();
     }
 
@@ -26,6 +30,9 @@ public class InicioVista extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
         lblMano = new javax.swing.JLabel();
         lblBienvenido = new javax.swing.JLabel();
         lblTexto = new javax.swing.JLabel();
@@ -37,12 +44,38 @@ public class InicioVista extends javax.swing.JPanel {
         lblTramites = new javax.swing.JLabel();
         lblLogoHacienda = new javax.swing.JLabel();
         lblLogoSonora = new javax.swing.JLabel();
-        lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setPreferredSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setBorder(null);
+        jButton2.setBorderPainted(false);
+        jButton2.setContentAreaFilled(false);
+        jButton2.setOpaque(false);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 260, 190, 50));
+
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 180, 50));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/PantallaInicio.png"))); // NOI18N
+        lblFondo.setToolTipText("");
+        add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lblMano.setIcon(new javax.swing.ImageIcon(getClass().getResource("/manoInicio.png"))); // NOI18N
         add(lblMano, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, -1, -1));
@@ -92,14 +125,22 @@ public class InicioVista extends javax.swing.JPanel {
 
         lblLogoSonora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoSonora.png"))); // NOI18N
         add(lblLogoSonora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
-
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inicioVista.png"))); // NOI18N
-        lblFondo.setToolTipText("");
-        add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(this, "Pene pequeño");        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                JOptionPane.showMessageDialog(this, "Pene grande");        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblConsultas;
     private javax.swing.JLabel lblContribuyentes;

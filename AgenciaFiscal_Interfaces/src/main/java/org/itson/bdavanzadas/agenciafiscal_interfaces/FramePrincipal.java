@@ -8,14 +8,14 @@ import org.itson.bdavanzadas.agenciafiscal_dominio.*;
  *
  * @author rover
  */
-public class Ventana extends javax.swing.JFrame {
+public class FramePrincipal extends javax.swing.JFrame {
 
     private JPanel panelActual;
     
     /**
      * Creates new form Ventana
      */
-    public Ventana() {
+    public FramePrincipal() {
         initComponents();
     }
 
@@ -32,7 +32,6 @@ public class Ventana extends javax.swing.JFrame {
         setTitle("Red Única de Trámites");
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
-        setPreferredSize(new java.awt.Dimension(1000, 580));
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -49,40 +48,6 @@ public class Ventana extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Ventana.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Ventana().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
@@ -112,6 +77,16 @@ public class Ventana extends javax.swing.JFrame {
         this.pack();  // Ajustar el tamaño automáticamente
     }
 
+    /**
+     * Método para cambiar a la vista de inicio de la agencia. Este método elimina
+     * el panel actual y muestra la vista de inicio de la agencia.
+     */
+    public void cambiarVistaInicio() {
+        limpiarFrame();
+        PanelInicio vistaInicio = new PanelInicio(this);
+        ponerEnJFrame(vistaInicio);
+        panelActual = vistaInicio;
+    }
     /**
      * Método para mostrar un aviso al usuario mediante una ventana emergente.
      *

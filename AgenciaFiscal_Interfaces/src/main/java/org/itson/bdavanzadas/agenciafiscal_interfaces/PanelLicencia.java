@@ -8,12 +8,12 @@ package org.itson.bdavanzadas.agenciafiscal_interfaces;
  *
  * @author rover
  */
-public class TramitesVista extends javax.swing.JPanel {
+public class PanelLicencia extends javax.swing.JPanel {
 
     /**
      * Creates new form Inicio
      */
-    public TramitesVista() {
+    public PanelLicencia() {
         initComponents();
     }
 
@@ -27,7 +27,6 @@ public class TramitesVista extends javax.swing.JPanel {
     private void initComponents() {
 
         lblBienvenido = new javax.swing.JLabel();
-        lblTexto = new javax.swing.JLabel();
         lblTitulo1 = new javax.swing.JLabel();
         lblTitulo2 = new javax.swing.JLabel();
         lblContribuyentes = new javax.swing.JLabel();
@@ -36,9 +35,8 @@ public class TramitesVista extends javax.swing.JPanel {
         lblTramites = new javax.swing.JLabel();
         lblLogoHacienda = new javax.swing.JLabel();
         lblLogoSonora = new javax.swing.JLabel();
-        lblTexto1 = new javax.swing.JLabel();
-        lblTexto2 = new javax.swing.JLabel();
         lblTramites1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -50,11 +48,6 @@ public class TramitesVista extends javax.swing.JPanel {
         lblBienvenido.setForeground(new java.awt.Color(137, 21, 71));
         lblBienvenido.setText("SOLICITAR TRÁMITE");
         add(lblBienvenido, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 160, -1, -1));
-
-        lblTexto.setFont(new java.awt.Font("Montserrat", 0, 20)); // NOI18N
-        lblTexto.setForeground(new java.awt.Color(116, 71, 48));
-        lblTexto.setText(" · Placas");
-        add(lblTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 320, 90, 30));
 
         lblTitulo1.setFont(new java.awt.Font("Montserrat", 0, 26)); // NOI18N
         lblTitulo1.setForeground(new java.awt.Color(155, 90, 23));
@@ -92,28 +85,24 @@ public class TramitesVista extends javax.swing.JPanel {
         lblLogoSonora.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logoSonora.png"))); // NOI18N
         add(lblLogoSonora, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1, -1));
 
-        lblTexto1.setFont(new java.awt.Font("Montserrat", 0, 20)); // NOI18N
-        lblTexto1.setForeground(new java.awt.Color(116, 71, 48));
-        lblTexto1.setText(" · Licencia");
-        add(lblTexto1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 280, 100, 30));
-
-        lblTexto2.setFont(new java.awt.Font("Montserrat", 0, 28)); // NOI18N
-        lblTexto2.setForeground(new java.awt.Color(137, 21, 71));
-        lblTexto2.setText("Trámites disponibles");
-        add(lblTexto2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 220, 300, 30));
-
         lblTramites1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblTramites1.setForeground(new java.awt.Color(255, 255, 255));
         lblTramites1.setText("Trámites");
         add(lblTramites1, new org.netbeans.lib.awtextra.AbsoluteConstraints(106, 275, -1, -1));
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tramitesVista.png"))); // NOI18N
+        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
+        jTextField1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        jTextField1.setText("jTextField1");
+        add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 250, -1));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/licenciaVista.png"))); // NOI18N
         lblFondo.setToolTipText("");
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblConsultas;
     private javax.swing.JLabel lblContribuyentes;
@@ -121,9 +110,6 @@ public class TramitesVista extends javax.swing.JPanel {
     private javax.swing.JLabel lblLogoHacienda;
     private javax.swing.JLabel lblLogoSonora;
     private javax.swing.JLabel lblReportes;
-    private javax.swing.JLabel lblTexto;
-    private javax.swing.JLabel lblTexto1;
-    private javax.swing.JLabel lblTexto2;
     private javax.swing.JLabel lblTitulo1;
     private javax.swing.JLabel lblTitulo2;
     private javax.swing.JLabel lblTramites;

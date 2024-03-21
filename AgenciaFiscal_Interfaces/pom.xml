@@ -15,11 +15,6 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>AgenciaFiscal</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>AgenciaFiscal_Dominio</artifactId>
             <version>${project.version}</version>
         </dependency>
