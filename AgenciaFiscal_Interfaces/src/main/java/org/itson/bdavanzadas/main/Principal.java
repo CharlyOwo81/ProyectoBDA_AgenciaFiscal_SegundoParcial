@@ -13,7 +13,7 @@ public class Principal {
      */
     public static void main(String[] args) {
         FramePrincipal ventana = new FramePrincipal();
-        ventana.cambiarVistaInicio();
+        ventana.cambiarPanelInicio();
         ventana.setVisible(true);
     }
 

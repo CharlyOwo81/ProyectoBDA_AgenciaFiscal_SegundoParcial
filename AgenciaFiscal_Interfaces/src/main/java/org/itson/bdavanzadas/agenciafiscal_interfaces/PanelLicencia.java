@@ -10,10 +10,14 @@ package org.itson.bdavanzadas.agenciafiscal_interfaces;
  */
 public class PanelLicencia extends javax.swing.JPanel {
 
+    private FramePrincipal framePrincipal;
+
     /**
      * Creates new form Inicio
      */
-    public PanelLicencia() {
+    public PanelLicencia(FramePrincipal framePrincipal) {
+        this.framePrincipal = framePrincipal;
+
         initComponents();
     }
 
@@ -26,6 +30,7 @@ public class PanelLicencia extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblFondo = new javax.swing.JLabel();
         lblBienvenido = new javax.swing.JLabel();
         lblTitulo1 = new javax.swing.JLabel();
         lblTitulo2 = new javax.swing.JLabel();
@@ -37,12 +42,15 @@ public class PanelLicencia extends javax.swing.JPanel {
         lblLogoSonora = new javax.swing.JLabel();
         lblTramites1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setPreferredSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelLicencia.png"))); // NOI18N
+        lblFondo.setToolTipText("");
+        add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lblBienvenido.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
         lblBienvenido.setForeground(new java.awt.Color(137, 21, 71));
@@ -94,10 +102,6 @@ public class PanelLicencia extends javax.swing.JPanel {
         jTextField1.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         jTextField1.setText("jTextField1");
         add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 250, -1));
-
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/licenciaVista.png"))); // NOI18N
-        lblFondo.setToolTipText("");
-        add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
 

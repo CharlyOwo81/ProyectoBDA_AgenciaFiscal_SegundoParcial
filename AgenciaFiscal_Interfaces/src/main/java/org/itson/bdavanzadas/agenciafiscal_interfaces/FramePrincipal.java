@@ -81,12 +81,30 @@ public class FramePrincipal extends javax.swing.JFrame {
      * Método para cambiar a la vista de inicio de la agencia. Este método elimina
      * el panel actual y muestra la vista de inicio de la agencia.
      */
-    public void cambiarVistaInicio() {
+    public void cambiarPanelInicio() {
         limpiarFrame();
         PanelInicio vistaInicio = new PanelInicio(this);
         ponerEnJFrame(vistaInicio);
         panelActual = vistaInicio;
     }
+    
+    public void cambiarPanelTramites() {
+        limpiarFrame();
+        PanelTramites panelTramites = new PanelTramites(this);
+        ponerEnJFrame(panelTramites);
+        panelActual = panelTramites;
+    }
+    
+    
+    public void cambiarPanelLicencia() {
+        limpiarFrame();
+        PanelLicencia panelLicencia = new PanelLicencia(this);
+        ponerEnJFrame(panelLicencia);
+        panelActual = panelLicencia;
+    }
+
+    
+    
     /**
      * Método para mostrar un aviso al usuario mediante una ventana emergente.
      *
