@@ -13,6 +13,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -58,7 +59,7 @@ public class Contribuyente implements Serializable {
     private ContribuyenteDiscapacidad discapacidad;
 
     @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
-    @Column (name = "licencia", nullable = true)
+    @JoinColumn (name = "licencia", nullable = true)
     private List<Tramite> licencia;
     
     public Contribuyente() {

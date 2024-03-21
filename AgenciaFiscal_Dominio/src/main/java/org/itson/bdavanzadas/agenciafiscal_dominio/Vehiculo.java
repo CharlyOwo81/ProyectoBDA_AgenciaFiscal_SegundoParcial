@@ -30,7 +30,7 @@ public class Vehiculo implements Serializable {
     @Column(name = "marca", nullable = false, length = 20)
     private String marca;
     
-    @Column(name = "marca", nullable = false, length = 20)
+    @Column(name = "linea", nullable = false, length = 20)
     private String linea;
     
     @Column(name = "color", nullable = false, length = 10)
