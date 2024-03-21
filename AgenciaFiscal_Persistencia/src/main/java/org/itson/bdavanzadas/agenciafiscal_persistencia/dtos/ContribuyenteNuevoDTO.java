@@ -6,7 +6,11 @@ package org.itson.bdavanzadas.agenciafiscal_persistencia.dtos;
 
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.itson.bdavanzadas.agenciafiscal_dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_dominio.Tramite;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.ValidacionDTOException;
 
 /**
  *
@@ -20,21 +24,18 @@ public class ContribuyenteNuevoDTO {
     private String apellido_materno;
     private String telefono;
     private Date fecha_nacimiento;
-    private boolean discapacidad;
+    private ContribuyenteDiscapacidad discapacidad;
     private List<Tramite> licencia;
 
-    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad) {
-        this.RFC = RFC;
-        this.CURP = CURP;
-        this.nombre = nombre;
-        this.apellido_paterno = apellido_paterno;
-        this.apellido_materno = apellido_materno;
-        this.telefono = telefono;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.discapacidad = discapacidad;
-    }
+    //ATRIBUTOS - VALIDACIONES
+    private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
+    private String validadorNumerico = "^[0-9]+$";
+    private String validadorFechas = "^\\d{4}-\\d{2}-\\d{2}$";
+    private String validadorCorreos = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+    private Pattern patron;
+    private Matcher coincidencia;
 
-    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad, List<Tramite> licencia) {
+    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
         this.CURP = CURP;
         this.nombre = nombre;
@@ -46,8 +47,17 @@ public class ContribuyenteNuevoDTO {
         this.licencia = licencia;
     }
 
-    
-    
+    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.RFC = RFC;
+        this.CURP = CURP;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+    }
+       
     public List<Tramite> getLicencia() {
         return licencia;
     }
@@ -55,7 +65,6 @@ public class ContribuyenteNuevoDTO {
     public void setLicencia(List<Tramite> licencia) {
         this.licencia = licencia;
     }
-
 
     
     public String getCURP() {
@@ -114,12 +123,53 @@ public class ContribuyenteNuevoDTO {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public boolean isDiscapacidad() {
+    public ContribuyenteDiscapacidad getDiscapacidad() {
         return discapacidad;
     }
 
-    public void setDiscapacidad(boolean discapacidad) {
+    public void setDiscapacidad(ContribuyenteDiscapacidad discapacidad) {
         this.discapacidad = discapacidad;
     }
+
+   
+        public boolean esValido() throws ValidacionDTOException {
+            validarNombre();
+            validarApellidoPaterno();
+            validarApellidoMaterno();
+            validarRFC();
+            validarCURP();
+            validarTelefono();
+            validarFechaNacimiento();
+            return true;
+    }
+
+    private void validarNombre() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void validarApellidoPaterno() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void validarApellidoMaterno() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void validarRFC() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void validarCURP() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void validarTelefono() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private void validarFechaNacimiento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     
 }

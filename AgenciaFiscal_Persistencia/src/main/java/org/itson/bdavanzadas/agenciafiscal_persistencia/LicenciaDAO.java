@@ -19,13 +19,18 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.TramiteNuevoDTO;
  */
 public class LicenciaDAO implements ILicenciaDAO{
 
+    private IConexion conexion;
+
+    public LicenciaDAO(IConexion conexion) {
+        this.conexion = conexion;
+    }
+
     @Override
     public TramiteLicencia agregarLicencia(TramiteLicenciaNuevaDTO licenciaNueva) {
-        EntityManagerFactory  emf = Persistence.createEntityManagerFactory("AgenciaFiscalPU");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+        EntityManager eManager = conexion.crearConexion();
         
-        tx.begin();
+        eManager.getTransaction().begin();
+        
         TramiteLicencia licencia = new TramiteLicencia(
                 licenciaNueva.getTipo_licencia(),
                 licenciaNueva.getVigencia(),
@@ -34,9 +39,13 @@ public class LicenciaDAO implements ILicenciaDAO{
                 licenciaNueva.getFecha_recepcion(),
                 licenciaNueva.getContribuyente()
         );      
-        em.persist(licencia);
-        tx.commit();
-        em.close();
+        
+        eManager.persist(licencia);
+        
+        eManager.getTransaction().commit();
+        
+        eManager.close();
+        
         return licencia;
     }
     

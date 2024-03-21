@@ -5,9 +5,6 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.ContribuyenteNuevoDTO;
 
@@ -17,14 +14,19 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.ContribuyenteNuevoD
  */
 public class ContribuyenteDAO implements IContribuyenteDAO{
 
+    private IConexion conexion;
+
+    public ContribuyenteDAO(IConexion conexion) {
+        this.conexion = conexion;
+    }
+   
     @Override
     public Contribuyente agregarContribuyente(ContribuyenteNuevoDTO contribuyenteNuevo) {
        
-        EntityManagerFactory  emf = Persistence.createEntityManagerFactory("AgenciaFiscalPU");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
+        EntityManager eManager = conexion.crearConexion();
         
-        tx.begin();
+        eManager.getTransaction().begin();
+        
         Contribuyente contribuyente = new Contribuyente(
                             contribuyenteNuevo.getCURP(),
                             contribuyenteNuevo.getRFC(),        
@@ -33,11 +35,15 @@ public class ContribuyenteDAO implements IContribuyenteDAO{
                             contribuyenteNuevo.getApellido_materno(),        
                             contribuyenteNuevo.getTelefono(),        
                             contribuyenteNuevo.getFecha_nacimiento(),
-                            contribuyenteNuevo.isDiscapacidad(),
+                            contribuyenteNuevo.getDiscapacidad(),
                             contribuyenteNuevo.getLicencia());      
-        em.persist(contribuyente);
-        tx.commit();
-        em.close();
+        
+        eManager.persist(contribuyente);
+        
+        eManager.getTransaction().commit();
+        
+        eManager.close();
+        
         return contribuyente;
 
     }
