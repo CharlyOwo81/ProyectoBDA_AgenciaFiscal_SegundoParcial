@@ -55,7 +55,7 @@ public class Contribuyente implements Serializable {
     private Date fecha_nacimiento;
     
     @Column (name ="discapacidad", nullable = false)
-    private boolean discapacidad;
+    private ContribuyenteDiscapacidad discapacidad;
 
     @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
     @Column (name = "licencia", nullable = true)
@@ -64,7 +64,7 @@ public class Contribuyente implements Serializable {
     public Contribuyente() {
     }
 
-    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, boolean discapacidad, List<Tramite> licencia) {
+    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
         this.CURP = CURP;
         this.nombre = nombre;
@@ -76,6 +76,17 @@ public class Contribuyente implements Serializable {
         this.licencia = licencia;
     }
 
+    public Contribuyente(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.RFC = RFC;
+        this.CURP = CURP;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+    }
+    
     public List<Tramite> getLicencia() {
         return licencia;
     }
@@ -152,13 +163,15 @@ public class Contribuyente implements Serializable {
         this.fecha_nacimiento = fecha_nacimiento;
     }
 
-    public boolean isDiscapacidad() {
+    public ContribuyenteDiscapacidad getDiscapacidad() {
         return discapacidad;
     }
 
-    public void setDiscapacidad(boolean discapacidad) {
+    public void setDiscapacidad(ContribuyenteDiscapacidad discapacidad) {
         this.discapacidad = discapacidad;
     }
+
+    
     
     @Override
     public int hashCode() {

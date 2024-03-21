@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,7 +46,7 @@ public class Tramite implements Serializable {
     private Date fecha_recepcion;
     
     
-    @Column(name = "contribuyente", nullable = true)
+    @JoinColumn(name = "contribuyente", nullable = true)
     private Contribuyente contribuyente;
 
     public Tramite() {
