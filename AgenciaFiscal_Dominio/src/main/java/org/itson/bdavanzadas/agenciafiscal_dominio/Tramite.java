@@ -57,6 +57,14 @@ public class Tramite implements Serializable {
         this.fecha_recepcion = fecha_recepcion;
         this.contribuyente = contribuyente;
     }
+
+    public Tramite(Float costo, Date fecha_emision, Contribuyente contribuyente) {
+        this.costo = costo;
+        this.fecha_emision = fecha_emision;
+        this.contribuyente = contribuyente;
+    }
+    
+    
     
     public Long getId() {
         return id;
