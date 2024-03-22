@@ -12,8 +12,9 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOExce
  *
  * @author gamaliel
  */
-public class ContribuyenteNuevoDTO {
+public class ContribuyenteDTO {
 
+    private Long id;
     private String RFC;
     private String nombre;
     private String apellido_paterno;
@@ -23,15 +24,8 @@ public class ContribuyenteNuevoDTO {
     private ContribuyenteDiscapacidad discapacidad;
     private List<Tramite> licencia;
 
-    //ATRIBUTOS - VALIDACIONES
-    private String validadorEnEspaniol = "^[a-zA-ZáéíóúüñÁÉÍÓÚÜÑ\\s]+$";
-    private String validadorNumerico = "^[0-9]+$";
-    private String validadorFechas = "^\\d{4}-\\d{2}-\\d{2}$";
-    private String validadorCorreos = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
-    private Pattern patron;
-    private Matcher coincidencia;
 
-    public ContribuyenteNuevoDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
+    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
@@ -42,7 +36,7 @@ public class ContribuyenteNuevoDTO {
         this.licencia = licencia;
     }
 
-    public ContribuyenteNuevoDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
+    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
         this.RFC = RFC;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
@@ -51,6 +45,27 @@ public class ContribuyenteNuevoDTO {
         this.fecha_nacimiento = fecha_nacimiento;
         this.discapacidad = discapacidad;
     }
+
+    public ContribuyenteDTO(Long id, String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.id = id;
+        this.RFC = RFC;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    
 
     public List<Tramite> getLicencia() {
         return licencia;

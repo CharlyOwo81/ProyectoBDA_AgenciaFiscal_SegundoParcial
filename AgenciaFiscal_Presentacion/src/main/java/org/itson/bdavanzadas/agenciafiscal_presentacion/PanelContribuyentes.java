@@ -4,7 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.InsercionMasivaBO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IInsercionMasivaBO;
 
@@ -142,29 +142,29 @@ public class PanelContribuyentes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private static void agregarContribuyentes() {
-        List<ContribuyenteNuevoDTO> contribuyentesDTO = new ArrayList<>();
+        List<ContribuyenteDTO> contribuyentesDTO = new ArrayList<>();
 
         // Generar 20 registros hardcodeados
-                contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC1234567890", "Juan", "Perez", "Garcia", "1234567890", new Date(1985 - 1900, 5, 20), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC2345678901", "Maria", "Lopez", "Martinez", "2345678901", new Date(1978 - 1900, 9, 12), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC3456789012", "Pedro", "Gomez", "Rodriguez", "3456789012", new Date(1963 - 1900, 2, 5), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC4567890123", "Ana", "Hernandez", "Gonzalez", "4567890123", new Date(1955 - 1900, 11, 30), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC5678901234", "Luis", "Diaz", "Perez", "5678901234", new Date(1992 - 1900, 7, 14), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC6789012345", "Laura", "Martinez", "Sanchez", "6789012345", new Date(1980 - 1900, 4, 8), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC7890123456", "Carlos", "Torres", "Lopez", "7890123456", new Date(1974 - 1900, 1, 23), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC8901234567", "Sofia", "Ramirez", "Herrera", "8901234567", new Date(1968 - 1900, 6, 17), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC9012345678", "Daniel", "Ruiz", "Jimenez", "9012345678", new Date(1998 - 1900, 10, 3), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC1234013489", "Elena", "Gutierrez", "Torres", "0123456789", new Date(1979 - 1900, 8, 26), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC5748963254", "Alejandro", "Luna", "Vazquez", "1234567890", new Date(1957 - 1900, 3, 19), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC1315467821", "Monica", "Castro", "Nunez", "2345678901", new Date(1969 - 1900, 12, 7), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC4613758912", "Jorge", "Mendez", "Flores", "3456789012", new Date(1987 - 1900, 2, 10), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC0024361579", "Fernanda", "Rojas", "Santos", "4567890123", new Date(1972 - 1900, 5, 25), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC6431985734", "Pablo", "Vargas", "Montes", "5678901234", new Date(1995 - 1900, 9, 3), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC6789034618", "Eva", "Molina", "Cruz", "6789012345", new Date(1983 - 1900, 11, 8), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC7167436577", "Hector", "Cruz", "Dominguez", "7890123456", new Date(1960 - 1900, 7, 16), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC0145675157", "Adriana", "Flores", "Ramirez", "8901234567", new Date(1990 - 1900, 1, 12), ContribuyenteDiscapacidad.SI));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC6451375479", "Raul", "Santiago", "Guerrero", "9012345678", new Date(1976 - 1900, 4, 5), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteNuevoDTO("RFC6476721470", "Carmen", "Mendez", "Ortega", "0123456789", new Date(1988 - 1900, 8, 28), ContribuyenteDiscapacidad.SI));
+                contribuyentesDTO.add(new ContribuyenteDTO("RFC1234567890", "Juan", "Perez", "Garcia", "1234567890", new Date(1985 - 1900, 5, 20), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC2345678901", "Maria", "Lopez", "Martinez", "2345678901", new Date(1978 - 1900, 9, 12), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC3456789012", "Pedro", "Gomez", "Rodriguez", "3456789012", new Date(1963 - 1900, 2, 5), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC4567890123", "Ana", "Hernandez", "Gonzalez", "4567890123", new Date(1955 - 1900, 11, 30), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC5678901234", "Luis", "Diaz", "Perez", "5678901234", new Date(1992 - 1900, 7, 14), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC6789012345", "Laura", "Martinez", "Sanchez", "6789012345", new Date(1980 - 1900, 4, 8), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC7890123456", "Carlos", "Torres", "Lopez", "7890123456", new Date(1974 - 1900, 1, 23), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC8901234567", "Sofia", "Ramirez", "Herrera", "8901234567", new Date(1968 - 1900, 6, 17), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC9012345678", "Daniel", "Ruiz", "Jimenez", "9012345678", new Date(1998 - 1900, 10, 3), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC1234013489", "Elena", "Gutierrez", "Torres", "0123456789", new Date(1979 - 1900, 8, 26), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC5748963254", "Alejandro", "Luna", "Vazquez", "1234567890", new Date(1957 - 1900, 3, 19), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC1315467821", "Monica", "Castro", "Nunez", "2345678901", new Date(1969 - 1900, 12, 7), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC4613758912", "Jorge", "Mendez", "Flores", "3456789012", new Date(1987 - 1900, 2, 10), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC0024361579", "Fernanda", "Rojas", "Santos", "4567890123", new Date(1972 - 1900, 5, 25), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC6431985734", "Pablo", "Vargas", "Montes", "5678901234", new Date(1995 - 1900, 9, 3), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC6789034618", "Eva", "Molina", "Cruz", "6789012345", new Date(1983 - 1900, 11, 8), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC7167436577", "Hector", "Cruz", "Dominguez", "7890123456", new Date(1960 - 1900, 7, 16), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC0145675157", "Adriana", "Flores", "Ramirez", "8901234567", new Date(1990 - 1900, 1, 12), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC6451375479", "Raul", "Santiago", "Guerrero", "9012345678", new Date(1976 - 1900, 4, 5), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC6476721470", "Carmen", "Mendez", "Ortega", "0123456789", new Date(1988 - 1900, 8, 28), ContribuyenteDiscapacidad.SI));
 
         IInsercionMasivaBO insercion = new InsercionMasivaBO();
 

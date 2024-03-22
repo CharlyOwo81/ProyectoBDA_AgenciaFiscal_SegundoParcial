@@ -12,29 +12,26 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
  * @author gamaliel
  */
 public class TramiteNuevoDTO {
-    
-    private Float costo;
-    private Date fecha_emision; 
-    private Date fecha_recepcion;
-    private Contribuyente contribuyente;
 
-    public TramiteNuevoDTO(Float costo, Date fecha_emision, Date fecha_recepcion, Contribuyente contribuyente) {
+    private Float costo;
+    private Date fecha_emision;
+    private Date fecha_recepcion;
+    private Long idContribuyente;
+
+    public TramiteNuevoDTO(Float costo, Date fecha_emision, Date fecha_recepcion, Long idContribuyente) {
         this.costo = costo;
         this.fecha_emision = fecha_emision;
         this.fecha_recepcion = fecha_recepcion;
-        this.contribuyente = contribuyente;
+        this.idContribuyente = idContribuyente;
     }
 
-
-    public Contribuyente getContribuyente() {
-        return contribuyente;
+    public Long getIdContribuyente() {
+        return idContribuyente;
     }
 
-    public void setContribuyente(Contribuyente contribuyente) {
-        this.contribuyente = contribuyente;
+    public void setIdContribuyente(Long idContribuyente) {
+        this.idContribuyente = idContribuyente;
     }
-
-
 
     public Float getCosto() {
         return costo;
@@ -59,7 +56,5 @@ public class TramiteNuevoDTO {
     public void setFecha_recepcion(Date fecha_recepcion) {
         this.fecha_recepcion = fecha_recepcion;
     }
-    
-    
-    
+
 }

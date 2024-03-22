@@ -3,6 +3,7 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 /**
  *
  * @author rover
@@ -10,7 +11,7 @@ import javax.swing.JPanel;
 public class FramePrincipal extends javax.swing.JFrame {
 
     private JPanel panelActual;
-    
+    private ContribuyenteDTO contribuyenteDTO;
     /**
      * Creates new form Ventana
      */
@@ -109,6 +110,22 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     }
     
+    public void cambiarPanelLicenciaAnios() {
+        limpiarFrame();
+        PanelLicenicaAnios panelLicenicaAnios = new PanelLicenicaAnios(this);
+        ponerEnJFrame(panelLicenicaAnios);
+        panelActual = panelLicenicaAnios;
+
+    }
+    
+    public void cambiarPanelLicenciaExito() {
+        limpiarFrame();
+        PanelLicenciaExito panelLicenciaExito = new PanelLicenciaExito(this);
+        ponerEnJFrame(panelLicenciaExito);
+        panelActual = panelLicenciaExito;
+
+    }
+    
     /**
      * Método para mostrar un aviso al usuario mediante una ventana emergente.
      *
@@ -139,6 +156,22 @@ public class FramePrincipal extends javax.swing.JFrame {
      */
     public void mostrarInformacion(String mensaje, String titulo) {
         JOptionPane.showMessageDialog(this, mensaje, titulo, JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public JPanel getPanelActual() {
+        return panelActual;
+    }
+
+    public void setPanelActual(JPanel panelActual) {
+        this.panelActual = panelActual;
+    }
+
+    public ContribuyenteDTO getContribuyenteDTO() {
+        return contribuyenteDTO;
+    }
+
+    public void setContribuyenteDTO(ContribuyenteDTO contribuyenteDTO) {
+        this.contribuyenteDTO = contribuyenteDTO;
     }
     
     

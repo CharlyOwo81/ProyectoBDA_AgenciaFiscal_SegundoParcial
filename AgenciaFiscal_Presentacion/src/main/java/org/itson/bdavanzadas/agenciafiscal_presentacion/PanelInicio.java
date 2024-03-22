@@ -35,6 +35,7 @@ public class PanelInicio extends javax.swing.JPanel {
         btnConsultas = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnContribuyentes = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
         lblBienvenido = new javax.swing.JLabel();
         lblTexto = new javax.swing.JLabel();
@@ -98,6 +99,18 @@ public class PanelInicio extends javax.swing.JPanel {
         });
         add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
 
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setOpaque(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(859, 462, 43, 20));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelInicio.png"))); // NOI18N
         lblFondo.setToolTipText("");
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -159,11 +172,19 @@ public class PanelInicio extends javax.swing.JPanel {
         framePrincipal.cambiarPanelContribuyentes();        // TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        if (framePrincipal.mostrarConfirmacion("¿Seguro que deseas abandonar el programa?", "Salir")) {
+            framePrincipal.limpiarFrame();
+            framePrincipal.dispose();
+        }
+    }//GEN-LAST:event_btnSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnContribuyentes;
     private javax.swing.JButton btnReportes;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnTramites;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblConsultas;

@@ -2,7 +2,7 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.IConexion;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
@@ -14,10 +14,10 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 public class InsercionMasivaBO implements IInsercionMasivaBO {
 
     @Override
-    public void insertar(List<ContribuyenteNuevoDTO> contribuyentesDTO) {
+    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) {
         // Convertir DTO a entidades Contribuyente
         List<Contribuyente> contribuyentes = new ArrayList<>();
-        for (ContribuyenteNuevoDTO dto : contribuyentesDTO) {
+        for (ContribuyenteDTO dto : contribuyentesDTO) {
             Contribuyente contribuyente = new Contribuyente(
                     dto.getRFC(),
                     dto.getNombre(),

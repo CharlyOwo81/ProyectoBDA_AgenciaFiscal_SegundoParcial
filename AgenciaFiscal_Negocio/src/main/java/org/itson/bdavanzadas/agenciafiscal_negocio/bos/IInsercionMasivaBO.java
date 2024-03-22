@@ -1,7 +1,7 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import java.util.List;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 
 /**
  *
@@ -9,5 +9,5 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteNuevoDTO;
  */
 public interface IInsercionMasivaBO {
 
-    public void insertar(List<ContribuyenteNuevoDTO> contribuyentesDTO);
+    public void insertar(List<ContribuyenteDTO> contribuyentesDTO);
 }
