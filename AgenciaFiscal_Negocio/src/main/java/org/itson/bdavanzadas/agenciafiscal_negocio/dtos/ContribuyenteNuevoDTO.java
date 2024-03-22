@@ -15,7 +15,6 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOExce
 public class ContribuyenteNuevoDTO {
 
     private String RFC;
-    private String CURP;
     private String nombre;
     private String apellido_paterno;
     private String apellido_materno;
@@ -32,9 +31,8 @@ public class ContribuyenteNuevoDTO {
     private Pattern patron;
     private Matcher coincidencia;
 
-    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
+    public ContribuyenteNuevoDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
-        this.CURP = CURP;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -44,9 +42,8 @@ public class ContribuyenteNuevoDTO {
         this.licencia = licencia;
     }
 
-    public ContribuyenteNuevoDTO(String RFC, String CURP, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
+    public ContribuyenteNuevoDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
         this.RFC = RFC;
-        this.CURP = CURP;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
         this.apellido_materno = apellido_materno;
@@ -61,14 +58,6 @@ public class ContribuyenteNuevoDTO {
 
     public void setLicencia(List<Tramite> licencia) {
         this.licencia = licencia;
-    }
-
-    public String getCURP() {
-        return CURP;
-    }
-
-    public void setCURP(String CURP) {
-        this.CURP = CURP;
     }
 
     public String getRFC() {

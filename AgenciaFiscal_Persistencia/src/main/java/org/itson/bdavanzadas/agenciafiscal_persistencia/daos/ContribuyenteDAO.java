@@ -15,8 +15,8 @@ public class ContribuyenteDAO implements IContribuyenteDAO{
 
     private IConexion conexion;
 
-    public ContribuyenteDAO(IConexion conexion) {
-        this.conexion = conexion;
+    public ContribuyenteDAO() {
+        this.conexion = new Conexion();
     }
    
     @Override

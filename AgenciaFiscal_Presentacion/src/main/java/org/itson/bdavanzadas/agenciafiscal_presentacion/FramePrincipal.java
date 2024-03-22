@@ -100,8 +100,14 @@ public class FramePrincipal extends javax.swing.JFrame {
         ponerEnJFrame(panelLicencia);
         panelActual = panelLicencia;
     }
-
     
+    public void cambiarPanelContribuyentes() {
+        limpiarFrame();
+        PanelContribuyentes panelContribuyentes = new PanelContribuyentes(this);
+        ponerEnJFrame(panelContribuyentes);
+        panelActual = panelContribuyentes;
+
+    }
     
     /**
      * Método para mostrar un aviso al usuario mediante una ventana emergente.

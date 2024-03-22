@@ -156,7 +156,7 @@ public class PanelInicio extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
-        // TODO add your handling code here:
+        framePrincipal.cambiarPanelContribuyentes();        // TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
 
