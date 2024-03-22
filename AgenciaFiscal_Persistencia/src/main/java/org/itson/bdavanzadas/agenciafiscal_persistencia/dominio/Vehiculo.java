@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 /**
@@ -42,20 +43,21 @@ public class Vehiculo implements Serializable {
     @Column(name = "id_tramite", nullable = true)
     private Long id_tramite;
     
-    @Column(name = "id_contribuyente", nullable = true)
-    private Long id_contribuyente;
+    @JoinColumn(name = "contribuyente", nullable = true)
+    private Contribuyente contribuyente;
+
 
     public Vehiculo() {
     }
 
-    public Vehiculo(String numero_serie, String marca, String linea, String color, String modelo, Long id_tramite, Long id_contribuyente) {
+    public Vehiculo(String numero_serie, String marca, String linea, String color, String modelo, Long id_tramite, Contribuyente contribuyente) {
         this.numero_serie = numero_serie;
         this.marca = marca;
         this.linea = linea;
         this.color = color;
         this.modelo = modelo;
         this.id_tramite = id_tramite;
-        this.id_contribuyente = id_contribuyente;
+        this.contribuyente = contribuyente;
     }
 
     public Vehiculo(String numero_serie, String marca, String linea, String color, String modelo) {
@@ -122,16 +124,14 @@ public class Vehiculo implements Serializable {
         this.id_tramite = id_tramite;
     }
 
-    public Long getId_contribuyente() {
-        return id_contribuyente;
+    public Contribuyente getContribuyente() {
+        return contribuyente;
     }
 
-    public void setId_contribuyente(Long id_contribuyente) {
-        this.id_contribuyente = id_contribuyente;
+    public void setContribuyente(Contribuyente contribuyente) {
+        this.contribuyente = contribuyente;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 0;

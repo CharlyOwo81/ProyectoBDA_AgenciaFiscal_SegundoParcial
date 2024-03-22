@@ -46,7 +46,7 @@ public class Tramite implements Serializable {
     private Date fecha_recepcion;
     
     
-    @JoinColumn(name = "contribuyente", nullable = true)
+    @JoinColumn(name = "contribuyente", nullable = false)
     private Contribuyente contribuyente;
 
     public Tramite() {

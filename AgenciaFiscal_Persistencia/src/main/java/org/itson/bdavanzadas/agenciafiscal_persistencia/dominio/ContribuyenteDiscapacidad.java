@@ -9,6 +9,6 @@ package org.itson.bdavanzadas.agenciafiscal_persistencia.dominio;
  * @author gamaliel
  */
 public enum ContribuyenteDiscapacidad {
-    SI,
-    NO
+    NO,
+    SI
 }

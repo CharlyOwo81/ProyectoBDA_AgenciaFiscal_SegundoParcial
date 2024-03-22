@@ -18,7 +18,7 @@ import javax.persistence.Entity;
 @DiscriminatorValue("Placa")
 public class TramitePlaca extends Tramite implements Serializable {
 
-    @Column(name = "numero_placa", nullable = false, length = 7)
+    @Column(name = "numero_placa", nullable = true, length = 7)
     private String numero_placa;
 
     public TramitePlaca() {

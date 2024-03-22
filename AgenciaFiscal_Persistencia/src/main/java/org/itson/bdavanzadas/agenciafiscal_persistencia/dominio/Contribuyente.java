@@ -5,6 +5,7 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.dominio;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -60,6 +61,10 @@ public class Contribuyente implements Serializable {
     @JoinColumn (name = "licencia", nullable = true)
     private List<Tramite> licencia;
     
+    @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "vehiculo", nullable = true)
+    private List<Vehiculo> vehiculo;
+    
 
     public Contribuyente(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
         this.RFC = RFC;
@@ -81,7 +86,19 @@ public class Contribuyente implements Serializable {
         this.fecha_nacimiento = fecha_nacimiento;
         this.discapacidad = discapacidad;
     }
-    
+
+    public Contribuyente(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia, List<Vehiculo> vehiculo) {
+        this.RFC = RFC;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+        this.licencia = licencia;
+        this.vehiculo = vehiculo;
+    }
+           
     public List<Tramite> getLicencia() {
         return licencia;
     }
