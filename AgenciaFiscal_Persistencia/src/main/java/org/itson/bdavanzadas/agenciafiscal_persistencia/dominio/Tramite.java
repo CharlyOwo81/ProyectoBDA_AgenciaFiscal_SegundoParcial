@@ -42,7 +42,7 @@ public class Tramite implements Serializable {
     private Date fecha_emision; 
     
     @Temporal(TemporalType.TIMESTAMP)
-    @Column (name = "fecha_recepcion", nullable = false)
+    @Column (name = "fecha_recepcion", nullable = true)
     private Date fecha_recepcion;
     
     
@@ -63,6 +63,12 @@ public class Tramite implements Serializable {
         this.costo = costo;
         this.fecha_emision = fecha_emision;
         this.contribuyente = contribuyente;
+    }
+
+    public Tramite(Float costo, Date fecha_emision, Date fecha_recepcion) {
+        this.costo = costo;
+        this.fecha_emision = fecha_emision;
+        this.fecha_recepcion = fecha_recepcion;
     }
     
     

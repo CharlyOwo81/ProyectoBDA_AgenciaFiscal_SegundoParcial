@@ -46,6 +46,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         lblAnios.setForeground(new java.awt.Color(77, 77, 77));
         lblAnios.setText("1");
         add(lblAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(741, 253, -1, -1));
+        lblAnios.setText(String.valueOf(framePrincipal.getTramiteLicenciaDTO().getVigencia()));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelLicenciaExito.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -55,7 +56,8 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         framePrincipal.cambiarPanelInicio();
     }//GEN-LAST:event_btnTerminarActionPerformed
 
-
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTerminar;
     private javax.swing.JLabel lblAnios;

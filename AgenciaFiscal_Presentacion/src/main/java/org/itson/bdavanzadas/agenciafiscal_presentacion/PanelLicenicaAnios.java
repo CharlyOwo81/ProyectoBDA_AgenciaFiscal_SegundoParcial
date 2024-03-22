@@ -2,23 +2,28 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.CalcularCostoLicenciaBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.RegistrarLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteLicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  *
  * @author Roberto García
  */
 public class PanelLicenicaAnios extends javax.swing.JPanel {
-    
+
     private FramePrincipal framePrincipal;
     private CalcularCostoLicenciaBO calcularCostoLicenciaBO;
     private TramiteLicenciaNuevaDTO tramiteLicenciaNuevaDTO;
     private ContribuyenteDTO contribuyenteDTO;
+    private TipoLicencia tipoLicencia;
     private Float costo;
     private Integer vigencia;
 
@@ -29,8 +34,8 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
         this.framePrincipal = framePrincipal;
         this.contribuyenteDTO = framePrincipal.getContribuyenteDTO();
         this.calcularCostoLicenciaBO = new CalcularCostoLicenciaBO(contribuyenteDTO);
-        setTipoLicencia();
         initComponents();
+        setTipoLicencia();
     }
 
     /**
@@ -121,7 +126,7 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
 
         lblCosto.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblCosto.setForeground(new java.awt.Color(132, 21, 71));
-        add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 336, 300, -1));
+        add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 382, 140, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelLicenciaAnios.png"))); // NOI18N
         lblFondo.setToolTipText("");
@@ -135,38 +140,53 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         if (vigencia == null) {
             framePrincipal.mostrarAviso("Seleccione un plazo de vigencia");
-        }else{
-            
-            tramiteLicenciaNuevaDTO = new TramiteLicenciaNuevaDTO(vigencia, TipoLicencia.DISCAPACIDAD, costo, new Date(), new Date(), contribuyenteDTO.getId());
-                    
-            framePrincipal.cambiarPanelLicenciaExito();
-                    
+        } else {
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, vigencia);
+            Date fechaRecepcion = calendar.getTime();
+            tramiteLicenciaNuevaDTO = new TramiteLicenciaNuevaDTO(
+                    vigencia,
+                    tipoLicencia,
+                    costo,
+                    new Date(),
+                    fechaRecepcion,
+                    contribuyenteDTO);
+            try {
+                RegistrarLicenciaBO tramitarLicenciaBO = new RegistrarLicenciaBO(tramiteLicenciaNuevaDTO);
+                tramitarLicenciaBO.registrarLicencia(contribuyenteDTO);
+                framePrincipal.setTramiteLicenciaDTO(tramiteLicenciaNuevaDTO);
+                framePrincipal.cambiarPanelLicenciaExito();
+            } catch (PersistenciaException ex) {
+                framePrincipal.mostrarAviso(ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btn1anioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn1anioActionPerformed
         vigencia = 1;
         costo = calcularCostoLicenciaBO.calcularCosto(vigencia);
-        lblCosto.setText(String.valueOf(costo));
+        lblCosto.setText("$" + String.valueOf(costo));
     }//GEN-LAST:event_btn1anioActionPerformed
 
     private void btn2aniosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn2aniosActionPerformed
         vigencia = 2;
         costo = calcularCostoLicenciaBO.calcularCosto(vigencia);
-        lblCosto.setText(String.valueOf(costo));
+        lblCosto.setText("$" + String.valueOf(costo));
      }//GEN-LAST:event_btn2aniosActionPerformed
 
     private void btn3aniosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn3aniosActionPerformed
         vigencia = 3;
         costo = calcularCostoLicenciaBO.calcularCosto(vigencia);
-        lblCosto.setText(String.valueOf(costo));
+        lblCosto.setText("$" + String.valueOf(costo));
     }//GEN-LAST:event_btn3aniosActionPerformed
-    
+
     private void setTipoLicencia() {
         if (contribuyenteDTO.getDiscapacidad() == ContribuyenteDiscapacidad.NO) {
             lblTipoLicencia.setText("Estándar");
+            tipoLicencia = TipoLicencia.ESTANDAR;
         } else {
             lblTipoLicencia.setText("Discapacitado");
+            tipoLicencia = TipoLicencia.DISCAPACIDAD;
         }
     }
 

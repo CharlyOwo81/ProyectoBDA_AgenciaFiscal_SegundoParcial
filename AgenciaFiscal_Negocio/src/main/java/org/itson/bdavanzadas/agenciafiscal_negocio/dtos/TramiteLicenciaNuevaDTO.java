@@ -16,8 +16,8 @@ public class TramiteLicenciaNuevaDTO extends TramiteNuevoDTO{
     private Integer vigencia;
     private TipoLicencia tipo_licencia;
 
-    public TramiteLicenciaNuevaDTO(Integer vigencia, TipoLicencia tipo_licencia, Float costo, Date fecha_emision, Date fecha_recepcion, Long idContribuyente) {
-        super(costo, fecha_emision, fecha_recepcion, idContribuyente);
+    public TramiteLicenciaNuevaDTO(Integer vigencia, TipoLicencia tipo_licencia, Float costo, Date fecha_emision, Date fecha_recepcion, ContribuyenteDTO contribuyenteDTO) {
+        super(costo, fecha_emision, fecha_recepcion, contribuyenteDTO);
         this.vigencia = vigencia;
         this.tipo_licencia = tipo_licencia;
     }

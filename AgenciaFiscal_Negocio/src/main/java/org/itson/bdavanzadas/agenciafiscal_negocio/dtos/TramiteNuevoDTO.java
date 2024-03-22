@@ -16,22 +16,25 @@ public class TramiteNuevoDTO {
     private Float costo;
     private Date fecha_emision;
     private Date fecha_recepcion;
-    private Long idContribuyente;
+    private ContribuyenteDTO contribuyenteDTO;
 
-    public TramiteNuevoDTO(Float costo, Date fecha_emision, Date fecha_recepcion, Long idContribuyente) {
+    public TramiteNuevoDTO(Float costo, Date fecha_emision, Date fecha_recepcion, ContribuyenteDTO contribuyenteDTO) {
         this.costo = costo;
         this.fecha_emision = fecha_emision;
         this.fecha_recepcion = fecha_recepcion;
-        this.idContribuyente = idContribuyente;
+        this.contribuyenteDTO = contribuyenteDTO;
     }
 
-    public Long getIdContribuyente() {
-        return idContribuyente;
+    public ContribuyenteDTO getContribuyenteDTO() {
+        return contribuyenteDTO;
     }
 
-    public void setIdContribuyente(Long idContribuyente) {
-        this.idContribuyente = idContribuyente;
+    public void setContribuyenteDTO(ContribuyenteDTO contribuyenteDTO) {
+        this.contribuyenteDTO = contribuyenteDTO;
     }
+    
+    
+    
 
     public Float getCosto() {
         return costo;

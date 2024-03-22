@@ -1,40 +1,32 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
 import javax.persistence.EntityManager;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramiteLicencia;
 
 /**
  *
- * @author Proyecto2
+ * @author Roberto García
  */
-public class ContribuyenteDAO implements IContribuyenteDAO{
-
+public class RegistrarLicenciaDAO {
     private IConexion conexion;
 
-    public ContribuyenteDAO() {
+    public RegistrarLicenciaDAO() {
         this.conexion = new Conexion();
     }
    
-    @Override
-    public Contribuyente agregarContribuyente(Contribuyente contribuyente) {
+    public void registrarLicencia(TramiteLicencia tramiteLicencia) {
        
-        
         EntityManager eManager = conexion.crearConexion();
         
         eManager.getTransaction().begin(); 
         
-        eManager.persist(contribuyente);
+        eManager.persist(tramiteLicencia);
         
         eManager.getTransaction().commit();
         
         eManager.close();
+       
         
-        return contribuyente;
-
     }
-    
 }
