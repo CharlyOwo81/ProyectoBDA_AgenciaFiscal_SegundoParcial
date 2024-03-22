@@ -22,6 +22,7 @@ public class RegistrarLicenciaBO {
 
     public void registrarLicencia(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         BuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
+        
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(contribuyenteDTO.getRFC());
         TramiteLicencia tramiteLicencia = new TramiteLicencia(
                 tramiteLicenciaNuevaDTO.getTipo_licencia(),
@@ -32,6 +33,9 @@ public class RegistrarLicenciaBO {
                 contribuyente);
         RegistrarLicenciaDAO registrarLicenciaDAO = new RegistrarLicenciaDAO();
         registrarLicenciaDAO.registrarLicencia(tramiteLicencia);
-        
     }
+    
+    
+    
+    
 }

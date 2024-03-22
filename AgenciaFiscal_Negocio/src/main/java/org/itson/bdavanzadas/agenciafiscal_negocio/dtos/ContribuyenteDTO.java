@@ -2,11 +2,9 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 
 import java.util.Date;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
-import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 
 /**
  *
@@ -23,6 +21,7 @@ public class ContribuyenteDTO {
     private Date fecha_nacimiento;
     private ContribuyenteDiscapacidad discapacidad;
     private List<Tramite> licencia;
+    private List <Vehiculo> vehiculo;
 
 
     public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
@@ -57,6 +56,20 @@ public class ContribuyenteDTO {
         this.discapacidad = discapacidad;
     }
 
+    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia, List<Vehiculo> vehiculo) {
+        this.RFC = RFC;
+        this.nombre = nombre;
+        this.apellido_paterno = apellido_paterno;
+        this.apellido_materno = apellido_materno;
+        this.telefono = telefono;
+        this.fecha_nacimiento = fecha_nacimiento;
+        this.discapacidad = discapacidad;
+        this.licencia = licencia;
+        this.vehiculo = vehiculo;
+    }
+
+    
+    
     public Long getId() {
         return id;
     }
@@ -64,6 +77,15 @@ public class ContribuyenteDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public List<Vehiculo> getVehiculo() {
+        return vehiculo;
+    }
+
+    public void setVehiculo(List<Vehiculo> vehiculo) {
+        this.vehiculo = vehiculo;
+    }
+    
     
     
 
@@ -130,44 +152,4 @@ public class ContribuyenteDTO {
     public void setDiscapacidad(ContribuyenteDiscapacidad discapacidad) {
         this.discapacidad = discapacidad;
     }
-
-    public boolean esValido() throws ValidacionDTOException {
-        validarNombre();
-        validarApellidoPaterno();
-        validarApellidoMaterno();
-        validarRFC();
-        validarCURP();
-        validarTelefono();
-        validarFechaNacimiento();
-        return true;
-    }
-
-    private void validarNombre() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void validarApellidoPaterno() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void validarApellidoMaterno() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void validarRFC() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void validarCURP() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void validarTelefono() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    private void validarFechaNacimiento() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }
