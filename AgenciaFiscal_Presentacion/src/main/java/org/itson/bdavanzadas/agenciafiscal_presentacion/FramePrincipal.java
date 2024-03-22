@@ -3,7 +3,6 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import org.itson.bdavanzadas.agenciafiscal_dominio.*;
 /**
  *
  * @author rover

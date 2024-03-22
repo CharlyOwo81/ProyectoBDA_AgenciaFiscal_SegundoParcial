@@ -6,10 +6,6 @@ package org.itson.bdavanzadas.agenciafiscal;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
-import static org.itson.bdavanzadas.agenciafiscal_dominio.TipoLicencia.ESTANDAR;
-import org.itson.bdavanzadas.agenciafiscal_dominio.TramiteLicencia;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.LicenciaDAO;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.TramiteLicenciaNuevaDTO;
 
 /**
  *
@@ -36,6 +32,5 @@ public class AgenciaFiscal {
         GregorianCalendar calendario = new GregorianCalendar();
         Date fecha = calendario.getTime();
 //        LicenciaDAO licenciaDAO = new LicenciaDAO();
-//        TramiteLicencia nuevaLicencia = licenciaDAO.agregarLicencia(new TramiteLicenciaNuevaDTO(1, ESTANDAR, 600F, fecha));
     }
 }

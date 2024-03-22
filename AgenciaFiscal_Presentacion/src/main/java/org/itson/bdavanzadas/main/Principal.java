@@ -2,10 +2,10 @@ package org.itson.bdavanzadas.main;
 
 import java.util.Date;
 import javax.persistence.EntityManager;
-import org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_dominio.ContribuyenteDiscapacidad;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.Conexion;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.IConexion;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.Conexion;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.IConexion;
 
 /**
  *
@@ -26,9 +26,8 @@ public class Principal {
 
         entityManager.getTransaction().begin();
 
-        Contribuyente con = new Contribuyente("aadfds", "adfedf0", "dfd", "sdasdf", "fads", "6226", new Date(2004, 0, 0), ContribuyenteDiscapacidad.SI);
+        
 
-        entityManager.persist(con);
         entityManager.getTransaction().commit();
 
         entityManager.close();

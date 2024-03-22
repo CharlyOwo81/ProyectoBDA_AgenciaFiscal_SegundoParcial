@@ -1,22 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package org.itson.bdavanzadas.agenciafiscal_persistencia.dtos;
+package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.itson.bdavanzadas.agenciafiscal_dominio.ContribuyenteDiscapacidad;
-import org.itson.bdavanzadas.agenciafiscal_dominio.Tramite;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.ValidacionDTOException;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 
 /**
  *
  * @author gamaliel
  */
 public class ContribuyenteNuevoDTO {
+
     private String RFC;
     private String CURP;
     private String nombre;
@@ -57,7 +54,7 @@ public class ContribuyenteNuevoDTO {
         this.fecha_nacimiento = fecha_nacimiento;
         this.discapacidad = discapacidad;
     }
-       
+
     public List<Tramite> getLicencia() {
         return licencia;
     }
@@ -66,7 +63,6 @@ public class ContribuyenteNuevoDTO {
         this.licencia = licencia;
     }
 
-    
     public String getCURP() {
         return CURP;
     }
@@ -131,16 +127,15 @@ public class ContribuyenteNuevoDTO {
         this.discapacidad = discapacidad;
     }
 
-   
-        public boolean esValido() throws ValidacionDTOException {
-            validarNombre();
-            validarApellidoPaterno();
-            validarApellidoMaterno();
-            validarRFC();
-            validarCURP();
-            validarTelefono();
-            validarFechaNacimiento();
-            return true;
+    public boolean esValido() throws ValidacionDTOException {
+        validarNombre();
+        validarApellidoPaterno();
+        validarApellidoMaterno();
+        validarRFC();
+        validarCURP();
+        validarTelefono();
+        validarFechaNacimiento();
+        return true;
     }
 
     private void validarNombre() {
@@ -171,5 +166,4 @@ public class ContribuyenteNuevoDTO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    
 }

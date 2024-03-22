@@ -14,9 +14,9 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>AgenciaFiscal_Dominio</artifactId>
-            <version>${project.version}</version>
+            <groupId>unknown.binary</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -24,9 +24,9 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>AgenciaFiscal_Negocio</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
     <properties>

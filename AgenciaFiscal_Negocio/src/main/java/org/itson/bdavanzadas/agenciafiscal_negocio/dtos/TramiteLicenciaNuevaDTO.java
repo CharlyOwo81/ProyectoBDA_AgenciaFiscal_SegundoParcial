@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package org.itson.bdavanzadas.agenciafiscal_persistencia.dtos;
+package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 
 import java.util.Date;
-import org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_dominio.TipoLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
 
 /**
  *

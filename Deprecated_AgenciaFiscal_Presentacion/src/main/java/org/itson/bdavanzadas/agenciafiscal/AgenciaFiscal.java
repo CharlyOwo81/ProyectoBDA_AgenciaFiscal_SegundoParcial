@@ -9,12 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.itson.bdavanzadas.agenciafiscal_dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_dominio.ContribuyenteDiscapacidad;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.Conexion;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.ContribuyenteDAO;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.IConexion;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dtos.ContribuyenteNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.Conexion;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ContribuyenteDAO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.IConexion;
 
 /**
  *
@@ -35,9 +34,6 @@ public class AgenciaFiscal {
             
             ContribuyenteDAO contriDAO = new ContribuyenteDAO(conexion);
             
-            Contribuyente contri = contriDAO.agregarContribuyente(
-                    new ContribuyenteNuevoDTO("RUCJ700321WE2","RUCJ",
-                            "José", "Ruíz", "Chávez","6432133124", fecha, ContribuyenteDiscapacidad.SI));
         } catch (ParseException ex) {
             Logger.getLogger(AgenciaFiscal.class.getName()).log(Level.SEVERE, null, ex);
         }
