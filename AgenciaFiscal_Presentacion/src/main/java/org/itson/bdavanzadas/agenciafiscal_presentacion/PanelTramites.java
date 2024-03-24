@@ -113,7 +113,7 @@ public class PanelTramites extends javax.swing.JPanel {
                 btnRegresarActionPerformed(evt);
             }
         });
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 368, 137, 40));
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 365, 137, 40));
 
         btnLicencia.setBorder(null);
         btnLicencia.setBorderPainted(false);
@@ -200,7 +200,7 @@ public class PanelTramites extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
-        
+        framePrincipal.cambiarPanelTramites();
     }//GEN-LAST:event_btnTramitesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
@@ -212,7 +212,7 @@ public class PanelTramites extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
-        // TODO add your handling code here:
+        framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed

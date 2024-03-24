@@ -52,6 +52,10 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
         btn1anio = new javax.swing.JButton();
         btn2anios = new javax.swing.JButton();
         btn3anios = new javax.swing.JButton();
+        btnTramites = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnContribuyentes = new javax.swing.JButton();
         lblTipoLicencia = new javax.swing.JLabel();
         lblCosto = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
@@ -120,6 +124,54 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
         });
         add(btn3anios, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 239, 86, 55));
 
+        btnTramites.setBorder(null);
+        btnTramites.setBorderPainted(false);
+        btnTramites.setContentAreaFilled(false);
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setOpaque(false);
+        btnTramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTramitesActionPerformed(evt);
+            }
+        });
+        add(btnTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 261, 186, 47));
+
+        btnConsultas.setBorder(null);
+        btnConsultas.setBorderPainted(false);
+        btnConsultas.setContentAreaFilled(false);
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setOpaque(false);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
+        add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 308, 186, 47));
+
+        btnReportes.setBorder(null);
+        btnReportes.setBorderPainted(false);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setOpaque(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 355, 186, 47));
+
+        btnContribuyentes.setBorder(null);
+        btnContribuyentes.setBorderPainted(false);
+        btnContribuyentes.setContentAreaFilled(false);
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
+        add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
+
         lblTipoLicencia.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblTipoLicencia.setForeground(new java.awt.Color(132, 21, 71));
         add(lblTipoLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 336, 300, 20));
@@ -180,6 +232,26 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
         lblCosto.setText("$" + String.valueOf(costo));
     }//GEN-LAST:event_btn3aniosActionPerformed
 
+    private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+
+    }//GEN-LAST:event_btnTramitesActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setTramiteLicenciaDTO(null);
+            framePrincipal.cambiarPanelContribuyentes();
+        }
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
+
     private void setTipoLicencia() {
         if (contribuyenteDTO.getDiscapacidad() == ContribuyenteDiscapacidad.NO) {
             lblTipoLicencia.setText("Estándar");
@@ -195,7 +267,11 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
     private javax.swing.JButton btn2anios;
     private javax.swing.JButton btn3anios;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnContribuyentes;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnReportes;
+    private javax.swing.JButton btnTramites;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblTipoLicencia;

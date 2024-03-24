@@ -1,11 +1,11 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteLicenciaNuevaDTO;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramiteLicencia;
 /**
  *
  * @author rover
@@ -60,7 +60,7 @@ public class FramePrincipal extends javax.swing.JFrame {
      */
     public void limpiarFrame() {
         if (panelActual != null) {
-            this.remove(panelActual);
+        this.remove(panelActual);
             panelActual = null;
         }
     }
@@ -95,8 +95,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         PanelTramites panelTramites = new PanelTramites(this);
         ponerEnJFrame(panelTramites);
         panelActual = panelTramites;
-    }
-    
+    }  
     
     public void cambiarPanelLicencia() {
         limpiarFrame();
@@ -129,6 +128,20 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     }
     
+//    TODO habilitar este método para mostrar la ventana
+//    public void cambiarPanelConfirmarSalir(Integer seleccion) {
+//        JLayeredPane layeredPane = new JLayeredPane(); // Crear un JLayeredPane local
+//        PanelConfirmarSalir panelConfirmarSalir = new PanelConfirmarSalir(this, seleccion);
+//        layeredPane.add(panelConfirmarSalir, JLayeredPane.MODAL_LAYER); // Agregar el panel al JLayeredPane local
+//        panelConfirmarSalir.setBounds(0, 0, 1000, 580);
+//        panelConfirmarSalir.setLocationRelativeTo(null);
+//        
+//        // Mostrar el JLayeredPane local en el JFrame
+//        this.setContentPane(layeredPane);
+//        this.revalidate();
+//        this.repaint();
+//    }
+//    
     /**
      * Método para mostrar un aviso al usuario mediante una ventana emergente.
      *

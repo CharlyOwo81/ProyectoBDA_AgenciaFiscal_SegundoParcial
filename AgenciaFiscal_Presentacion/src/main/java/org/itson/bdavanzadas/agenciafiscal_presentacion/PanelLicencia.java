@@ -29,6 +29,10 @@ public class PanelLicencia extends javax.swing.JPanel {
     public PanelLicencia(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        contribuyenteDTO = this.framePrincipal.getContribuyenteDTO();
+        if (contribuyenteDTO != null) {
+            setTextos(contribuyenteDTO);
+        }
     }
 
     /**
@@ -100,7 +104,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         txtRfc.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
         txtRfc.setToolTipText("");
         txtRfc.setName(""); // NOI18N
-        add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, -1));
+        add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
 
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
@@ -186,16 +190,16 @@ public class PanelLicencia extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
+        framePrincipal.setContribuyenteDTO(null);
+        framePrincipal.cambiarPanelTramites();// TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (contribuyenteDTO ==null) {
+        if (contribuyenteDTO == null) {
             framePrincipal.mostrarAviso("Proporciona un contribuyente válido");
-        }else{
+        } else {
             framePrincipal.cambiarPanelLicenciaAnios();
         }
-// TODO add your handling code here:
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
@@ -210,8 +214,11 @@ public class PanelLicencia extends javax.swing.JPanel {
                 contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
                 setTextos(contribuyenteDTO);
                 framePrincipal.setContribuyenteDTO(contribuyenteDTO);
-            } catch (ValidacionDTOException | PersistenciaException ex) {
+            } catch (ValidacionDTOException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
+            } catch (PersistenciaException ex) {
+                framePrincipal.mostrarAviso(ex.getMessage());
+                txtRfc.setText(contribuyenteDTO.getRFC());
             }
         }
 
@@ -229,10 +236,16 @@ public class PanelLicencia extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
-        framePrincipal.cambiarPanelContribuyentes();        // TODO add your handling code here:
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setTramiteLicenciaDTO(null);
+            framePrincipal.cambiarPanelContribuyentes();
+        }
+// TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void setTextos(ContribuyenteDTO contribuyenteDTO) {
+        txtRfc.setText(contribuyenteDTO.getRFC());
         lblNombre.setText(contribuyenteDTO.getNombre());
         lblApellidoPaterno.setText(contribuyenteDTO.getApellido_paterno());
         lblApellidoMaterno.setText(contribuyenteDTO.getApellido_materno());
