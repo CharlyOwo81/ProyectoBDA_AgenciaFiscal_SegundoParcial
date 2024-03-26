@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.dominio;
 
 import java.io.Serializable;
@@ -11,27 +7,35 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author gamaliel
  */
 @Entity
+@Table(name = "licencias")
 @DiscriminatorValue("Licencia")
-public class TramiteLicencia extends Tramite implements Serializable {
+public class Licencia extends Tramite implements Serializable {
     
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_licencia", nullable = false)
     private TipoLicencia tipo_licencia;
     
-    @Column (name= "vigencia", nullable = false)
+    @Column (name= "anios_vigencia", nullable = false)
     private Integer vigencia;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column (name = "fecha_vencimiento", nullable = false)
+    private Date fecha_vencimiento;
 
-    public TramiteLicencia() {
+    public Licencia() {
    
     }
 
-    public TramiteLicencia(TipoLicencia tipo_licencia, Integer vigencia, Float costo, Date fecha_emision, Date fecha_recepcion, Contribuyente contribuyente) {
+    public Licencia(TipoLicencia tipo_licencia, Integer vigencia, Float costo, Date fecha_emision, Date fecha_recepcion, Contribuyente contribuyente) {
         super(costo, fecha_emision, fecha_recepcion, contribuyente);
         this.tipo_licencia = tipo_licencia;
         this.vigencia = vigencia;
@@ -52,4 +56,13 @@ public class TramiteLicencia extends Tramite implements Serializable {
     public void setVigencia(Integer vigencia) {
         this.vigencia = vigencia;
     }
+
+    public Date getFecha_vencimiento() {
+        return fecha_vencimiento;
+    }
+
+    public void setFecha_vencimiento(Date fecha_vencimiento) {
+        this.fecha_vencimiento = fecha_vencimiento;
+    }
+
 }

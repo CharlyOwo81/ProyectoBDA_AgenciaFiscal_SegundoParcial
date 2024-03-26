@@ -1,11 +1,11 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteLicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.BuscarContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.RegistrarLicenciaDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramiteLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -14,9 +14,9 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  */
 public class RegistrarLicenciaBO {
 
-    TramiteLicenciaNuevaDTO tramiteLicenciaNuevaDTO;
+    LicenciaNuevaDTO tramiteLicenciaNuevaDTO;
 
-    public RegistrarLicenciaBO(TramiteLicenciaNuevaDTO tramiteLicenciaNuevaDTO) {
+    public RegistrarLicenciaBO(LicenciaNuevaDTO tramiteLicenciaNuevaDTO) {
         this.tramiteLicenciaNuevaDTO = tramiteLicenciaNuevaDTO;
     }
 
@@ -24,12 +24,12 @@ public class RegistrarLicenciaBO {
         BuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
         
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(contribuyenteDTO.getRFC());
-        TramiteLicencia tramiteLicencia = new TramiteLicencia(
+        Licencia tramiteLicencia = new Licencia(
                 tramiteLicenciaNuevaDTO.getTipo_licencia(),
                 tramiteLicenciaNuevaDTO.getVigencia(),
                 tramiteLicenciaNuevaDTO.getCosto(),
                 tramiteLicenciaNuevaDTO.getFecha_emision(),
-                tramiteLicenciaNuevaDTO.getFecha_recepcion(),
+                tramiteLicenciaNuevaDTO.,
                 contribuyente);
         RegistrarLicenciaDAO registrarLicenciaDAO = new RegistrarLicenciaDAO();
         registrarLicenciaDAO.registrarLicencia(tramiteLicencia);

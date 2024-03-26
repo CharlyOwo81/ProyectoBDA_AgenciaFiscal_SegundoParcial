@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.dominio;
 
 import java.io.Serializable;
@@ -11,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,16 +22,16 @@ public class Vehiculo implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name= "numero_serie", nullable = false, length = 17)
-    private String numero_serie;
+    @Column(name= "numeroSerie", nullable = false, length = 17)
+    private String numeroSerie;
     
-    @Column(name = "marca", nullable = false, length = 20)
+    @Column(name = "marca", nullable = false, length = 30)
     private String marca;
     
-    @Column(name = "linea", nullable = false, length = 20)
+    @Column(name = "linea", nullable = false, length = 30)
     private String linea;
     
-    @Column(name = "color", nullable = false, length = 10)
+    @Column(name = "color", nullable = false, length = 20)
     private String color;
     
     @Column(name = "modelo", nullable = false, length = 4)
@@ -44,14 +41,14 @@ public class Vehiculo implements Serializable {
     private Long id_tramite;
     
     @JoinColumn(name = "contribuyente", nullable = true)
+    @ManyToOne
     private Contribuyente contribuyente;
-
 
     public Vehiculo() {
     }
 
-    public Vehiculo(String numero_serie, String marca, String linea, String color, String modelo, Long id_tramite, Contribuyente contribuyente) {
-        this.numero_serie = numero_serie;
+    public Vehiculo(String numeroSerie, String marca, String linea, String color, String modelo, Long id_tramite, Contribuyente contribuyente) {
+        this.numeroSerie = numeroSerie;
         this.marca = marca;
         this.linea = linea;
         this.color = color;
@@ -60,8 +57,8 @@ public class Vehiculo implements Serializable {
         this.contribuyente = contribuyente;
     }
 
-    public Vehiculo(String numero_serie, String marca, String linea, String color, String modelo) {
-        this.numero_serie = numero_serie;
+    public Vehiculo(String numeroSerie, String marca, String linea, String color, String modelo) {
+        this.numeroSerie = numeroSerie;
         this.marca = marca;
         this.linea = linea;
         this.color = color;
@@ -77,11 +74,11 @@ public class Vehiculo implements Serializable {
     }
 
     public String getNumero_serie() {
-        return numero_serie;
+        return numeroSerie;
     }
 
-    public void setNumero_serie(String numero_serie) {
-        this.numero_serie = numero_serie;
+    public void setNumero_serie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
     }
 
     public String getMarca() {

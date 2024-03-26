@@ -23,28 +23,6 @@ public class ContribuyenteDTO {
     private List<Tramite> licencia;
     private List <Vehiculo> vehiculo;
 
-
-    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia) {
-        this.RFC = RFC;
-        this.nombre = nombre;
-        this.apellido_paterno = apellido_paterno;
-        this.apellido_materno = apellido_materno;
-        this.telefono = telefono;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.discapacidad = discapacidad;
-        this.licencia = licencia;
-    }
-
-    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
-        this.RFC = RFC;
-        this.nombre = nombre;
-        this.apellido_paterno = apellido_paterno;
-        this.apellido_materno = apellido_materno;
-        this.telefono = telefono;
-        this.fecha_nacimiento = fecha_nacimiento;
-        this.discapacidad = discapacidad;
-    }
-
     public ContribuyenteDTO(Long id, String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
         this.id = id;
         this.RFC = RFC;
@@ -56,7 +34,7 @@ public class ContribuyenteDTO {
         this.discapacidad = discapacidad;
     }
 
-    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad, List<Tramite> licencia, List<Vehiculo> vehiculo) {
+    public ContribuyenteDTO(String RFC, String nombre, String apellido_paterno, String apellido_materno, String telefono, Date fecha_nacimiento, ContribuyenteDiscapacidad discapacidad) {
         this.RFC = RFC;
         this.nombre = nombre;
         this.apellido_paterno = apellido_paterno;
@@ -64,12 +42,7 @@ public class ContribuyenteDTO {
         this.telefono = telefono;
         this.fecha_nacimiento = fecha_nacimiento;
         this.discapacidad = discapacidad;
-        this.licencia = licencia;
-        this.vehiculo = vehiculo;
     }
-
-    
-    
     public Long getId() {
         return id;
     }
@@ -85,9 +58,6 @@ public class ContribuyenteDTO {
     public void setVehiculo(List<Vehiculo> vehiculo) {
         this.vehiculo = vehiculo;
     }
-    
-    
-    
 
     public List<Tramite> getLicencia() {
         return licencia;

@@ -4,12 +4,12 @@
  */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramiteLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 
 /**
  *
  * @author gamaliel
  */
 public interface ILicenciaDAO {
-    public TramiteLicencia agregarLicencia(TramiteLicencia licenciaNueva);
+    public Licencia agregarLicencia(Licencia licenciaNueva);
 }

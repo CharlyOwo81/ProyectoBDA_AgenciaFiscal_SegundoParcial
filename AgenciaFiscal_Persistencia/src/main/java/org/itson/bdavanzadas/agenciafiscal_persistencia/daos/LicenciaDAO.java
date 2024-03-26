@@ -5,7 +5,7 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
 import javax.persistence.EntityManager;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramiteLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 
 /**
  *
@@ -20,7 +20,7 @@ public class LicenciaDAO implements ILicenciaDAO{
     }
 
     @Override
-    public TramiteLicencia agregarLicencia(TramiteLicencia licencia) {
+    public Licencia agregarLicencia(Licencia licencia) {
         EntityManager eManager = conexion.crearConexion();
         
         eManager.getTransaction().begin();    

@@ -2,7 +2,7 @@ package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
 import javax.persistence.EntityManager;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramiteLicencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 
 /**
  *
@@ -15,7 +15,7 @@ public class RegistrarLicenciaDAO {
         this.conexion = new Conexion();
     }
    
-    public void registrarLicencia(TramiteLicencia tramiteLicencia) {
+    public void registrarLicencia(Licencia tramiteLicencia) {
        
         EntityManager eManager = conexion.crearConexion();
         

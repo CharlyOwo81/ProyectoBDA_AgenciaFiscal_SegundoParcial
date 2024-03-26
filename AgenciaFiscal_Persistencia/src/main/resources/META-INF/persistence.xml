@@ -6,12 +6,12 @@
     <class>org.itson.bdavanzadas.agenciafiscal_dominio.Tramite</class>
     <class>org.itson.bdavanzadas.agenciafiscal_dominio.TramiteLicencia</class>
     <class>org.itson.bdavanzadas.agenciafiscal_dominio.Vehiculo</class>
-    <class>org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TramitePlaca</class>
+    <class>org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Placa</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/agencia_fiscal?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="TheVisitors1981"/>
+      <property name="javax.persistence.jdbc.password" value="tElina.69"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <exclude-unlisted-classes>false</exclude-unlisted-classes>
     </properties>

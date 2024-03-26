@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.dominio;
 
 import java.io.Serializable;
@@ -15,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,9 +21,9 @@ import javax.persistence.TemporalType;
  * @author gamaliel
  */
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_tramite")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table (name = "tramites")
+@DiscriminatorColumn(name = "tipo")
 public class Tramite implements Serializable {
 
     @Id
@@ -41,25 +38,14 @@ public class Tramite implements Serializable {
     @Column(name = "fecha_emision", nullable = false)
     private Date fecha_emision; 
     
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column (name = "fecha_recepcion", nullable = true)
-    private Date fecha_recepcion;
-    
-    
-    @JoinColumn(name = "contribuyente", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "id_contribuyente", nullable = false)
     private Contribuyente contribuyente;
-
+    
     public Tramite() {
     }
 
     public Tramite(Float costo, Date fecha_emision, Date fecha_recepcion, Contribuyente contribuyente) {
-        this.costo = costo;
-        this.fecha_emision = fecha_emision;
-        this.fecha_recepcion = fecha_recepcion;
-        this.contribuyente = contribuyente;
-    }
-
-    public Tramite(Float costo, Date fecha_emision, Contribuyente contribuyente) {
         this.costo = costo;
         this.fecha_emision = fecha_emision;
         this.contribuyente = contribuyente;
@@ -68,10 +54,7 @@ public class Tramite implements Serializable {
     public Tramite(Float costo, Date fecha_emision, Date fecha_recepcion) {
         this.costo = costo;
         this.fecha_emision = fecha_emision;
-        this.fecha_recepcion = fecha_recepcion;
     }
-    
-    
     
     public Long getId() {
         return id;
@@ -95,14 +78,6 @@ public class Tramite implements Serializable {
 
     public void setFecha_emision(Date fecha_emision) {
         this.fecha_emision = fecha_emision;
-    }
-
-    public Date getFecha_recepcion() {
-        return fecha_recepcion;
-    }
-
-    public void setFecha_recepcion(Date fecha_recepcion) {
-        this.fecha_recepcion = fecha_recepcion;
     }
 
     public Contribuyente getContribuyente() {

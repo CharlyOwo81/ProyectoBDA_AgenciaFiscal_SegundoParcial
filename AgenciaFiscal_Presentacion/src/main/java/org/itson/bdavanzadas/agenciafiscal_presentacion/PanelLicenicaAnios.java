@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.CalcularCostoLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.RegistrarLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteLicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
@@ -21,7 +21,7 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
 
     private FramePrincipal framePrincipal;
     private CalcularCostoLicenciaBO calcularCostoLicenciaBO;
-    private TramiteLicenciaNuevaDTO tramiteLicenciaNuevaDTO;
+    private LicenciaNuevaDTO licenciaNuevaDTO;
     private ContribuyenteDTO contribuyenteDTO;
     private TipoLicencia tipoLicencia;
     private Float costo;
@@ -195,18 +195,18 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
         } else {
             Calendar calendar = Calendar.getInstance();
             calendar.add(Calendar.YEAR, vigencia);
-            Date fechaRecepcion = calendar.getTime();
-            tramiteLicenciaNuevaDTO = new TramiteLicenciaNuevaDTO(
+            Date fechaVencimiento = calendar.getTime();
+            licenciaNuevaDTO = new LicenciaNuevaDTO(
                     vigencia,
                     tipoLicencia,
+                    fechaVencimiento,
                     costo,
                     new Date(),
-                    fechaRecepcion,
                     contribuyenteDTO);
             try {
-                RegistrarLicenciaBO tramitarLicenciaBO = new RegistrarLicenciaBO(tramiteLicenciaNuevaDTO);
-                tramitarLicenciaBO.registrarLicencia(contribuyenteDTO);
-                framePrincipal.setTramiteLicenciaDTO(tramiteLicenciaNuevaDTO);
+                RegistrarLicenciaBO registrarLicenciaBO = new RegistrarLicenciaBO(licenciaNuevaDTO);
+                registrarLicenciaBO.registrarLicencia(contribuyenteDTO);
+                framePrincipal.setTramiteLicenciaDTO(licenciaNuevaDTO);
                 framePrincipal.cambiarPanelLicenciaExito();
             } catch (PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());

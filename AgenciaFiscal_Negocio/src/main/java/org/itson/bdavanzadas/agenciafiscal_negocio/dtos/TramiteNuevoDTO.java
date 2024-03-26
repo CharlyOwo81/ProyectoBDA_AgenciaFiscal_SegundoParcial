@@ -5,7 +5,6 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 
 import java.util.Date;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 
 /**
  *
@@ -14,14 +13,12 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 public class TramiteNuevoDTO {
 
     private Float costo;
-    private Date fecha_emision;
-    private Date fecha_recepcion;
+    private Date fechaEmision;
     private ContribuyenteDTO contribuyenteDTO;
 
-    public TramiteNuevoDTO(Float costo, Date fecha_emision, Date fecha_recepcion, ContribuyenteDTO contribuyenteDTO) {
+    public TramiteNuevoDTO(Float costo, Date fechaEmision, ContribuyenteDTO contribuyenteDTO) {
         this.costo = costo;
-        this.fecha_emision = fecha_emision;
-        this.fecha_recepcion = fecha_recepcion;
+        this.fechaEmision = fechaEmision;
         this.contribuyenteDTO = contribuyenteDTO;
     }
 
@@ -32,9 +29,6 @@ public class TramiteNuevoDTO {
     public void setContribuyenteDTO(ContribuyenteDTO contribuyenteDTO) {
         this.contribuyenteDTO = contribuyenteDTO;
     }
-    
-    
-    
 
     public Float getCosto() {
         return costo;
@@ -44,20 +38,12 @@ public class TramiteNuevoDTO {
         this.costo = costo;
     }
 
-    public Date getFecha_emision() {
-        return fecha_emision;
+    public Date getFechaEmision() {
+        return fechaEmision;
     }
 
-    public void setFecha_emision(Date fecha_emision) {
-        this.fecha_emision = fecha_emision;
-    }
-
-    public Date getFecha_recepcion() {
-        return fecha_recepcion;
-    }
-
-    public void setFecha_recepcion(Date fecha_recepcion) {
-        this.fecha_recepcion = fecha_recepcion;
+    public void setFechaEmision(Date fechaEmision) {
+        this.fechaEmision = fechaEmision;
     }
 
 }

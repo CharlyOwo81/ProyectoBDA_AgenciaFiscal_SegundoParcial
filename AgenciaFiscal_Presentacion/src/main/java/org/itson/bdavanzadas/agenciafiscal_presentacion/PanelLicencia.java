@@ -218,7 +218,7 @@ public class PanelLicencia extends javax.swing.JPanel {
                 framePrincipal.mostrarAviso(ex.getMessage());
             } catch (PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
-                txtRfc.setText(contribuyenteDTO.getRFC());
+                if (contribuyenteDTO != null) txtRfc.setText(contribuyenteDTO.getRFC());
             }
         }
 

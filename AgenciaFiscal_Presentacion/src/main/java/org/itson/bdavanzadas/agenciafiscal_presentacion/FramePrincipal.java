@@ -5,7 +5,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteLicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 /**
  *
  * @author rover
@@ -14,7 +14,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private JPanel panelActual;
     private ContribuyenteDTO contribuyenteDTO;
-    private TramiteLicenciaNuevaDTO tramiteLicenciaDTO;
+    private LicenciaNuevaDTO tramiteLicenciaDTO;
     /**
      * Creates new form Ventana
      */
@@ -190,11 +190,11 @@ public class FramePrincipal extends javax.swing.JFrame {
         this.contribuyenteDTO = contribuyenteDTO;
     }
 
-    public TramiteLicenciaNuevaDTO getTramiteLicenciaDTO() {
+    public LicenciaNuevaDTO getTramiteLicenciaDTO() {
         return tramiteLicenciaDTO;
     }
 
-    public void setTramiteLicenciaDTO(TramiteLicenciaNuevaDTO tramiteLicenciaDTO) {
+    public void setTramiteLicenciaDTO(LicenciaNuevaDTO tramiteLicenciaDTO) {
         this.tramiteLicenciaDTO = tramiteLicenciaDTO;
     }
     

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 /**
@@ -212,7 +208,7 @@ public class PanelTramites extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
-        framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
+        framePrincipal.cambiarPanelContribuyentes();// TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
