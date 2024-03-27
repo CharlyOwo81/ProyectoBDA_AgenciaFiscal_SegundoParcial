@@ -52,7 +52,7 @@ public class Vehiculo implements Serializable {
     private Contribuyente contribuyente;
 
     @OneToMany(mappedBy = "vehiculo", cascade = CascadeType.PERSIST)
-    private List<Placas> placas;
+    private List<Placa> placas;
 
     /**
      * Constructor por defecto de la clase Vehiculo.
@@ -214,7 +214,7 @@ public class Vehiculo implements Serializable {
      *
      * @return La lista de placas asociadas al vehículo.
      */
-    public List<Placas> getPlacas() {
+    public List<Placa> getPlacas() {
         return placas;
     }
 
@@ -223,7 +223,7 @@ public class Vehiculo implements Serializable {
      *
      * @param placas La lista de placas asociadas al vehículo.
      */
-    public void setPlacas(List<Placas> placas) {
+    public void setPlacas(List<Placa> placas) {
         this.placas = placas;
     }
 

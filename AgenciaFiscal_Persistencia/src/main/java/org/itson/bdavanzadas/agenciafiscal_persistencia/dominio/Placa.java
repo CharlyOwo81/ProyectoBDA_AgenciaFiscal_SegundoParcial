@@ -25,7 +25,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "placas")
 @DiscriminatorValue("Placas")
-public class Placas extends Tramite implements Serializable {
+public class Placa extends Tramite implements Serializable {
 
     @Column(name = "numero_placas", nullable = false, length = 7, unique = true)
     private String numeroPlacas;
@@ -42,7 +42,7 @@ public class Placas extends Tramite implements Serializable {
      * Constructor por defecto de la clase Placas. Crea un objeto Placas sin
      * inicializar sus atributos.
      */
-    public Placas() {
+    public Placa() {
     }
 
     /**
@@ -54,7 +54,7 @@ public class Placas extends Tramite implements Serializable {
      * @param fechaEmision La fecha de emisión del trámite de las placas.
      * @param contribuyente El contribuyente asociado al trámite de las placas.
      */
-    public Placas(String numeroPlacas, Date fechaRecepcion, Float costo, Date fechaEmision, Contribuyente contribuyente) {
+    public Placa(String numeroPlacas, Date fechaRecepcion, Float costo, Date fechaEmision, Contribuyente contribuyente) {
         super(costo, fechaEmision, contribuyente);
         this.numeroPlacas = numeroPlacas;
         this.fechaRecepcion = fechaRecepcion;
@@ -115,7 +115,7 @@ public class Placas extends Tramite implements Serializable {
     }
 
     /**
-     * Calcula el código hash para el objeto Placas.
+     * Calcula el código hash para el objeto Placa.
      *
      * @return El código hash del objeto.
      */
@@ -127,10 +127,10 @@ public class Placas extends Tramite implements Serializable {
     }
 
     /**
-     * Compara este objeto Placas con otro objeto para determinar si son
-     * iguales.
+     * Compara este objeto Placa con otro objeto para determinar si son
+ iguales.
      *
-     * @param obj El objeto a comparar con este Placas.
+     * @param obj El objeto a comparar con este Placa.
      * @return true si los objetos son iguales, false en caso contrario.
      */
     @Override
@@ -144,15 +144,15 @@ public class Placas extends Tramite implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Placas other = (Placas) obj;
+        final Placa other = (Placa) obj;
         return Objects.equals(this.numeroPlacas, other.numeroPlacas);
     }
 
     /**
-     * Devuelve una representación en forma de cadena de este objeto Placas,
-     * incluyendo los datos del trámite.
+     * Devuelve una representación en forma de cadena de este objeto Placa,
+ incluyendo los datos del trámite.
      *
-     * @return Una cadena que representa el objeto Placas.
+     * @return Una cadena que representa el objeto Placa.
      */
     @Override
     public String toString() {
