@@ -29,7 +29,7 @@ public class PanelLicencia extends javax.swing.JPanel {
     public PanelLicencia(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
-        contribuyenteDTO = this.framePrincipal.getContribuyenteDTO();
+        this.contribuyenteDTO = this.framePrincipal.getContribuyenteDTO();
         if (contribuyenteDTO != null) {
             setTextos(contribuyenteDTO);
         }
@@ -218,7 +218,7 @@ public class PanelLicencia extends javax.swing.JPanel {
                 framePrincipal.mostrarAviso(ex.getMessage());
             } catch (PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
-                if (contribuyenteDTO != null) txtRfc.setText(contribuyenteDTO.getRFC());
+                if (contribuyenteDTO != null) txtRfc.setText(contribuyenteDTO.getRfc());
             }
         }
 
@@ -238,19 +238,19 @@ public class PanelLicencia extends javax.swing.JPanel {
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
         if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
             framePrincipal.setContribuyenteDTO(null);
-            framePrincipal.setTramiteLicenciaDTO(null);
+            framePrincipal.setLicenciaNuevaDTO(null);
             framePrincipal.cambiarPanelContribuyentes();
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void setTextos(ContribuyenteDTO contribuyenteDTO) {
-        txtRfc.setText(contribuyenteDTO.getRFC());
+        txtRfc.setText(contribuyenteDTO.getRfc());
         lblNombre.setText(contribuyenteDTO.getNombre());
-        lblApellidoPaterno.setText(contribuyenteDTO.getApellido_paterno());
-        lblApellidoMaterno.setText(contribuyenteDTO.getApellido_materno());
+        lblApellidoPaterno.setText(contribuyenteDTO.getApellidoPaterno());
+        lblApellidoMaterno.setText(contribuyenteDTO.getApellidoMaterno());
         lblNumeroTelefono.setText(contribuyenteDTO.getTelefono());
-        lblFechaNacimiento.setText(convertirFechaATexto(contribuyenteDTO.getFecha_nacimiento()));
+        lblFechaNacimiento.setText(convertirFechaATexto(contribuyenteDTO.getFechaNacimiento()));
     }
 
     private String convertirFechaATexto(Date fecha) {

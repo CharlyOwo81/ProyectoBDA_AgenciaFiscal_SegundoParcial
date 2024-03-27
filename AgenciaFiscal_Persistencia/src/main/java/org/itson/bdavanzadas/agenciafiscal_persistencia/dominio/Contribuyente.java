@@ -1,7 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.dominio;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,9 +20,10 @@ import javax.persistence.TemporalType;
  *
  * Esta clase almacena información sobre los contribuyentes, como su rfc,
  * nombre, apellidos, teléfono, fecha de nacimiento, discapacidad, y los
- * trámites de licencias y vehículos asociados.
+ * trámites de tramites y vehículos asociados.
  *
- * @author Gamaliel Armenta, Roberto García
+ * @author Gamaliel Armenta
+ * @author Roberto García
  */
 @Entity
 @Table(name = "contribuyentes")
@@ -58,11 +57,9 @@ public class Contribuyente implements Serializable {
     private ContribuyenteDiscapacidad discapacidad;
 
     @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
-//    @JoinColumn (name = "licencias", nullable = true)
-    private List<Tramite> licencias;
+    private List<Tramite> tramites;
 
     @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "vehiculo", nullable = true)
     private List<Vehiculo> vehiculos;
 
     /**
@@ -240,21 +237,21 @@ public class Contribuyente implements Serializable {
     }
 
     /**
-     * Método para obtener la lista de licencias asociadas al contribuyente.
+     * Método para obtener la lista de tramites asociados al contribuyente.
      *
-     * @return La lista de licencias asociadas al contribuyente.
+     * @return La lista de tramites asociados al contribuyente.
      */
-    public List<Tramite> getLicencias() {
-        return licencias;
+    public List<Tramite> getTramites() {
+        return tramites;
     }
 
     /**
-     * Método para establecer la lista de licencias asociadas al contribuyente.
+     * Método para establecer la lista de tramites asociados al contribuyente.
      *
-     * @param licencias La lista de licencias asociadas al contribuyente.
+     * @param tramites La lista de tramites asociados al contribuyente.
      */
-    public void setLicencias(List<Tramite> licencias) {
-        this.licencias = licencias;
+    public void setTramites(List<Tramite> tramites) {
+        this.tramites = tramites;
     }
 
     /**
@@ -331,7 +328,7 @@ public class Contribuyente implements Serializable {
         sb.append(", telefono=").append(telefono);
         sb.append(", fechaNacimiento=").append(fechaNacimiento);
         sb.append(", discapacidad=").append(discapacidad);
-        sb.append(", licencias=").append(licencias);
+        sb.append(", tramites=").append(tramites);
         sb.append(", vehiculos=").append(vehiculos);
         sb.append('}');
         return sb.toString();

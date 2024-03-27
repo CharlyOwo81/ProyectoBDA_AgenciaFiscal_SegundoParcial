@@ -1,37 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
 import javax.persistence.EntityManager;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 
 /**
+ * Clase que implementa la interfaz ILicenciaDAO y proporciona funcionalidades
+ * para agregar licencias a la base de datos.
  *
- * @author gamaliel
+ * Esta clase se encarga de persistir nuevas licencias en la base de datos.
+ *
+ * @author Gamaliel Armenta
+ * @author Roberto García
  */
-public class LicenciaDAO implements ILicenciaDAO{
+public class LicenciaDAO implements ILicenciaDAO {
 
-    private IConexion conexion;
+    private final IConexion conexion;
 
+    /**
+     * Constructor de la clase LicenciaDAO.
+     *
+     * @param conexion La conexión a la base de datos a utilizar.
+     */
     public LicenciaDAO(IConexion conexion) {
         this.conexion = conexion;
     }
 
+    /**
+     * Agrega una nueva licencia a la base de datos.
+     *
+     * @param licencia La licencia a agregar.
+     * @return La licencia agregada.
+     */
     @Override
     public Licencia agregarLicencia(Licencia licencia) {
+        // Obtener una conexión a la base de datos
         EntityManager eManager = conexion.crearConexion();
-        
-        eManager.getTransaction().begin();    
-        
+
+        // Iniciar una transacción
+        eManager.getTransaction().begin();
+
+        // Persistir la licencia en la base de datos
         eManager.persist(licencia);
-        
+
+        // Confirmar la transacción
         eManager.getTransaction().commit();
-        
+
+        // Cerrar la conexión
         eManager.close();
-        
+
         return licencia;
     }
-    
 }

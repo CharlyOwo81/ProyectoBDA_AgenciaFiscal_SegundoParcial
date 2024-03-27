@@ -14,7 +14,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     private JPanel panelActual;
     private ContribuyenteDTO contribuyenteDTO;
-    private LicenciaNuevaDTO tramiteLicenciaDTO;
+    private LicenciaNuevaDTO licenciaNuevaDTO;
     /**
      * Creates new form Ventana
      */
@@ -128,6 +128,54 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     }
     
+    public void cambiarPanelPlacasValidarLicencia() {
+        limpiarFrame();
+        PanelPlacasValidarLicencia panelPlacasValidarLicencia = new PanelPlacasValidarLicencia(this);
+        ponerEnJFrame(panelPlacasValidarLicencia);
+        panelActual = panelPlacasValidarLicencia;
+
+    }
+    
+    public void cambiarPanelPlacasTipoAutomovil() {
+        limpiarFrame();
+        PanelPlacasTipoAutomovil panelPlacasTipoAutomovil = new PanelPlacasTipoAutomovil(this);
+        ponerEnJFrame(panelPlacasTipoAutomovil);
+        panelActual = panelPlacasTipoAutomovil;
+
+    }
+    
+    public void cambiarPanelPlacasAgregarAutomovil() {
+        limpiarFrame();
+        panelPlacasAgregarAutomovil panePlacasAgregarAutomovil = new panelPlacasAgregarAutomovil(this);
+        ponerEnJFrame(panePlacasAgregarAutomovil);
+        panelActual = panePlacasAgregarAutomovil;
+
+    }
+    
+    public void cambiarPanelPlacasBuscarAnteriores() {
+        limpiarFrame();
+        PanelPlacasBuscarAnteriores panelPlacasBuscarAnteriores = new PanelPlacasBuscarAnteriores(this);
+        ponerEnJFrame(panelPlacasBuscarAnteriores);
+        panelActual = panelPlacasBuscarAnteriores;
+
+    }
+    
+    public void cambiarPanelPlacasConfirmar() {
+        limpiarFrame();
+        panelPlacasConfirmar panelPlacasConfirmar = new panelPlacasConfirmar(this);
+        ponerEnJFrame(panelPlacasConfirmar);
+        panelActual = panelPlacasConfirmar;
+
+    }
+    
+    public void cambiarPanelPlacasExito() {
+        limpiarFrame();
+        PanelPlacasExito panelPlacasExito = new PanelPlacasExito(this);
+        ponerEnJFrame(panelPlacasExito);
+        panelActual = panelPlacasExito;
+
+    }
+    
 //    TODO habilitar este método para mostrar la ventana
 //    public void cambiarPanelConfirmarSalir(Integer seleccion) {
 //        JLayeredPane layeredPane = new JLayeredPane(); // Crear un JLayeredPane local
@@ -190,12 +238,12 @@ public class FramePrincipal extends javax.swing.JFrame {
         this.contribuyenteDTO = contribuyenteDTO;
     }
 
-    public LicenciaNuevaDTO getTramiteLicenciaDTO() {
-        return tramiteLicenciaDTO;
+    public LicenciaNuevaDTO getLicenciaNuevaDTO() {
+        return licenciaNuevaDTO;
     }
 
-    public void setTramiteLicenciaDTO(LicenciaNuevaDTO tramiteLicenciaDTO) {
-        this.tramiteLicenciaDTO = tramiteLicenciaDTO;
+    public void setLicenciaNuevaDTO(LicenciaNuevaDTO licenciaNuevaDTO) {
+        this.licenciaNuevaDTO = licenciaNuevaDTO;
     }
     
     

@@ -10,19 +10,34 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Clase DAO para buscar contribuyentes en la base de datos. Permite realizar
+ * búsquedas de contribuyentes por su RFC o por su ID.
  *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class BuscarContribuyenteDAO {
 
-    private IConexion conexion;
+    private final IConexion conexion;
 
+    /**
+     * Constructor de la clase BuscarContribuyenteDAO. Inicializa la conexión
+     * con la base de datos utilizando la implementación de IConexion por
+     * defecto.
+     */
     public BuscarContribuyenteDAO() {
         this.conexion = new Conexion();
     }
 
-    public Contribuyente buscarContribuyente(String rfc) throws PersistenciaException{
-
+    /**
+     * Busca un contribuyente en la base de datos por su RFC.
+     *
+     * @param rfc El RFC del contribuyente a buscar.
+     * @return El contribuyente encontrado.
+     * @throws PersistenciaException Si no se encuentra ningún contribuyente con
+     * el RFC proporcionado.
+     */
+    public Contribuyente buscarContribuyente(String rfc) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         // Objeto constructor de consultas
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -32,7 +47,7 @@ public class BuscarContribuyenteDAO {
         Root<Contribuyente> root = criteria.from(Contribuyente.class);
 
         // Filtrar por RFC igual al parámetro proporcionado
-        criteria.select(root).where(cb.equal(root.get("RFC"), rfc));
+        criteria.select(root).where(cb.equal(root.get("rfc"), rfc));
 
         // Consulta construida
         TypedQuery<Contribuyente> query = entityManager.createQuery(criteria);
@@ -44,13 +59,22 @@ public class BuscarContribuyenteDAO {
 
         // Verificar si se encontró algún contribuyente con el RFC dado
         if (contribuyentes.isEmpty()) {
-            throw new PersistenciaException("No se encontró ningún contribuyente con el RFC proporcionado");// No se encontró ningún contribuyente con el RFC dado
+            throw new PersistenciaException("No se encontró ningún contribuyente con el RFC proporcionado");
         } else {
             return contribuyentes.get(0); // Devolver el primer contribuyente encontrado
         }
     }
-    public Contribuyente buscarContribuyente(Long id) throws PersistenciaException{
 
+    //TODO, este método aún no funciona
+    /**
+     * Busca un contribuyente en la base de datos por su ID.
+     *
+     * @param id El ID del contribuyente a buscar.
+     * @return El contribuyente encontrado.
+     * @throws PersistenciaException Si no se encuentra ningún contribuyente con
+     * el ID proporcionado.
+     */
+    public Contribuyente buscarContribuyente(Long id) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         // Objeto constructor de consultas
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -59,7 +83,7 @@ public class BuscarContribuyenteDAO {
 
         Root<Contribuyente> root = criteria.from(Contribuyente.class);
 
-        // Filtrar por RFC igual al parámetro proporcionado
+        // Filtrar por ID igual al parámetro proporcionado
         criteria.select(root).where(cb.equal(root.get("id_contribuyente"), id));
 
         // Consulta construida
@@ -70,13 +94,11 @@ public class BuscarContribuyenteDAO {
 
         entityManager.close();
 
-        // Verificar si se encontró algún contribuyente con el RFC dado
+        // Verificar si se encontró algún contribuyente con el ID dado
         if (contribuyentes.isEmpty()) {
-            throw new PersistenciaException("No se encontró ningún contribuyente con el id proporcionado");// No se encontró ningún contribuyente con el RFC dado
+            throw new PersistenciaException("No se encontró ningún contribuyente con el ID proporcionado");
         } else {
             return contribuyentes.get(0); // Devolver el primer contribuyente encontrado
         }
-
     }
-
 }

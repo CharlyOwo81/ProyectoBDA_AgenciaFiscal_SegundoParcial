@@ -1,18 +1,22 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+
 /**
  *
  * @author Roberto García
  */
-public class PanelLicenciaExito extends javax.swing.JPanel {
+public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
+    ContribuyenteDTO contribuyenteDTO;
 
     /**
-     * Creates new form PanelLicenciaExito
+     * Creates new form PanelPlacasValidarLicencia
      */
-    public PanelLicenciaExito(FramePrincipal framePrincipal) {
+    public PanelPlacasValidarLicencia(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
+        this.contribuyenteDTO = this.framePrincipal.getContribuyenteDTO();
         initComponents();
     }
 
@@ -25,29 +29,18 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnTerminar = new javax.swing.JButton();
         btnTramites = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnContribuyentes = new javax.swing.JButton();
-        lblAnios = new javax.swing.JLabel();
+        btnContinuar = new javax.swing.JButton();
+        btnRegresar = new javax.swing.JButton();
+        btnValidar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnTerminar.setBorder(null);
-        btnTerminar.setBorderPainted(false);
-        btnTerminar.setContentAreaFilled(false);
-        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnTerminar.setOpaque(false);
-        btnTerminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerminarActionPerformed(evt);
-            }
-        });
-        add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 292, 137, 40));
 
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
@@ -97,23 +90,48 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         });
         add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
 
-        lblAnios.setFont(new java.awt.Font("Montserrat", 1, 16)); // NOI18N
-        lblAnios.setForeground(new java.awt.Color(77, 77, 77));
-        add(lblAnios, new org.netbeans.lib.awtextra.AbsoluteConstraints(741, 253, -1, -1));
-        lblAnios.setText(String.valueOf(framePrincipal.getLicenciaNuevaDTO().getVigencia()));
+        btnContinuar.setBorder(null);
+        btnContinuar.setBorderPainted(false);
+        btnContinuar.setContentAreaFilled(false);
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContinuar.setOpaque(false);
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
+        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 379, 137, 40));
 
-        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelLicenciaExito.png"))); // NOI18N
+        btnRegresar.setBorder(null);
+        btnRegresar.setBorderPainted(false);
+        btnRegresar.setContentAreaFilled(false);
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setOpaque(false);
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 379, 137, 40));
+
+        btnValidar.setBorder(null);
+        btnValidar.setBorderPainted(false);
+        btnValidar.setContentAreaFilled(false);
+        btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnValidar.setOpaque(false);
+        btnValidar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnValidarActionPerformed(evt);
+            }
+        });
+        add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 273, 137, 40));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasValidarLicencia.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed
-        framePrincipal.setContribuyenteDTO(null);
-        framePrincipal.setLicenciaNuevaDTO(null);
-        framePrincipal.cambiarPanelInicio();
-    }//GEN-LAST:event_btnTerminarActionPerformed
-
     private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
-
+        framePrincipal.cambiarPanelTramites();
     }//GEN-LAST:event_btnTramitesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
@@ -127,20 +145,35 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
         if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
             framePrincipal.setContribuyenteDTO(null);
-            framePrincipal.setLicenciaNuevaDTO(null);
             framePrincipal.cambiarPanelContribuyentes();
-        }
-        // TODO add your handling code here:
+        }      // TODO add your handling code here:
     }//GEN-LAST:event_btnContribuyentesActionPerformed
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        if (contribuyenteDTO == null) {
+            framePrincipal.mostrarAviso("Proporciona un contribuyente válido");
+        } else {
+            framePrincipal.cambiarPanelPlacasTipoAutomovil();
+        }
+    }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        framePrincipal.cambiarPanelTramites();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnValidarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnContribuyentes;
+    private javax.swing.JButton btnRegresar;
     private javax.swing.JButton btnReportes;
-    private javax.swing.JButton btnTerminar;
     private javax.swing.JButton btnTramites;
-    private javax.swing.JLabel lblAnios;
+    private javax.swing.JButton btnValidar;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 

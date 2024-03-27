@@ -206,7 +206,7 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
             try {
                 RegistrarLicenciaBO registrarLicenciaBO = new RegistrarLicenciaBO(licenciaNuevaDTO);
                 registrarLicenciaBO.registrarLicencia(contribuyenteDTO);
-                framePrincipal.setTramiteLicenciaDTO(licenciaNuevaDTO);
+                framePrincipal.setLicenciaNuevaDTO(licenciaNuevaDTO);
                 framePrincipal.cambiarPanelLicenciaExito();
             } catch (PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
@@ -247,7 +247,7 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
         if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
             framePrincipal.setContribuyenteDTO(null);
-            framePrincipal.setTramiteLicenciaDTO(null);
+            framePrincipal.setLicenciaNuevaDTO(null);
             framePrincipal.cambiarPanelContribuyentes();
         }
     }//GEN-LAST:event_btnContribuyentesActionPerformed
