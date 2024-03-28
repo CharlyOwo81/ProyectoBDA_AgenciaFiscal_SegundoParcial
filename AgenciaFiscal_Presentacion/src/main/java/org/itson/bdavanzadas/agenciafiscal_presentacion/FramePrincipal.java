@@ -4,8 +4,10 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 /**
  *
  * @author rover
@@ -15,6 +17,8 @@ public class FramePrincipal extends javax.swing.JFrame {
     private JPanel panelActual;
     private ContribuyenteDTO contribuyenteDTO;
     private LicenciaNuevaDTO licenciaNuevaDTO;
+    private AutomovilNuevoDTO automovilNuevoDTO;
+    private PlacasNuevasDTO placasNuevasDTO;
     /**
      * Creates new form Ventana
      */
@@ -162,7 +166,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     
     public void cambiarPanelPlacasConfirmar() {
         limpiarFrame();
-        panelPlacasConfirmar panelPlacasConfirmar = new panelPlacasConfirmar(this);
+        PanelPlacasConfirmar panelPlacasConfirmar = new PanelPlacasConfirmar(this);
         ponerEnJFrame(panelPlacasConfirmar);
         panelActual = panelPlacasConfirmar;
 
@@ -244,6 +248,22 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     public void setLicenciaNuevaDTO(LicenciaNuevaDTO licenciaNuevaDTO) {
         this.licenciaNuevaDTO = licenciaNuevaDTO;
+    }
+
+    public AutomovilNuevoDTO getAutomovilNuevoDTO() {
+        return automovilNuevoDTO;
+    }
+
+    public void setAutomovilNuevoDTO(AutomovilNuevoDTO automovilNuevoDTO) {
+        this.automovilNuevoDTO = automovilNuevoDTO;
+    }
+
+    public PlacasNuevasDTO getPlacasNuevasDTO() {
+        return placasNuevasDTO;
+    }
+
+    public void setPlacasNuevasDTO(PlacasNuevasDTO placasNuevasDTO) {
+        this.placasNuevasDTO = placasNuevasDTO;
     }
     
     

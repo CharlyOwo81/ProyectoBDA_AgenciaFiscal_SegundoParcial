@@ -82,6 +82,28 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
         this.contribuyente = contribuyente;
     }
+    /**
+     * Constructor de la clase Vehiculo.
+     *
+     * Crea un nuevo objeto Vehiculo con los atributos especificados.
+     *
+     * @param id
+     * @param numeroSerie El número de serie del vehículo.
+     * @param marca La marca del vehículo.
+     * @param linea La línea del vehículo.
+     * @param color El color del vehículo.
+     * @param modelo El modelo del vehículo.
+     * @param contribuyente El contribuyente asociado al vehículo.
+     */
+    public Vehiculo(Long id, String numeroSerie, String marca, String linea, String color, String modelo, Contribuyente contribuyente) {
+        this.id = id;
+        this.numeroSerie = numeroSerie;
+        this.marca = marca;
+        this.linea = linea;
+        this.color = color;
+        this.modelo = modelo;
+        this.contribuyente = contribuyente;
+    }
 
     /**
      * Devuelve el ID del vehículo.

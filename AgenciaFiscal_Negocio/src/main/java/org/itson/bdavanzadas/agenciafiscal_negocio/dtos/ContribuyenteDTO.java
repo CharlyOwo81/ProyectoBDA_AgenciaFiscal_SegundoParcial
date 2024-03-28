@@ -3,6 +3,7 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 import java.util.Date;
 import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 
@@ -29,8 +30,8 @@ public class ContribuyenteDTO {
     private String telefono;
     private Date fechaNacimiento;
     private ContribuyenteDiscapacidad discapacidad;
-    private List<Tramite> licencia;
-    private List<Vehiculo> vehiculo;
+    private List<Tramite> tramites;
+    private List<Vehiculo> vehiculos;
 
     /**
      * Crea una nueva instancia de ContribuyenteDTO con los datos básicos de un
@@ -46,6 +47,30 @@ public class ContribuyenteDTO {
      * ninguna.
      */
     public ContribuyenteDTO(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, Date fechaNacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.discapacidad = discapacidad;
+    }
+    /**
+     * Crea una nueva instancia de ContribuyenteDTO con los datos básicos de un
+     * contribuyente.
+     *
+     * @param id
+     * @param rfc El RFC del contribuyente.
+     * @param nombre El nombre del contribuyente.
+     * @param apellidoPaterno El apellido paterno del contribuyente.
+     * @param apellidoMaterno El apellido materno del contribuyente.
+     * @param telefono El número de teléfono del contribuyente.
+     * @param fechaNacimiento La fecha de nacimiento del contribuyente.
+     * @param discapacidad La discapacidad del contribuyente, o null si no tiene
+     * ninguna.
+     */
+    public ContribuyenteDTO(Long id, String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, Date fechaNacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -199,41 +224,20 @@ public class ContribuyenteDTO {
         this.discapacidad = discapacidad;
     }
 
-    /**
-     * Obtiene la lista de trámites de licencia asociados al contribuyente.
-     *
-     * @return La lista de trámites de licencia asociados al contribuyente.
-     */
-    public List<Tramite> getLicencia() {
-        return licencia;
+    public List<Tramite> getTramites() {
+        return tramites;
     }
 
-    /**
-     * Establece la lista de trámites de licencia asociados al contribuyente.
-     *
-     * @param licencia La lista de trámites de licencia asociados al
-     * contribuyente.
-     */
-    public void setLicencia(List<Tramite> licencia) {
-        this.licencia = licencia;
+    public void setTramites(List<Tramite> tramites) {
+        this.tramites = tramites;
     }
 
-    /**
-     * Obtiene la lista de vehículos asociados al contribuyente.
-     *
-     * @return La lista de vehículos asociados al contribuyente.
-     */
-    public List<Vehiculo> getVehiculo() {
-        return vehiculo;
+    public List<Vehiculo> getVehiculos() {
+        return vehiculos;
     }
 
-    /**
-     * Establece la lista de vehículos asociados al contribuyente.
-     *
-     * @param vehiculo La lista de vehículos asociados al contribuyente.
-     */
-    public void setVehiculo(List<Vehiculo> vehiculo) {
-        this.vehiculo = vehiculo;
+    public void setVehiculos(List<Vehiculo> vehiculos) {
+        this.vehiculos = vehiculos;
     }
 
 }

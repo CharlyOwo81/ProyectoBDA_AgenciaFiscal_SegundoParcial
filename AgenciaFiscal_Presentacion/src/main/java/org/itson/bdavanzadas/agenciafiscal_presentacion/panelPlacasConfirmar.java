@@ -1,19 +1,36 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.AgregarAutomovilBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IAgregarAutomovilBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IRegistrarLicenciaBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IRegistrarPlacasBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.RegistrarPlacasBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
+
 /**
  *
  * @author Roberto García
  */
-public class panelPlacasConfirmar extends javax.swing.JPanel {
+public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
+    AutomovilNuevoDTO automovilNuevoDTO;
+    ContribuyenteDTO contribuyenteDTO;
+    PlacasNuevasDTO placasNuevasDTO;
 
     /**
      * Creates new form panelPlacasConfirmar
      */
-    public panelPlacasConfirmar(FramePrincipal framePrincipal) {
+    public PanelPlacasConfirmar(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        setTextos();
     }
 
     /**
@@ -25,25 +42,27 @@ public class panelPlacasConfirmar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnContinuar = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
+        lblTipoTramite = new javax.swing.JLabel();
+        lblCosto = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnContinuar.setBorder(null);
-        btnContinuar.setBorderPainted(false);
-        btnContinuar.setContentAreaFilled(false);
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnContinuar.setOpaque(false);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+        btnConfirmar.setBorder(null);
+        btnConfirmar.setBorderPainted(false);
+        btnConfirmar.setContentAreaFilled(false);
+        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar.setOpaque(false);
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
+                btnConfirmarActionPerformed(evt);
             }
         });
-        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 324, 137, 40));
+        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 324, 137, 40));
 
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
@@ -57,18 +76,29 @@ public class panelPlacasConfirmar extends javax.swing.JPanel {
         });
         add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 324, 137, 40));
 
+        lblTipoTramite.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblTipoTramite.setForeground(new java.awt.Color(137, 21, 71));
+        add(lblTipoTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 233, 230, 20));
+        lblTipoTramite.getAccessibleContext().setAccessibleName("");
+
+        lblCosto.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblCosto.setForeground(new java.awt.Color(137, 21, 71));
+        add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 289, 230, 20));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasConfirmar.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO validar con automovilNuevoDTO
+        registrarAuto();
+        registrarPlacas();
         framePrincipal.cambiarPanelPlacasExito();
-    }//GEN-LAST:event_btnContinuarActionPerformed
+    }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO validar si el usuario viene del panel de agregar auto o de buscar placas anteriores
-        if (true) {
+        if (framePrincipal.getAutomovilNuevoDTO() == null) {
             framePrincipal.cambiarPanelPlacasBuscarAnteriores();
         } else {
             framePrincipal.cambiarPanelPlacasAgregarAutomovil();
@@ -77,11 +107,44 @@ public class panelPlacasConfirmar extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void registrarPlacas() {
+        placasNuevasDTO.setContribuyenteDTO(contribuyenteDTO);
+        IRegistrarPlacasBO registrarPlacasBO = new RegistrarPlacasBO(placasNuevasDTO);
+        try {
+            registrarPlacasBO.registrarPlacas(automovilNuevoDTO);
+        } catch (PersistenciaException ex) {
+            framePrincipal.mostrarAviso(ex.getMessage());
+        }
+
+    }
+
+    private void registrarAuto() {
+        automovilNuevoDTO = framePrincipal.getAutomovilNuevoDTO();
+        contribuyenteDTO = framePrincipal.getContribuyenteDTO();
+        IAgregarAutomovilBO agregarAutomovilBO = new AgregarAutomovilBO(automovilNuevoDTO);
+        automovilNuevoDTO = agregarAutomovilBO.agregarAutomovil(contribuyenteDTO);
+    }
+
+    private void setTextos() {
+        if (framePrincipal.getAutomovilNuevoDTO() == null) {
+            lblTipoTramite.setText("Renovación");
+            lblCosto.setText("$1000.00");
+            placasNuevasDTO = new PlacasNuevasDTO(1000.0F, new Date(), contribuyenteDTO);
+        } else {
+            lblTipoTramite.setText("Placas nuevas");
+            lblCosto.setText("$1500.00");
+            placasNuevasDTO = new PlacasNuevasDTO(1500.0F, new Date(), contribuyenteDTO);
+
+        }
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblTipoTramite;
     // End of variables declaration//GEN-END:variables
 
 }

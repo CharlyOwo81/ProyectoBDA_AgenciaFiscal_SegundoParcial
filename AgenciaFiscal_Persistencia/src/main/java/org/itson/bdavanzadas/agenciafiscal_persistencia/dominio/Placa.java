@@ -50,14 +50,43 @@ public class Placa extends Tramite implements Serializable {
      *
      * @param numeroPlacas El número de placas.
      * @param fechaRecepcion La fecha de recepción de las placas.
+     * @param vehiculo
      * @param costo El costo del trámite de las placas.
      * @param fechaEmision La fecha de emisión del trámite de las placas.
      * @param contribuyente El contribuyente asociado al trámite de las placas.
      */
-    public Placa(String numeroPlacas, Date fechaRecepcion, Float costo, Date fechaEmision, Contribuyente contribuyente) {
+    public Placa(String numeroPlacas, Date fechaRecepcion, Vehiculo vehiculo, Float costo, Date fechaEmision, Contribuyente contribuyente) {
         super(costo, fechaEmision, contribuyente);
         this.numeroPlacas = numeroPlacas;
         this.fechaRecepcion = fechaRecepcion;
+        this.vehiculo = vehiculo;
+    }
+    /**
+     * Constructor de la clase Placas que inicializa todos los campos.
+     *
+     * @param numeroPlacas El número de placas.
+     * @param vehiculo
+     * @param costo El costo del trámite de las placas.
+     * @param fechaEmision La fecha de emisión del trámite de las placas.
+     * @param contribuyente El contribuyente asociado al trámite de las placas.
+     */
+    public Placa(String numeroPlacas, Vehiculo vehiculo, Float costo, Date fechaEmision, Contribuyente contribuyente) {
+        super(costo, fechaEmision, contribuyente);
+        this.numeroPlacas = numeroPlacas;
+        this.vehiculo = vehiculo;
+    }
+    /**
+     * Constructor de la clase Placas que inicializa todos los campos.
+     *
+     * @param numeroPlacas El número de placas.
+     * @param vehiculo
+     * @param costo El costo del trámite de las placas.
+     * @param fechaEmision La fecha de emisión del trámite de las placas.
+     * @param contribuyente El contribuyente asociado al trámite de las placas.
+     */
+    public Placa(String numeroPlacas, Float costo, Date fechaEmision, Contribuyente contribuyente) {
+        super(costo, fechaEmision, contribuyente);
+        this.numeroPlacas = numeroPlacas;
     }
 
     /**

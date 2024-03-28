@@ -7,6 +7,8 @@ import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,6 +56,7 @@ public class Contribuyente implements Serializable {
     private Date fechaNacimiento;
 
     @Column(name = "discapacidad", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ContribuyenteDiscapacidad discapacidad;
 
     @OneToMany(mappedBy = "contribuyente", cascade = CascadeType.PERSIST)
@@ -83,6 +86,30 @@ public class Contribuyente implements Serializable {
      * contribuyente (SI, NO).
      */
     public Contribuyente(String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, Date fechaNacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.rfc = rfc;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.telefono = telefono;
+        this.fechaNacimiento = fechaNacimiento;
+        this.discapacidad = discapacidad;
+    }
+    
+    /**
+     * Constructor de la clase Contribuyente que permite inicializar todos los
+     * campos.
+     *
+     * @param rfc El RFC del contribuyente.
+     * @param nombre El nombre del contribuyente.
+     * @param apellidoPaterno El apellido paterno del contribuyente.
+     * @param apellidoMaterno El apellido materno del contribuyente.
+     * @param telefono El número de teléfono del contribuyente.
+     * @param fechaNacimiento La fecha de nacimiento del contribuyente.
+     * @param discapacidad La información sobre la discapacidad del
+     * contribuyente (SI, NO).
+     */
+    public Contribuyente(Long id, String rfc, String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, Date fechaNacimiento, ContribuyenteDiscapacidad discapacidad) {
+        this.id = id;
         this.rfc = rfc;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;

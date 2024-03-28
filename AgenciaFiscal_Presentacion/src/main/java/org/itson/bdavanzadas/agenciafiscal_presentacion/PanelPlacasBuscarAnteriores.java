@@ -1,5 +1,13 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IValidarPlacasBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.ValidarPlacasBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
+
 /**
  *
  * @author Roberto García
@@ -7,6 +15,8 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
+    PlacasViejasDTO placasViejasDTO;
+    AutomovilNuevoDTO automovilNuevoDTO;
     /** Creates new form PanelPlacasBuscarAnteriores */
     public PanelPlacasBuscarAnteriores(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
@@ -25,6 +35,9 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
         btnRegresar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
+        txtPlacas = new javax.swing.JTextField();
+        lblAutomovil = new javax.swing.JLabel();
+        lblPlacas = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -41,7 +54,7 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
                 btnRegresarActionPerformed(evt);
             }
         });
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 398, 137, 40));
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 386, 137, 40));
 
         btnBuscar.setBorder(null);
         btnBuscar.setBorderPainted(false);
@@ -53,7 +66,7 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
                 btnBuscarActionPerformed(evt);
             }
         });
-        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(626, 282, 137, 40));
+        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 273, 137, 40));
 
         btnContinuar.setBorder(null);
         btnContinuar.setBorderPainted(false);
@@ -65,7 +78,26 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
                 btnContinuarActionPerformed(evt);
             }
         });
-        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 398, 137, 40));
+        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 386, 137, 40));
+
+        txtPlacas.setBackground(new java.awt.Color(250, 248, 245));
+        txtPlacas.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
+        txtPlacas.setToolTipText("");
+        txtPlacas.setName(""); // NOI18N
+        txtPlacas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPlacasActionPerformed(evt);
+            }
+        });
+        add(txtPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
+
+        lblAutomovil.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblAutomovil.setForeground(new java.awt.Color(77, 77, 77));
+        add(lblAutomovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 326, 583, 20));
+
+        lblPlacas.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblPlacas.setForeground(new java.awt.Color(77, 77, 77));
+        add(lblPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 346, 583, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasBuscarAnteriores.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -80,17 +112,35 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (true) {
-            framePrincipal.cambiarPanelPlacasConfirmar();
+        if (txtPlacas.getText().isBlank()) {
+            framePrincipal.mostrarAviso("El campo de número de placa no puede estar vacío");
+        }else{
+            String placas = txtPlacas.getText();
+            placasViejasDTO = new PlacasViejasDTO(txtPlacas.getText());
+            IValidarPlacasBO validarPlacasBO = new ValidarPlacasBO(placasViejasDTO);
+            try {
+                PlacasNuevasDTO placasNuevasDTO = validarPlacasBO.validarPlacas();
+                framePrincipal.mostrarAviso("Placas encontradas con exito: " + placasNuevasDTO.getNumeroPlacas());
+                framePrincipal.cambiarPanelPlacasConfirmar();
+            } catch (ValidacionDTOException | PersistenciaException ex) {
+                framePrincipal.mostrarAviso(ex.getMessage());
+            }
         }
     }//GEN-LAST:event_btnContinuarActionPerformed
+
+    private void txtPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPlacasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPlacasActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JLabel lblAutomovil;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblPlacas;
+    private javax.swing.JTextField txtPlacas;
     // End of variables declaration//GEN-END:variables
 
 }

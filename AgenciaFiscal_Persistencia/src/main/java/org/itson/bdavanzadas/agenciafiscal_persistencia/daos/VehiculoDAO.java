@@ -15,12 +15,12 @@ public class VehiculoDAO implements IVehiculoDAO {
 
     private IConexion conexion;
 
-    public VehiculoDAO(IConexion conexion) {
-        this.conexion = conexion;
+    public VehiculoDAO() {
+        this.conexion = new Conexion();
     }    
     
     @Override
-    public Vehiculo agregarVehiculo(Vehiculo vehiculo) {
+    public Vehiculo agregarVehiculo(Vehiculo vehiculo){
         EntityManager eManager = conexion.crearConexion();
         
         eManager.getTransaction().begin();

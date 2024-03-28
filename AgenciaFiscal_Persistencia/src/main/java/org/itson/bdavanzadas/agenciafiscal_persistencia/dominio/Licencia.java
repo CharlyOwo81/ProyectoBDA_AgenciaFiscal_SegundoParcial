@@ -37,7 +37,7 @@ public class Licencia extends Tramite implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_vencimiento", nullable = false)
     private Date fechaVencimiento;
-
+    
     /**
      * Constructor por defecto de la clase Licencia. Crea un objeto Licencia sin
      * inicializar sus atributos.

@@ -220,7 +220,7 @@ public class PanelTramites extends javax.swing.JPanel {
     }//GEN-LAST:event_btnLicenciaActionPerformed
 
     private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
-        // TODO add your handling code here:
+        framePrincipal.cambiarPanelPlacasValidarLicencia();        // TODO add your handling code here:
     }//GEN-LAST:event_btnPlacasActionPerformed
 
 

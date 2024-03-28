@@ -1,6 +1,17 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorRfcBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPorRfcBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IValidarLicenciaBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.ValidarLicenciaBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -10,6 +21,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
     ContribuyenteDTO contribuyenteDTO;
+    LicenciaNuevaDTO licenciaNuevaDTO;
 
     /**
      * Creates new form PanelPlacasValidarLicencia
@@ -36,6 +48,9 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnContinuar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnValidar = new javax.swing.JButton();
+        txtRfc = new javax.swing.JTextField();
+        lblContribuyente = new javax.swing.JLabel();
+        lblLicencia = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -126,6 +141,20 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         });
         add(btnValidar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 273, 137, 40));
 
+        txtRfc.setBackground(new java.awt.Color(250, 248, 245));
+        txtRfc.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
+        txtRfc.setToolTipText("");
+        txtRfc.setName(""); // NOI18N
+        add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
+
+        lblContribuyente.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblContribuyente.setForeground(new java.awt.Color(77, 77, 77));
+        add(lblContribuyente, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 318, 592, 20));
+
+        lblLicencia.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblLicencia.setForeground(new java.awt.Color(77, 77, 77));
+        add(lblLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 338, 592, 20));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasValidarLicencia.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -150,8 +179,8 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (contribuyenteDTO == null) {
-            framePrincipal.mostrarAviso("Proporciona un contribuyente válido");
+        if (licenciaNuevaDTO == null) {
+            framePrincipal.mostrarAviso("Proporciona un contribuyente con licencia válida");
         } else {
             framePrincipal.cambiarPanelPlacasTipoAutomovil();
         }
@@ -162,9 +191,30 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnValidarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarActionPerformed
-        // TODO add your handling code here:
+        if (txtRfc.getText().isBlank()) {
+            framePrincipal.mostrarAviso("El campo de RFC no puede estar vacío");
+        } else {
+            String rfc = txtRfc.getText();
+            BuscarContribyenteRFCDTO buscarContribyenteRFCDTO = new BuscarContribyenteRFCDTO(rfc);
+            IBuscarPorRfcBO buscarPorRfcBO = new BuscarPorRfcBO(buscarContribyenteRFCDTO);
+            try {
+                contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
+                framePrincipal.setContribuyenteDTO(contribuyenteDTO);
+                IValidarLicenciaBO validarLicenciaBO = new ValidarLicenciaBO(contribuyenteDTO);
+                licenciaNuevaDTO = validarLicenciaBO.validarLicencia();
+                setLabels();
+            } catch (ValidacionDTOException | PersistenciaException ex) {
+                framePrincipal.mostrarAviso(ex.getMessage());
+            }
+
+        }
+
     }//GEN-LAST:event_btnValidarActionPerformed
 
+    private void setLabels() {
+        lblContribuyente.setText("El contribuyente " + contribuyenteDTO.getNombre() + " " + contribuyenteDTO.getApellidoPaterno() + " " + contribuyenteDTO.getApellidoMaterno());
+        lblLicencia.setText("tiene una licencia válida");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultas;
@@ -174,7 +224,10 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnTramites;
     private javax.swing.JButton btnValidar;
+    private javax.swing.JLabel lblContribuyente;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblLicencia;
+    private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -41,6 +41,7 @@ public class BuscarPorRfcBO implements IBuscarPorRfcBO {
         
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(rfc);
         ContribuyenteDTO contribuyenteDTO = new ContribuyenteDTO(
+                contribuyente.getId(),
                 contribuyente.getRfc(),
                 contribuyente.getNombre(),
                 contribuyente.getApellidoPaterno(),
