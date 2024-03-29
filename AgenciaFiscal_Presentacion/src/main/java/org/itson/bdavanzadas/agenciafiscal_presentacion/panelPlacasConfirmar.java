@@ -62,7 +62,7 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
                 btnConfirmarActionPerformed(evt);
             }
         });
-        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 324, 137, 40));
+        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 367, 137, 40));
 
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
@@ -74,16 +74,15 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
                 btnRegresarActionPerformed(evt);
             }
         });
-        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 324, 137, 40));
+        add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 367, 137, 40));
 
         lblTipoTramite.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblTipoTramite.setForeground(new java.awt.Color(137, 21, 71));
-        add(lblTipoTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 233, 230, 20));
-        lblTipoTramite.getAccessibleContext().setAccessibleName("");
+        add(lblTipoTramite, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 276, 230, 20));
 
         lblCosto.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblCosto.setForeground(new java.awt.Color(137, 21, 71));
-        add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 289, 230, 20));
+        add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 332, 230, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasConfirmar.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -111,7 +110,8 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         placasNuevasDTO.setContribuyenteDTO(contribuyenteDTO);
         IRegistrarPlacasBO registrarPlacasBO = new RegistrarPlacasBO(placasNuevasDTO);
         try {
-            registrarPlacasBO.registrarPlacas(automovilNuevoDTO);
+            placasNuevasDTO = registrarPlacasBO.registrarPlacas(automovilNuevoDTO);
+            framePrincipal.setPlacasNuevasDTO(placasNuevasDTO);
         } catch (PersistenciaException ex) {
             framePrincipal.mostrarAviso(ex.getMessage());
         }

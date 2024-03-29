@@ -30,6 +30,9 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         this.framePrincipal = framePrincipal;
         this.contribuyenteDTO = this.framePrincipal.getContribuyenteDTO();
         initComponents();
+        if (contribuyenteDTO != null) {
+            setLabels();
+        }
     }
 
     /**
@@ -214,6 +217,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     private void setLabels() {
         lblContribuyente.setText("El contribuyente " + contribuyenteDTO.getNombre() + " " + contribuyenteDTO.getApellidoPaterno() + " " + contribuyenteDTO.getApellidoMaterno());
         lblLicencia.setText("tiene una licencia válida");
+        txtRfc.setText(contribuyenteDTO.getRfc());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

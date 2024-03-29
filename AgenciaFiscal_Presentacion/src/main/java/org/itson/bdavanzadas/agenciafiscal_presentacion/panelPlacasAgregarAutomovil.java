@@ -1,6 +1,8 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.ValidarAutomovilBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
@@ -9,7 +11,7 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOExce
  *
  * @author Roberto García
  */
-public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
+public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
     AutomovilNuevoDTO automovilNuevoDTO;
@@ -17,9 +19,14 @@ public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
     /**
      * Creates new form panelPlacasAgregarAutomovil
      */
-    public panelPlacasAgregarAutomovil(FramePrincipal framePrincipal) {
+    public PanelPlacasAgregarAutomovil(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
+        this.automovilNuevoDTO = framePrincipal.getAutomovilNuevoDTO();
         initComponents();
+        agregarListener();
+        if (automovilNuevoDTO != null) {
+            setTextos();
+        }
     }
 
     /**
@@ -38,6 +45,7 @@ public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
         txtColor = new javax.swing.JTextField();
         btnContinuar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        lblCaracteresNumSerie = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -98,6 +106,12 @@ public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
         });
         add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 463, 137, 40));
 
+        lblCaracteresNumSerie.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
+        lblCaracteresNumSerie.setForeground(new java.awt.Color(77, 77, 77));
+        lblCaracteresNumSerie.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblCaracteresNumSerie.setText("0/17");
+        add(lblCaracteresNumSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 283, 40, 20));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasAgregarAutomovil.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -112,7 +126,6 @@ public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
             try {
                 validarAutomovilBO.validarAutomovil();
                 framePrincipal.setAutomovilNuevoDTO(automovilNuevoDTO);
-                framePrincipal.mostrarInformacion("Automóvil agregado con éxito", "Éxito");
                 framePrincipal.cambiarPanelPlacasConfirmar();
             } catch (ValidacionDTOException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
@@ -121,6 +134,7 @@ public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        framePrincipal.setAutomovilNuevoDTO(null);
         framePrincipal.cambiarPanelPlacasTipoAutomovil();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -144,9 +158,43 @@ public class panelPlacasAgregarAutomovil extends javax.swing.JPanel {
                 txtModelo.getText());
     }
 
+    private void agregarListener(){
+        txtNumeroSerie.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateCount();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateCount();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateCount();
+            }
+
+            private void updateCount() {
+                int count = txtNumeroSerie.getText().length();
+                lblCaracteresNumSerie.setText(count + "/17");
+            }
+        });
+    }
+    
+    private void setTextos(){
+        txtNumeroSerie.setText(automovilNuevoDTO.getNumeroSerie());
+        txtMarca.setText(automovilNuevoDTO.getMarca());
+        txtLinea.setText(automovilNuevoDTO.getLinea());
+        txtModelo.setText(automovilNuevoDTO.getModelo());
+        txtColor.setText(automovilNuevoDTO.getColor());
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnContinuar;
+    private javax.swing.JLabel lblCaracteresNumSerie;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JTextField txtColor;
     private javax.swing.JTextField txtLinea;

@@ -27,12 +27,12 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
     }
 
     private boolean validarNumeroSerie() throws ValidacionDTOException {
-        String regex = "^[a-zA-Z0-9]{17}$";
+        String regex = "^[A-Z0-9]{17}$";
         String numeroSerie = automovilNuevoDTO.getNumeroSerie();
         if (numeroSerie.length() != 17) {
             throw new ValidacionDTOException("El número de serie debe contener 17 caracteres");
         } else if (!numeroSerie.matches(regex)) {
-            throw new ValidacionDTOException("El número de serie solo debe contener letras y números");
+            throw new ValidacionDTOException("El número de serie solo debe contener letras mayúsculas y números");
         }
         return true;
     }

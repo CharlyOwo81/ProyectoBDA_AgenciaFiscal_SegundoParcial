@@ -1,13 +1,14 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
-
-import javax.swing.JLayeredPane;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+
 /**
  *
  * @author rover
@@ -19,11 +20,14 @@ public class FramePrincipal extends javax.swing.JFrame {
     private LicenciaNuevaDTO licenciaNuevaDTO;
     private AutomovilNuevoDTO automovilNuevoDTO;
     private PlacasNuevasDTO placasNuevasDTO;
+
     /**
      * Creates new form Ventana
      */
     public FramePrincipal() {
         initComponents();
+        ImageIcon img = new ImageIcon("/icon.png");
+        this.setIconImage(img.getImage());
     }
 
     /**
@@ -37,6 +41,7 @@ public class FramePrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Red Única de Trámites");
+        setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setResizable(false);
 
@@ -51,24 +56,25 @@ public class FramePrincipal extends javax.swing.JFrame {
             .addGap(0, 580, Short.MAX_VALUE)
         );
 
+        getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
     /**
      * Método para limpiar el contenido de la ventana. Si hay un panel
      * actualmente mostrado, lo elimina de la ventana.
      */
     public void limpiarFrame() {
         if (panelActual != null) {
-        this.remove(panelActual);
+            this.remove(panelActual);
             panelActual = null;
         }
     }
-    
+
     /**
      * Método para agregar un panel a la ventana. Este método agrega el panel
      * especificado a la ventana, lo posiciona y ajusta su tamaño
@@ -84,8 +90,8 @@ public class FramePrincipal extends javax.swing.JFrame {
     }
 
     /**
-     * Método para cambiar a la vista de inicio de la agencia. Este método elimina
-     * el panel actual y muestra la vista de inicio de la agencia.
+     * Método para cambiar a la vista de inicio de la agencia. Este método
+     * elimina el panel actual y muestra la vista de inicio de la agencia.
      */
     public void cambiarPanelInicio() {
         limpiarFrame();
@@ -93,21 +99,21 @@ public class FramePrincipal extends javax.swing.JFrame {
         ponerEnJFrame(vistaInicio);
         panelActual = vistaInicio;
     }
-    
+
     public void cambiarPanelTramites() {
         limpiarFrame();
         PanelTramites panelTramites = new PanelTramites(this);
         ponerEnJFrame(panelTramites);
         panelActual = panelTramites;
-    }  
-    
+    }
+
     public void cambiarPanelLicencia() {
         limpiarFrame();
         PanelLicencia panelLicencia = new PanelLicencia(this);
         ponerEnJFrame(panelLicencia);
         panelActual = panelLicencia;
     }
-    
+
     public void cambiarPanelContribuyentes() {
         limpiarFrame();
         PanelContribuyentes panelContribuyentes = new PanelContribuyentes(this);
@@ -115,7 +121,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelContribuyentes;
 
     }
-    
+
     public void cambiarPanelLicenciaAnios() {
         limpiarFrame();
         PanelLicenicaAnios panelLicenicaAnios = new PanelLicenicaAnios(this);
@@ -123,7 +129,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelLicenicaAnios;
 
     }
-    
+
     public void cambiarPanelLicenciaExito() {
         limpiarFrame();
         PanelLicenciaExito panelLicenciaExito = new PanelLicenciaExito(this);
@@ -131,7 +137,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelLicenciaExito;
 
     }
-    
+
     public void cambiarPanelPlacasValidarLicencia() {
         limpiarFrame();
         PanelPlacasValidarLicencia panelPlacasValidarLicencia = new PanelPlacasValidarLicencia(this);
@@ -139,7 +145,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelPlacasValidarLicencia;
 
     }
-    
+
     public void cambiarPanelPlacasTipoAutomovil() {
         limpiarFrame();
         PanelPlacasTipoAutomovil panelPlacasTipoAutomovil = new PanelPlacasTipoAutomovil(this);
@@ -147,15 +153,15 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelPlacasTipoAutomovil;
 
     }
-    
+
     public void cambiarPanelPlacasAgregarAutomovil() {
         limpiarFrame();
-        panelPlacasAgregarAutomovil panePlacasAgregarAutomovil = new panelPlacasAgregarAutomovil(this);
+        PanelPlacasAgregarAutomovil panePlacasAgregarAutomovil = new PanelPlacasAgregarAutomovil(this);
         ponerEnJFrame(panePlacasAgregarAutomovil);
         panelActual = panePlacasAgregarAutomovil;
 
     }
-    
+
     public void cambiarPanelPlacasBuscarAnteriores() {
         limpiarFrame();
         PanelPlacasBuscarAnteriores panelPlacasBuscarAnteriores = new PanelPlacasBuscarAnteriores(this);
@@ -163,7 +169,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelPlacasBuscarAnteriores;
 
     }
-    
+
     public void cambiarPanelPlacasConfirmar() {
         limpiarFrame();
         PanelPlacasConfirmar panelPlacasConfirmar = new PanelPlacasConfirmar(this);
@@ -171,7 +177,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelPlacasConfirmar;
 
     }
-    
+
     public void cambiarPanelPlacasExito() {
         limpiarFrame();
         PanelPlacasExito panelPlacasExito = new PanelPlacasExito(this);
@@ -179,7 +185,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelPlacasExito;
 
     }
-    
+
 //    TODO habilitar este método para mostrar la ventana
 //    public void cambiarPanelConfirmarSalir(Integer seleccion) {
 //        JLayeredPane layeredPane = new JLayeredPane(); // Crear un JLayeredPane local
@@ -265,6 +271,5 @@ public class FramePrincipal extends javax.swing.JFrame {
     public void setPlacasNuevasDTO(PlacasNuevasDTO placasNuevasDTO) {
         this.placasNuevasDTO = placasNuevasDTO;
     }
-    
-    
+
 }
