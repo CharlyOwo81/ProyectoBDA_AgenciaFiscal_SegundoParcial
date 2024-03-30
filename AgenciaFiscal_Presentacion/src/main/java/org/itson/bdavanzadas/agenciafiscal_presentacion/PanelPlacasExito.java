@@ -35,7 +35,7 @@ public class PanelPlacasExito extends javax.swing.JPanel {
         btnTerminar.setBorder(null);
         btnTerminar.setBorderPainted(false);
         btnTerminar.setContentAreaFilled(false);
-        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnTerminar.setOpaque(false);
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -54,6 +54,7 @@ public class PanelPlacasExito extends javax.swing.JPanel {
         add(lblNumPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 100, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasExito.png"))); // NOI18N
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

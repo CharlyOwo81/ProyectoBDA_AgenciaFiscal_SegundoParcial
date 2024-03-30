@@ -30,6 +30,7 @@ public class PanelPlacasTipoAutomovil extends javax.swing.JPanel {
         btnVehiculoUsado = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
+        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -37,7 +38,7 @@ public class PanelPlacasTipoAutomovil extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -49,7 +50,7 @@ public class PanelPlacasTipoAutomovil extends javax.swing.JPanel {
         btnVehiculoNuevo.setBorder(null);
         btnVehiculoNuevo.setBorderPainted(false);
         btnVehiculoNuevo.setContentAreaFilled(false);
-        btnVehiculoNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVehiculoNuevo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVehiculoNuevo.setOpaque(false);
         btnVehiculoNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +62,7 @@ public class PanelPlacasTipoAutomovil extends javax.swing.JPanel {
         btnVehiculoUsado.setBorder(null);
         btnVehiculoUsado.setBorderPainted(false);
         btnVehiculoUsado.setContentAreaFilled(false);
-        btnVehiculoUsado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVehiculoUsado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnVehiculoUsado.setOpaque(false);
         btnVehiculoUsado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

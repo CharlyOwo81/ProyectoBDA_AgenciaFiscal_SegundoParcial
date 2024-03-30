@@ -63,7 +63,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
         btnTramites.setContentAreaFilled(false);
-        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnTramites.setOpaque(false);
         btnTramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,7 +75,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnConsultas.setBorder(null);
         btnConsultas.setBorderPainted(false);
         btnConsultas.setContentAreaFilled(false);
-        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnConsultas.setOpaque(false);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +87,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnReportes.setBorder(null);
         btnReportes.setBorderPainted(false);
         btnReportes.setContentAreaFilled(false);
-        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnReportes.setOpaque(false);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,7 +99,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnContribuyentes.setBorder(null);
         btnContribuyentes.setBorderPainted(false);
         btnContribuyentes.setContentAreaFilled(false);
-        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnContribuyentes.setOpaque(false);
         btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,7 +111,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnContinuar.setBorder(null);
         btnContinuar.setBorderPainted(false);
         btnContinuar.setContentAreaFilled(false);
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnContinuar.setOpaque(false);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -123,7 +123,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,7 +135,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         btnValidar.setBorder(null);
         btnValidar.setBorderPainted(false);
         btnValidar.setContentAreaFilled(false);
-        btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnValidar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnValidar.setOpaque(false);
         btnValidar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -159,6 +159,7 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
         add(lblLicencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 338, 592, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasValidarLicencia.png"))); // NOI18N
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
