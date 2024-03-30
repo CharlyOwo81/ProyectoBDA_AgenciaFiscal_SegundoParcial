@@ -54,7 +54,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
         btnTramites.setContentAreaFilled(false);
-        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTramites.setOpaque(false);
         btnTramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +66,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnConsultas.setBorder(null);
         btnConsultas.setBorderPainted(false);
         btnConsultas.setContentAreaFilled(false);
-        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultas.setOpaque(false);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,7 +78,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnReportes.setBorder(null);
         btnReportes.setBorderPainted(false);
         btnReportes.setContentAreaFilled(false);
-        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setOpaque(false);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +90,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnContribuyentes.setBorder(null);
         btnContribuyentes.setBorderPainted(false);
         btnContribuyentes.setContentAreaFilled(false);
-        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContribuyentes.setOpaque(false);
         btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -102,7 +102,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnLicencia.setBorder(null);
         btnLicencia.setBorderPainted(false);
         btnLicencia.setContentAreaFilled(false);
-        btnLicencia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnLicencia.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLicencia.setOpaque(false);
         btnLicencia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,7 +126,7 @@ public class PanelTramites extends javax.swing.JPanel {
         btnPlacas.setBorder(null);
         btnPlacas.setBorderPainted(false);
         btnPlacas.setContentAreaFilled(false);
-        btnPlacas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnPlacas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPlacas.setOpaque(false);
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,7 +137,7 @@ public class PanelTramites extends javax.swing.JPanel {
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelTramites.png"))); // NOI18N
         lblFondo.setToolTipText("");
-        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         lblBienvenido.setFont(new java.awt.Font("Montserrat", 1, 28)); // NOI18N
@@ -201,7 +201,7 @@ public class PanelTramites extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTramitesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        framePrincipal.cambiarPanelHistorialTipoBusqueda();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed

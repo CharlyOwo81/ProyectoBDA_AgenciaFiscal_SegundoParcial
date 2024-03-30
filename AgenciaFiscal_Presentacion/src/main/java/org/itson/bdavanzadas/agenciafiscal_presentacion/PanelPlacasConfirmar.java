@@ -7,7 +7,9 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.bos.AgregarAutomovilBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IAgregarAutomovilBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IRegistrarLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IRegistrarPlacasBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IVencerPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.RegistrarPlacasBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.VencerPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
@@ -91,17 +93,20 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO validar con automovilNuevoDTO
-        registrarAuto();
-        registrarPlacas();
-        framePrincipal.cambiarPanelPlacasExito();
+        contribuyenteDTO = framePrincipal.getContribuyenteDTO();
+
+        if (framePrincipal.getPlacasViejasDTO() == null) {
+            registrarAuto();
+        }
+            registrarPlacas();
+            framePrincipal.cambiarPanelPlacasExito();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO validar si el usuario viene del panel de agregar auto o de buscar placas anteriores
-        if (framePrincipal.getAutomovilNuevoDTO() == null) {
-            framePrincipal.cambiarPanelPlacasBuscarAnteriores();
-        } else {
+        if (framePrincipal.getPlacasViejasDTO() == null) {
             framePrincipal.cambiarPanelPlacasAgregarAutomovil();
+        } else {
+            framePrincipal.cambiarPanelPlacasBuscarAnteriores();
         }
 
 
@@ -121,24 +126,26 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     private void registrarAuto() {
         automovilNuevoDTO = framePrincipal.getAutomovilNuevoDTO();
-        contribuyenteDTO = framePrincipal.getContribuyenteDTO();
         IAgregarAutomovilBO agregarAutomovilBO = new AgregarAutomovilBO(automovilNuevoDTO);
         automovilNuevoDTO = agregarAutomovilBO.agregarAutomovil(contribuyenteDTO);
     }
 
     private void setTextos() {
-        if (framePrincipal.getAutomovilNuevoDTO() == null) {
-            lblTipoTramite.setText("Renovación");
-            lblCosto.setText("$1000.00");
-            placasNuevasDTO = new PlacasNuevasDTO(1000.0F, new Date(), contribuyenteDTO);
-        } else {
+        if (framePrincipal.getPlacasViejasDTO() == null) {
             lblTipoTramite.setText("Placas nuevas");
             lblCosto.setText("$1500.00");
             placasNuevasDTO = new PlacasNuevasDTO(1500.0F, new Date(), contribuyenteDTO);
+        } else {
+            lblTipoTramite.setText("Renovación");
+            lblCosto.setText("$1000.00");
+            placasNuevasDTO = new PlacasNuevasDTO(1000.0F, new Date(), contribuyenteDTO);
 
         }
     }
 
+    private void vencerPlacas(){
+        IVencerPlacasBO vencerPlacasBO = new VencerPlacasBO(placasNuevasDTO);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;

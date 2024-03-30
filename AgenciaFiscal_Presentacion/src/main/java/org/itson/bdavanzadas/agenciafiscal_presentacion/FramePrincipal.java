@@ -1,13 +1,14 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.util.Stack;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 
 /**
  *
@@ -16,10 +17,13 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 public class FramePrincipal extends javax.swing.JFrame {
 
     private JPanel panelActual;
+    private Stack<JPanel> panelStack;
     private ContribuyenteDTO contribuyenteDTO;
     private LicenciaNuevaDTO licenciaNuevaDTO;
     private AutomovilNuevoDTO automovilNuevoDTO;
     private PlacasNuevasDTO placasNuevasDTO;
+    private PlacasViejasDTO placasViejasDTO;
+    private int panelAnterior;
 
     /**
      * Creates new form Ventana
@@ -28,6 +32,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         initComponents();
         ImageIcon img = new ImageIcon("/icon.png");
         this.setIconImage(img.getImage());
+        panelStack = new Stack<>();
     }
 
     /**
@@ -87,6 +92,7 @@ public class FramePrincipal extends javax.swing.JFrame {
         panel.setBounds(0, 0, 1000, 580);
         this.setLocationRelativeTo(null);
         this.pack();  // Ajustar el tamaño automáticamente
+        panelStack.push(panel);
     }
 
     /**
@@ -186,6 +192,75 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     }
 
+    public void cambiarPanelHistorialTipoBusqueda() {
+        limpiarFrame();
+        PanelHistorialTipoBusqueda panelHistorialTipoBusqueda = new PanelHistorialTipoBusqueda(this);
+        ponerEnJFrame(panelHistorialTipoBusqueda);
+        panelActual = panelHistorialTipoBusqueda;
+
+    }
+
+    public void cambiarPanelHistorialRfc() {
+        limpiarFrame();
+        PanelHistorialRfc panelHistorialRfc = new PanelHistorialRfc(this);
+        ponerEnJFrame(panelHistorialRfc);
+        panelActual = panelHistorialRfc;
+
+    }
+
+    public void cambiarPanelHistorialNombre() {
+        limpiarFrame();
+        PanelHistorialNombre panelHistorialNombre = new PanelHistorialNombre(this);
+        ponerEnJFrame(panelHistorialNombre);
+        panelActual = panelHistorialNombre;
+
+    }
+
+    public void cambiarPanelHistorialFecha() {
+        limpiarFrame();
+        PanelHistorialFecha panelHistorialFecha = new PanelHistorialFecha(this);
+        ponerEnJFrame(panelHistorialFecha);
+        panelActual = panelHistorialFecha;
+
+    }
+
+    public void cambiarPanelHistorialSeleccion() {
+        limpiarFrame();
+        PanelHistorialSeleccion panelHistorialSeleccion = new PanelHistorialSeleccion(this);
+        ponerEnJFrame(panelHistorialSeleccion);
+        panelActual = panelHistorialSeleccion;
+
+    }
+
+    public void cambiarPanelHistorialLicencias() {
+        limpiarFrame();
+        PanelHistorialLicencias panelHistorialLicencias = new PanelHistorialLicencias(this);
+        ponerEnJFrame(panelHistorialLicencias);
+        panelActual = panelHistorialLicencias;
+
+    }
+
+    public void cambiarPanelHistorialPlacas() {
+        limpiarFrame();
+        PanelHistorialPlacas panelHistorialPlacas = new PanelHistorialPlacas(this);
+        ponerEnJFrame(panelHistorialPlacas);
+        panelActual = panelHistorialPlacas;
+
+    }
+//
+//    public void cambiarPanelAnterior() {
+//        if (!panelStack.isEmpty()) {
+//            limpiarFrame();
+//            panelStack.pop(); // Quita el panel actual de la pila
+//            if (!panelStack.isEmpty()) {
+//                limpiarFrame();
+//                JPanel panelAnterior = panelStack.peek(); // Obtiene el panel anterior sin quitarlo de la pila
+//                ponerEnJFrame(panelAnterior);
+//                panelActual = panelAnterior;
+//            }
+//        }
+//    }
+
 //    TODO habilitar este método para mostrar la ventana
 //    public void cambiarPanelConfirmarSalir(Integer seleccion) {
 //        JLayeredPane layeredPane = new JLayeredPane(); // Crear un JLayeredPane local
@@ -270,6 +345,23 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     public void setPlacasNuevasDTO(PlacasNuevasDTO placasNuevasDTO) {
         this.placasNuevasDTO = placasNuevasDTO;
+    }
+
+    public PlacasViejasDTO getPlacasViejasDTO() {
+        return placasViejasDTO;
+    }
+
+    public void setPlacasViejasDTO(PlacasViejasDTO placasViejasDTO) {
+        this.placasViejasDTO = placasViejasDTO;
+    }
+
+    public int getPanelAnterior() {
+        return panelAnterior;
+    }
+
+    //1=panelRfc, 2=panelNombre, 3=panelfecha
+    public void setPanelAnterior(int panelAnterior) {
+        this.panelAnterior = panelAnterior;
     }
 
 }

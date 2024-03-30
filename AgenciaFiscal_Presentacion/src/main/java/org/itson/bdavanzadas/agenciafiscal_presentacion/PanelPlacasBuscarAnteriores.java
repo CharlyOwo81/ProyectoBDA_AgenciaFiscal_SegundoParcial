@@ -1,7 +1,9 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarAutomovilBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarAutomovilBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IValidarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.ValidarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
@@ -27,6 +29,9 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
     public PanelPlacasBuscarAnteriores(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        if (placasViejasDTO != null) {
+            setTextos();
+        }
     }
 
     /**
@@ -111,6 +116,9 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        framePrincipal.setPlacasNuevasDTO(null);
+        framePrincipal.setPlacasViejasDTO(null);
+        framePrincipal.setAutomovilNuevoDTO(null);
         framePrincipal.cambiarPanelPlacasTipoAutomovil();// TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -118,18 +126,20 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
         if (txtPlacas.getText().isBlank()) {
             framePrincipal.mostrarAviso("El campo de número de placa no puede estar vacío");
         } else {
-            String placas = txtPlacas.getText();
-            placasViejasDTO = new PlacasViejasDTO(placas);
-            IValidarPlacasBO validarPlacasBO = new ValidarPlacasBO(placasViejasDTO);
-            try {
-                placasNuevasDTO = validarPlacasBO.validarPlacas();
-                automovilNuevoDTO = new AutomovilNuevoDTO(placasNuevasDTO.getAutomovilNuevoDTO().getId());
+            // buscamos las placas anteriores a través del número de placas
+            String numeroPlacas = txtPlacas.getText();
+            placasViejasDTO = new PlacasViejasDTO(numeroPlacas, null, null, null);
+            IBuscarPlacasBO buscarPlacasBO =  new BuscarPlacasBO(placasViejasDTO);
+                try {
+                placasViejasDTO = buscarPlacasBO.buscarPlacas();
+                //creamos un autoDTO con el id del automovil de las placas encontradas
+                automovilNuevoDTO = new AutomovilNuevoDTO(placasViejasDTO.getAutomovilNuevoDTO().getId());
                 IBuscarAutomovilBO buscarAutomovilBO = new BuscarAutomovilBO(automovilNuevoDTO);
-                automovilNuevoDTO = buscarAutomovilBO.buscarAutomovil(framePrincipal.getContribuyenteDTO(), placasNuevasDTO);
+                automovilNuevoDTO = buscarAutomovilBO.buscarAutomovil(placasViejasDTO.getContribuyenteDTO(), placasNuevasDTO);
                 framePrincipal.setAutomovilNuevoDTO(automovilNuevoDTO);
                 framePrincipal.setPlacasNuevasDTO(placasNuevasDTO);
-                lblAutomovil.setText("El número de placas corresponde a un: " + automovilNuevoDTO.getMarca() + " " + automovilNuevoDTO.getLinea() + " " + automovilNuevoDTO.getModelo());
-                txtPlacas.setText(placasNuevasDTO.getNumeroPlacas());
+                framePrincipal.setPlacasViejasDTO(placasViejasDTO);
+                setTextos();
             } catch (ValidacionDTOException | PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
             }
@@ -148,7 +158,10 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPlacasActionPerformed
 
-
+    private void setTextos() {
+        lblAutomovil.setText("El número de placas corresponde a un: " + automovilNuevoDTO.getMarca() + " " + automovilNuevoDTO.getLinea() + " " + automovilNuevoDTO.getModelo());
+        txtPlacas.setText(placasNuevasDTO.getNumeroPlacas());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnContinuar;

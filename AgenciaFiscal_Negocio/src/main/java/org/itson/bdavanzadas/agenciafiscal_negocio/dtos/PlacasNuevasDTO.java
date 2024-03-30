@@ -1,7 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 
 import java.util.Date;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 
 /**
  *
@@ -10,6 +9,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 public class PlacasNuevasDTO extends TramiteNuevoDTO{
     private String numeroPlacas;
     private AutomovilNuevoDTO automovilNuevoDTO;
+    private Date fechaRecepcion;
 
     public PlacasNuevasDTO(String numeroPlacas, Float costo, Date fechaEmision, ContribuyenteDTO contribuyenteDTO) {
         super(costo, fechaEmision, contribuyenteDTO);
@@ -26,6 +26,13 @@ public class PlacasNuevasDTO extends TramiteNuevoDTO{
         this.automovilNuevoDTO = automovilNuevoDTO;
     }
 
+    public PlacasNuevasDTO(String numeroPlacas, AutomovilNuevoDTO automovilNuevoDTO, Date fechaRecepcion, Float costo, Date fechaEmision, ContribuyenteDTO contribuyenteDTO) {
+        super(costo, fechaEmision, contribuyenteDTO);
+        this.numeroPlacas = numeroPlacas;
+        this.automovilNuevoDTO = automovilNuevoDTO;
+        this.fechaRecepcion = fechaRecepcion;
+    }
+
     public String getNumeroPlacas() {
         return numeroPlacas;
     }
@@ -40,6 +47,14 @@ public class PlacasNuevasDTO extends TramiteNuevoDTO{
 
     public void setAutomovilNuevoDTO(AutomovilNuevoDTO automovilNuevoDTO) {
         this.automovilNuevoDTO = automovilNuevoDTO;
+    }
+
+    public Date getFechaRecepcion() {
+        return fechaRecepcion;
+    }
+
+    public void setFechaRecepcion(Date fechaRecepcion) {
+        this.fechaRecepcion = fechaRecepcion;
     }
     
 }

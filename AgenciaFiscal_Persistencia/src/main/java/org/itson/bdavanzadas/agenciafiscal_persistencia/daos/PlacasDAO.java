@@ -1,5 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -13,7 +14,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  *
  * @author Roberto García
  */
-public class PlacasDAO {
+public class PlacasDAO implements IPlacasDAO{
 
     private final IConexion conexion;
 
@@ -25,6 +26,7 @@ public class PlacasDAO {
         this.conexion = new Conexion();
     }
 
+    @Override
     public void registrarPlacas(Placa placa) throws PersistenciaException {
         EntityManager eManager = conexion.crearConexion();
 
@@ -41,6 +43,7 @@ public class PlacasDAO {
         eManager.close();
     }
 
+    @Override
     public Placa buscarPlacas(Placa placa) throws PersistenciaException {
         EntityManager entityManager = conexion.crearConexion();
 
@@ -60,5 +63,25 @@ public class PlacasDAO {
             placa = placas.getFirst();
             return placa;
         }
+    }
+    
+    @Override
+    public Placa vencerPlaca(Placa placa) throws PersistenciaException{        
+        EntityManager eManager = conexion.crearConexion();
+
+        // Iniciar una transacción
+        eManager.getTransaction().begin();
+
+        placa.setFechaRecepcion(new Date());
+        // Actualizar la licencia en la base de datos
+        eManager.merge(placa);
+
+        // Confirmar la transacción
+        eManager.getTransaction().commit();
+
+        // Cerrar la conexión
+        eManager.close();
+        
+        return placa;
     }
 }
