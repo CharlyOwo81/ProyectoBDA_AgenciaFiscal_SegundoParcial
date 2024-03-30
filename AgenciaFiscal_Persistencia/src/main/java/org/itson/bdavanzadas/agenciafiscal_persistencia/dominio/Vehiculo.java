@@ -105,6 +105,12 @@ public class Vehiculo implements Serializable {
         this.contribuyente = contribuyente;
     }
 
+    public Vehiculo(Long id) {
+        this.id = id;
+    }
+    
+    
+
     /**
      * Devuelve el ID del vehículo.
      *

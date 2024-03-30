@@ -1,6 +1,7 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  * Interfaz que define el método para agregar un contribuyente a la base de datos.
@@ -18,7 +19,9 @@ public interface IContribuyenteDAO {
      * 
      * @param contribuyente El contribuyente a agregar.
      * @return El contribuyente agregado.
+     * @throws org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException
+     * @throws java.sql.SQLIntegrityConstraintViolationException
      */
-    public Contribuyente agregarContribuyente(Contribuyente contribuyente);
+    public Contribuyente agregarContribuyente(Contribuyente contribuyente) throws Exception;
 }
 

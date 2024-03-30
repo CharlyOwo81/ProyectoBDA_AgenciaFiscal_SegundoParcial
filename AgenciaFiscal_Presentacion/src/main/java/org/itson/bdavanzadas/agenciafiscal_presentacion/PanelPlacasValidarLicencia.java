@@ -190,6 +190,10 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        
+        
+        
+        framePrincipal.setContribuyenteDTO(null);
         framePrincipal.cambiarPanelTramites();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 

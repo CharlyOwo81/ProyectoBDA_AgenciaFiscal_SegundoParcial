@@ -21,7 +21,9 @@ public class AutomovilNuevoDTO {
         this.modelo = modelo;
     }
 
-    
+    public AutomovilNuevoDTO(Long id) {
+        this.id = id;
+    }
     
     public AutomovilNuevoDTO(Long id, String numeroSerie, String marca, String linea, String color, String modelo) {
         this.id = id;

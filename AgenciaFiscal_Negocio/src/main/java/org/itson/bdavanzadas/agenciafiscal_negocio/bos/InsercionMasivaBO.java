@@ -2,9 +2,11 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  * Esta clase implementa la interfaz IInsercionMasivaBO y proporciona funcionalidad para insertar una lista masiva de contribuyentes en el sistema.
@@ -21,7 +23,7 @@ public class InsercionMasivaBO implements IInsercionMasivaBO {
      * @param contribuyentesDTO La lista de contribuyentes en forma de objetos DTO que se insertarán.
      */
     @Override
-    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) {
+    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) throws Exception{
         // Convertir DTO a entidades Contribuyente
         List<Contribuyente> contribuyentes = new ArrayList<>();
         for (ContribuyenteDTO dto : contribuyentesDTO) {

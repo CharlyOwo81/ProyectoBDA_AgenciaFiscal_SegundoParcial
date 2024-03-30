@@ -119,6 +119,12 @@ public class Contribuyente implements Serializable {
         this.discapacidad = discapacidad;
     }
 
+    public Contribuyente(Long id) {
+        this.id = id;
+    }
+    
+    
+
     /**
      * Método para obtener el ID del contribuyente.
      *

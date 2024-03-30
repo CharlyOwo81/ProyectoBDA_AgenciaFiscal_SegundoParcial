@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
+import java.util.List;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -12,4 +11,5 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
  */
 public interface IVehiculoDAO {
     public Vehiculo agregarVehiculo(Vehiculo vehiculoNuevo);
+    public List<Vehiculo> buscarVehiculo(Vehiculo vehiculo, Contribuyente contribuyente) throws PersistenciaException;
 }

@@ -3,10 +3,14 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.eclipse.persistence.exceptions.DatabaseException;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.InsercionMasivaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IInsercionMasivaBO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -18,6 +22,7 @@ public class PanelContribuyentes extends javax.swing.JPanel {
 
     /**
      * Creates new form panelContribuyentes
+     *
      * @param framePrincipal
      */
     public PanelContribuyentes(FramePrincipal framePrincipal) {
@@ -130,10 +135,15 @@ public class PanelContribuyentes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnAgregarContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarContribuyentesActionPerformed
-        if (framePrincipal.mostrarConfirmacion("¿Seguro que deseas agregar 20 contribuyentes de prueba?", "Agregar contribuyentes")) {
-            agregarContribuyentes();
-            framePrincipal.mostrarInformacion("Registros agregados exitosamente", "Éxito");
-            framePrincipal.cambiarPanelInicio();
+        if (framePrincipal.mostrarConfirmacion("¿Seguro que desea agregar 20 contribuyentes de prueba?", "Agregar contribuyentes")) {
+            try {
+                agregarContribuyentes();
+                framePrincipal.mostrarInformacion("Registros agregados exitosamente", "Éxito");
+                framePrincipal.cambiarPanelInicio();
+
+            } catch (Exception e) {
+                framePrincipal.mostrarAviso("Contribuyentes no agregados.\nLos contribuyentes ya han sido agregados\na la base de datos anteriormente");
+            }
         }
     }//GEN-LAST:event_btnAgregarContribuyentesActionPerformed
 
@@ -141,11 +151,11 @@ public class PanelContribuyentes extends javax.swing.JPanel {
         framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private static void agregarContribuyentes() {
+    private void agregarContribuyentes() throws Exception {
         List<ContribuyenteDTO> contribuyentesDTO = new ArrayList<>();
 
         // Generar 20 registros hardcodeados
-                contribuyentesDTO.add(new ContribuyenteDTO("RFC1234567890", "Juan", "Perez", "Garcia", "1234567890", new Date(1985 - 1900, 5, 20), ContribuyenteDiscapacidad.NO));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC1234567890", "Juan", "Perez", "Garcia", "1234567890", new Date(1985 - 1900, 5, 20), ContribuyenteDiscapacidad.NO));
         contribuyentesDTO.add(new ContribuyenteDTO("RFC2345678901", "Maria", "Lopez", "Martinez", "2345678901", new Date(1978 - 1900, 9, 12), ContribuyenteDiscapacidad.SI));
         contribuyentesDTO.add(new ContribuyenteDTO("RFC3456789012", "Pedro", "Gomez", "Rodriguez", "3456789012", new Date(1963 - 1900, 2, 5), ContribuyenteDiscapacidad.NO));
         contribuyentesDTO.add(new ContribuyenteDTO("RFC4567890123", "Ana", "Hernandez", "Gonzalez", "4567890123", new Date(1955 - 1900, 11, 30), ContribuyenteDiscapacidad.SI));

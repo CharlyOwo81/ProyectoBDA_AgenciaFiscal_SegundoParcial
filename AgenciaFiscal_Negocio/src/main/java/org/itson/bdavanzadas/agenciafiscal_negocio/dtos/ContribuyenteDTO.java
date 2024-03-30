@@ -80,6 +80,12 @@ public class ContribuyenteDTO {
         this.discapacidad = discapacidad;
     }
 
+    public ContribuyenteDTO(Long id) {
+        this.id = id;
+    }
+
+    
+    
     /**
      * Obtiene el ID del contribuyente.
      *
