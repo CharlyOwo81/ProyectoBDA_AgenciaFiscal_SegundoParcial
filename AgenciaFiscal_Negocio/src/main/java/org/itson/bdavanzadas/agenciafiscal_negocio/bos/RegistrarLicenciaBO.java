@@ -42,7 +42,12 @@ public class RegistrarLicenciaBO implements IRegistrarLicenciaBO{
         BuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
         
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(contribuyenteDTO.getRfc());
-        
+        Integer edadContribuyente = buscarContribuyenteDAO.calcularEdad(contribuyente);
+
+        if (edadContribuyente < 18) {
+            throw new PersistenciaException("El contribuyente es menor de edad para obtener la licencia");
+        }
+
         Licencia licencia = new Licencia(
                 licenciaNuevaDTO.getVigencia(),
                 licenciaNuevaDTO.getTipoLicencia(),
@@ -50,7 +55,7 @@ public class RegistrarLicenciaBO implements IRegistrarLicenciaBO{
                 licenciaNuevaDTO.getCosto(),
                 licenciaNuevaDTO.getFechaEmision(),
                 contribuyente);
-        
+
         RegistrarLicenciaDAO registrarLicenciaDAO = new RegistrarLicenciaDAO();
         registrarLicenciaDAO.registrarLicencia(licencia);
     }
