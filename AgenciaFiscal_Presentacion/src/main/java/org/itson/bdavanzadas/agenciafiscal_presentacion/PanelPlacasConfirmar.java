@@ -85,6 +85,7 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 332, 230, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasConfirmar.png"))); // NOI18N
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
