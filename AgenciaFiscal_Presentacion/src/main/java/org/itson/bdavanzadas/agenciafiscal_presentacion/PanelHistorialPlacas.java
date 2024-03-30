@@ -35,7 +35,7 @@ public class PanelHistorialPlacas extends javax.swing.JPanel {
         btnPlacas.setBorder(null);
         btnPlacas.setBorderPainted(false);
         btnPlacas.setContentAreaFilled(false);
-        btnPlacas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnPlacas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnPlacas.setOpaque(false);
         btnPlacas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -33,7 +33,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         lblAnios = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -41,7 +41,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         btnTerminar.setBorder(null);
         btnTerminar.setBorderPainted(false);
         btnTerminar.setContentAreaFilled(false);
-        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTerminar.setOpaque(false);
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -53,7 +53,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
         btnTramites.setContentAreaFilled(false);
-        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTramites.setOpaque(false);
         btnTramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -65,7 +65,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         btnConsultas.setBorder(null);
         btnConsultas.setBorderPainted(false);
         btnConsultas.setContentAreaFilled(false);
-        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultas.setOpaque(false);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +77,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         btnReportes.setBorder(null);
         btnReportes.setBorderPainted(false);
         btnReportes.setContentAreaFilled(false);
-        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setOpaque(false);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +89,7 @@ public class PanelLicenciaExito extends javax.swing.JPanel {
         btnContribuyentes.setBorder(null);
         btnContribuyentes.setBorderPainted(false);
         btnContribuyentes.setContentAreaFilled(false);
-        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContribuyentes.setOpaque(false);
         btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

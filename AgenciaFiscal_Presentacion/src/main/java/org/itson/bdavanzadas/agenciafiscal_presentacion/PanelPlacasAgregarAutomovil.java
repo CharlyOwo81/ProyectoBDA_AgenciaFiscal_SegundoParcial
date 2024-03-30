@@ -85,7 +85,7 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
         btnContinuar.setBorder(null);
         btnContinuar.setBorderPainted(false);
         btnContinuar.setContentAreaFilled(false);
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContinuar.setOpaque(false);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,7 +97,7 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
         btnCancelar.setBorder(null);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.setOpaque(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,7 +113,7 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
         add(lblCaracteresNumSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 283, 40, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasAgregarAutomovil.png"))); // NOI18N
-        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

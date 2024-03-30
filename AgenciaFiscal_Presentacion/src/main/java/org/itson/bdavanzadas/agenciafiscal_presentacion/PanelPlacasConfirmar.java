@@ -57,7 +57,7 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         btnConfirmar.setBorder(null);
         btnConfirmar.setBorderPainted(false);
         btnConfirmar.setContentAreaFilled(false);
-        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar.setOpaque(false);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +69,7 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +87,7 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         add(lblCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 332, 230, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasConfirmar.png"))); // NOI18N
-        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

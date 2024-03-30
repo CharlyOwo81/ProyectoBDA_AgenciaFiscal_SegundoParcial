@@ -47,11 +47,11 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnCancelar = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        txtRfc = new javax.swing.JTextField();
         btnTramites = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnContribuyentes = new javax.swing.JButton();
+        txtRfc = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         lblApellidoPaterno = new javax.swing.JLabel();
         lblApellidoMaterno = new javax.swing.JLabel();
@@ -59,7 +59,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         lblFechaNacimiento = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
-        setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setPreferredSize(new java.awt.Dimension(1000, 580));
@@ -68,7 +68,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnCancelar.setBorder(null);
         btnCancelar.setBorderPainted(false);
         btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.setOpaque(false);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +80,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnContinuar.setBorder(null);
         btnContinuar.setBorderPainted(false);
         btnContinuar.setContentAreaFilled(false);
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContinuar.setOpaque(false);
         btnContinuar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +92,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnBuscar.setBorder(null);
         btnBuscar.setBorderPainted(false);
         btnBuscar.setContentAreaFilled(false);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnBuscar.setOpaque(false);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,16 +101,10 @@ public class PanelLicencia extends javax.swing.JPanel {
         });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 273, 137, 40));
 
-        txtRfc.setBackground(new java.awt.Color(250, 248, 245));
-        txtRfc.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
-        txtRfc.setToolTipText("");
-        txtRfc.setName(""); // NOI18N
-        add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
-
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
         btnTramites.setContentAreaFilled(false);
-        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTramites.setOpaque(false);
         btnTramites.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +116,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnConsultas.setBorder(null);
         btnConsultas.setBorderPainted(false);
         btnConsultas.setContentAreaFilled(false);
-        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConsultas.setOpaque(false);
         btnConsultas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,7 +128,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnReportes.setBorder(null);
         btnReportes.setBorderPainted(false);
         btnReportes.setContentAreaFilled(false);
-        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnReportes.setOpaque(false);
         btnReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +140,7 @@ public class PanelLicencia extends javax.swing.JPanel {
         btnContribuyentes.setBorder(null);
         btnContribuyentes.setBorderPainted(false);
         btnContribuyentes.setContentAreaFilled(false);
-        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContribuyentes.setOpaque(false);
         btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,6 +148,12 @@ public class PanelLicencia extends javax.swing.JPanel {
             }
         });
         add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
+
+        txtRfc.setBackground(new java.awt.Color(250, 248, 245));
+        txtRfc.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
+        txtRfc.setToolTipText("");
+        txtRfc.setName(""); // NOI18N
+        add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
 
         lblNombre.setFont(new java.awt.Font("Montserrat SemiBold", 0, 16)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(77, 77, 77));

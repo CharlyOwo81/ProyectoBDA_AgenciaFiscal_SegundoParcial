@@ -26,6 +26,10 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
         btnRfc = new javax.swing.JButton();
         btnNombre = new javax.swing.JButton();
         btnFecha = new javax.swing.JButton();
+        btnTramites = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnContribuyentes = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -35,7 +39,7 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -47,7 +51,7 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
         btnRfc.setBorder(null);
         btnRfc.setBorderPainted(false);
         btnRfc.setContentAreaFilled(false);
-        btnRfc.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRfc.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRfc.setOpaque(false);
         btnRfc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +63,7 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
         btnNombre.setBorder(null);
         btnNombre.setBorderPainted(false);
         btnNombre.setContentAreaFilled(false);
-        btnNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnNombre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNombre.setOpaque(false);
         btnNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +75,7 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
         btnFecha.setBorder(null);
         btnFecha.setBorderPainted(false);
         btnFecha.setContentAreaFilled(false);
-        btnFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnFecha.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnFecha.setOpaque(false);
         btnFecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +83,54 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
             }
         });
         add(btnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 348, 315, 20));
+
+        btnTramites.setBorder(null);
+        btnTramites.setBorderPainted(false);
+        btnTramites.setContentAreaFilled(false);
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setOpaque(false);
+        btnTramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTramitesActionPerformed(evt);
+            }
+        });
+        add(btnTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 261, 186, 47));
+
+        btnConsultas.setBorder(null);
+        btnConsultas.setBorderPainted(false);
+        btnConsultas.setContentAreaFilled(false);
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setOpaque(false);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
+        add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 308, 186, 47));
+
+        btnReportes.setBorder(null);
+        btnReportes.setBorderPainted(false);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setOpaque(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 355, 186, 47));
+
+        btnContribuyentes.setBorder(null);
+        btnContribuyentes.setBorderPainted(false);
+        btnContribuyentes.setContentAreaFilled(false);
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
+        add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialTipoBusqueda.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -101,12 +153,32 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
         framePrincipal.cambiarPanelHistorialFecha();
     }//GEN-LAST:event_btnFechaActionPerformed
 
+    private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+        framePrincipal.cambiarPanelTramites();
+    }//GEN-LAST:event_btnTramitesActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        framePrincipal.cambiarPanelHistorialTipoBusqueda();
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        framePrincipal.cambiarPanelContribuyentes();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnContribuyentes;
     private javax.swing.JButton btnFecha;
     private javax.swing.JButton btnNombre;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnReportes;
     private javax.swing.JButton btnRfc;
+    private javax.swing.JButton btnTramites;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 

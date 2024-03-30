@@ -35,14 +35,14 @@ public class PanelPlacasExito extends javax.swing.JPanel {
         btnTerminar.setBorder(null);
         btnTerminar.setBorderPainted(false);
         btnTerminar.setContentAreaFilled(false);
-        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnTerminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnTerminar.setOpaque(false);
         btnTerminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnTerminarActionPerformed(evt);
             }
         });
-        add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 444, 137, 40));
+        add(btnTerminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 439, 137, 40));
 
         lblPlacas.setFont(new java.awt.Font("Driver Gothic", 0, 67)); // NOI18N
         lblPlacas.setForeground(new java.awt.Color(38, 38, 38));
@@ -54,7 +54,7 @@ public class PanelPlacasExito extends javax.swing.JPanel {
         add(lblNumPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 100, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelPlacasExito.png"))); // NOI18N
-        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
