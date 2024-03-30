@@ -1,5 +1,9 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -101,4 +105,15 @@ public class BuscarContribuyenteDAO {
             return contribuyentes.get(0); // Devolver el primer contribuyente encontrado
         }
     }
+    
+    public Integer calcularEdad(Contribuyente contribuyente) {
+        LocalDate fechaNacimiento = contribuyente.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate ahora = LocalDate.now();
+
+        Period periodo = Period.between(fechaNacimiento, ahora);
+        long edadEnDias = ChronoUnit.DAYS.between(fechaNacimiento, ahora);
+
+        int anos = periodo.getYears();
+        return anos;
+    }    
 }

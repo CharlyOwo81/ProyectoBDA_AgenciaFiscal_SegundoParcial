@@ -30,5 +30,7 @@ public interface IBuscarContribuyenteDAO {
      * @throws PersistenciaException Si no se encuentra ningún contribuyente con el ID proporcionado.
      */
     public Contribuyente buscarContribuyente(Long id) throws PersistenciaException;
+    
+    public Integer calcularEdad(Contribuyente contribuyente) throws PersistenciaException;
 }
 
