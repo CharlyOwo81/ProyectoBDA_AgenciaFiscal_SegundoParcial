@@ -1,6 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
-import java.util.Stack;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -9,6 +9,10 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ReporteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TipoTramiteEnum;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ReporteDAO;
 
 /**
  *
@@ -17,13 +21,15 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 public class FramePrincipal extends javax.swing.JFrame {
 
     private JPanel panelActual;
-    private Stack<JPanel> panelStack;
     private ContribuyenteDTO contribuyenteDTO;
     private LicenciaNuevaDTO licenciaNuevaDTO;
     private AutomovilNuevoDTO automovilNuevoDTO;
     private PlacasNuevasDTO placasNuevasDTO;
     private PlacasViejasDTO placasViejasDTO;
     private Integer panelAnterior;
+    private List<TramiteNuevoDTO> tramites;
+    private ReporteDTO reporteDTO;
+    private TipoTramiteEnum tipoTramiteEnum;
 
     /**
      * Creates new form Ventana
@@ -32,7 +38,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         initComponents();
         ImageIcon img = new ImageIcon("/icon.png");
         this.setIconImage(img.getImage());
-        panelStack = new Stack<>();
     }
 
     /**
@@ -92,7 +97,6 @@ public class FramePrincipal extends javax.swing.JFrame {
         panel.setBounds(0, 0, 1000, 580);
         this.setLocationRelativeTo(null);
         this.pack();  // Ajustar el tamaño automáticamente
-        panelStack.push(panel);
     }
 
     /**
@@ -386,6 +390,30 @@ public class FramePrincipal extends javax.swing.JFrame {
     //1=panelRfc, 2=panelNombre, 3=panelfecha
     public void setPanelAnterior(Integer panelAnterior) {
         this.panelAnterior = panelAnterior;
+    }
+
+    public List<TramiteNuevoDTO> getTramites() {
+        return tramites;
+    }
+
+    public void setTramites(List<TramiteNuevoDTO> tramites) {
+        this.tramites = tramites;
+    }
+
+    public ReporteDTO getReporteDTO() {
+        return reporteDTO;
+    }
+
+    public void setReporteDTO(ReporteDTO reporteDTO) {
+        this.reporteDTO = reporteDTO;
+    }
+
+    public TipoTramiteEnum getTipoTramiteEnum() {
+        return tipoTramiteEnum;
+    }
+
+    public void setTipoTramiteEnum(TipoTramiteEnum tipoTramiteEnum) {
+        this.tipoTramiteEnum = tipoTramiteEnum;
     }
 
 }

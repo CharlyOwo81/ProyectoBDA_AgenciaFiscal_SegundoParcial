@@ -1,10 +1,12 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
@@ -52,6 +54,30 @@ public class TramiteDAO implements ITramiteDAO {
         } else {
             return tramites;
         }
+    }
+
+    public List<Tramite> buscarTramitesFecha(Date desde, Date hasta) {
+        EntityManager entityManager = this.conexion.crearConexion();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Tramite> criteria = cb.createQuery(Tramite.class);
+        Root<Tramite> root = criteria.from(Tramite.class);
+
+        // Definir los predicados para las fechas
+        Predicate desdePredicate = cb.greaterThanOrEqualTo(root.get("fechaEmision"), desde);
+        Predicate hastaPredicate = cb.lessThanOrEqualTo(root.get("fechaEmision"), hasta);
+
+        // Construir un predicado compuesto para el rango de fechas
+        Predicate fechaPredicate = cb.and(desdePredicate, hastaPredicate);
+
+        // Agregar el predicado al CriteriaQuery
+        criteria.select(root).where(fechaPredicate);
+
+        TypedQuery<Tramite> query = entityManager.createQuery(criteria);
+        List<Tramite> tramites = query.getResultList();
+
+        entityManager.close();
+
+        return tramites;
     }
 
 }

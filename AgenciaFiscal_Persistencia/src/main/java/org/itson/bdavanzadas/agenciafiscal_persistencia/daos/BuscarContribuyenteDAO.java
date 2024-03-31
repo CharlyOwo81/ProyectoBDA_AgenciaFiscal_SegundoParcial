@@ -1,14 +1,11 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
@@ -88,7 +85,7 @@ public class BuscarContribuyenteDAO {
         Root<Contribuyente> root = criteria.from(Contribuyente.class);
 
         // Filtrar por ID igual al parámetro proporcionado
-        criteria.select(root).where(cb.equal(root.get("id_contribuyente"), id));
+        criteria.select(root).where(cb.equal(root.get("idContribuyente"), id));
 
         // Consulta construida
         TypedQuery<Contribuyente> query = entityManager.createQuery(criteria);
@@ -105,7 +102,30 @@ public class BuscarContribuyenteDAO {
             return contribuyentes.get(0); // Devolver el primer contribuyente encontrado
         }
     }
-    
+
+    public List<Contribuyente> buscarContribuyentes(Contribuyente contribuyente) {
+        EntityManager entityManager = this.conexion.crearConexion();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Contribuyente> criteria = cb.createQuery(Contribuyente.class);
+        Root<Contribuyente> root = criteria.from(Contribuyente.class);
+
+        Predicate nombrePredicate = cb.like(root.get("nombre"), "%" + contribuyente.getNombre() + "%");
+        Predicate apellidoPaternoPredicate = cb.like(root.get("apellidoPaterno"), "%" + contribuyente.getApellidoPaterno() + "%");
+        Predicate apellidoMaternoPredicate = cb.like(root.get("apellidoMaterno"), "%" + contribuyente.getApellidoMaterno() + "%");
+
+        // Construyendo una condición compuesta para buscar por nombre, apellido paterno y materno
+        Predicate combinedPredicate = cb.and(nombrePredicate, apellidoPaternoPredicate, apellidoMaternoPredicate);
+
+        criteria.select(root).where(combinedPredicate);
+
+        TypedQuery<Contribuyente> query = entityManager.createQuery(criteria);
+        List<Contribuyente> contribuyentes = query.getResultList();
+
+        entityManager.close();
+
+        return contribuyentes;
+    }
+
 //    public Integer calcularEdad(Contribuyente contribuyente) {
 //        LocalDate fechaNacimiento = contribuyente.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 //        LocalDate ahora = LocalDate.now();

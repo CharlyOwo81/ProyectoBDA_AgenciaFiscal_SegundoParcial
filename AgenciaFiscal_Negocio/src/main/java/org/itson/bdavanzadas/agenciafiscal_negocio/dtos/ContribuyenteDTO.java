@@ -2,8 +2,8 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.dtos;
 
 import java.util.Date;
 import java.util.List;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 
@@ -84,7 +84,24 @@ public class ContribuyenteDTO {
         this.id = id;
     }
 
-    
+    public ContribuyenteDTO(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public ContribuyenteDTO(Contribuyente contribuyente) {
+        this.id = contribuyente.getId();
+        this.rfc = contribuyente.getRfc();
+        this.nombre = contribuyente.getNombre();
+        this.apellidoPaterno = contribuyente.getApellidoPaterno();
+        this.apellidoMaterno = contribuyente.getApellidoMaterno();
+        this.telefono = contribuyente.getTelefono();
+        this.fechaNacimiento = contribuyente.getFechaNacimiento();
+        this.discapacidad = contribuyente.getDiscapacidad();
+        this.tramites = contribuyente.getTramites();
+        this.vehiculos = contribuyente.getVehiculos();
+    }
     
     /**
      * Obtiene el ID del contribuyente.

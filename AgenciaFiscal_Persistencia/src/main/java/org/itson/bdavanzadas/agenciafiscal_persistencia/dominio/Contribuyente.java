@@ -122,6 +122,12 @@ public class Contribuyente implements Serializable {
     public Contribuyente(Long id) {
         this.id = id;
     }
+
+    public Contribuyente(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+    }
     
     
 
