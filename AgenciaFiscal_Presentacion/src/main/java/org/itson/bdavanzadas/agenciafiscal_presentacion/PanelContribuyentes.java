@@ -92,6 +92,11 @@ public class PanelContribuyentes extends javax.swing.JPanel {
         btnContribuyentes.setContentAreaFilled(false);
         btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
         add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
 
         btnAgregarContribuyentes.setBorder(null);
@@ -127,11 +132,11 @@ public class PanelContribuyentes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTramitesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        framePrincipal.cambiarPanelHistorialTipoBusqueda();
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        framePrincipal.cambiarPanelReportesBusqueda();
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnAgregarContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarContribuyentesActionPerformed
@@ -150,6 +155,10 @@ public class PanelContribuyentes extends javax.swing.JPanel {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         framePrincipal.cambiarPanelInicio();        // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        framePrincipal.cambiarPanelContribuyentes();
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void agregarContribuyentes() throws Exception {
         List<ContribuyenteDTO> contribuyentesDTO = new ArrayList<>();

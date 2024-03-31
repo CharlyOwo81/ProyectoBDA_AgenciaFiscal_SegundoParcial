@@ -247,6 +247,30 @@ public class FramePrincipal extends javax.swing.JFrame {
         panelActual = panelHistorialPlacas;
 
     }
+
+    public void cambiarPanelReportesBusqueda() {
+        limpiarFrame();
+        PanelReportesBusqueda panelReportesBusqueda = new PanelReportesBusqueda(this);
+        ponerEnJFrame(panelReportesBusqueda);
+        panelActual = panelReportesBusqueda;
+
+    }
+
+    public void cambiarPanelReportesResultados() {
+        limpiarFrame();
+        PanelReportesResultados panelReportesResultados = new PanelReportesResultados(this);
+        ponerEnJFrame(panelReportesResultados);
+        panelActual = panelReportesResultados;
+
+    }
+
+    public void cambiarPanelReportesExportar() {
+        limpiarFrame();
+        PanelReportesExportar panelReportesExportar = new PanelReportesExportar(this);
+        ponerEnJFrame(panelReportesExportar);
+        panelActual = panelReportesExportar;
+
+    }
 //
 //    public void cambiarPanelAnterior() {
 //        if (!panelStack.isEmpty()) {

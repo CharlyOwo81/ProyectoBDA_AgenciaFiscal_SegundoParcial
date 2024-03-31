@@ -106,14 +106,14 @@ public class BuscarContribuyenteDAO {
         }
     }
     
-    public Integer calcularEdad(Contribuyente contribuyente) {
-        LocalDate fechaNacimiento = contribuyente.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate ahora = LocalDate.now();
-
-        Period periodo = Period.between(fechaNacimiento, ahora);
-        long edadEnDias = ChronoUnit.DAYS.between(fechaNacimiento, ahora);
-
-        int anos = periodo.getYears();
-        return anos;
-    }    
+//    public Integer calcularEdad(Contribuyente contribuyente) {
+//        LocalDate fechaNacimiento = contribuyente.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+//        LocalDate ahora = LocalDate.now();
+//
+//        Period periodo = Period.between(fechaNacimiento, ahora);
+//        long edadEnDias = ChronoUnit.DAYS.between(fechaNacimiento, ahora);
+//
+//        int anos = periodo.getYears();
+//        return anos;
+//    }    
 }

@@ -84,7 +84,7 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
     private boolean validarFechaModelo() throws ValidacionDTOException {
         int añoLimite = LocalDate.now().getYear() + 1;
         int añoModelo = Integer.parseInt(automovilNuevoDTO.getModelo());
-        if (añoModelo <= 1990) {
+        if (añoModelo <= 1900) {
             throw new ValidacionDTOException("El año del modelo del automóvil debe ser posterior a 1990");
         }
         if (añoModelo > añoLimite) {

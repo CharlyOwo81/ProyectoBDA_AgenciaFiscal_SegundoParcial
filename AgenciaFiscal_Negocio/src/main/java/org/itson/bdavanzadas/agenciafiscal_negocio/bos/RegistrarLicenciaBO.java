@@ -42,11 +42,11 @@ public class RegistrarLicenciaBO implements IRegistrarLicenciaBO{
         BuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
         
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(contribuyenteDTO.getRfc());
-        Integer edadContribuyente = buscarContribuyenteDAO.calcularEdad(contribuyente);
+//        Integer edadContribuyente = buscarContribuyenteDAO.calcularEdad(contribuyente);
 
-        if (edadContribuyente < 18) {
-            throw new PersistenciaException("El contribuyente es menor de edad para obtener la licencia");
-        }
+//        if (edadContribuyente < 18) {
+//            throw new PersistenciaException("El contribuyente es menor de edad para obtener la licencia");
+//        }
 
         Licencia licencia = new Licencia(
                 licenciaNuevaDTO.getVigencia(),
