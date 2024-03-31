@@ -14,7 +14,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  *
  * @author Roberto García
  */
-public class PlacasDAO implements IPlacasDAO{
+public class PlacasDAO implements IPlacasDAO {
 
     private final IConexion conexion;
 
@@ -27,7 +27,7 @@ public class PlacasDAO implements IPlacasDAO{
     }
 
     @Override
-    public void registrarPlacas(Placa placa) throws PersistenciaException {
+    public void registrarPlacas(Placa placa) throws Exception {
         EntityManager eManager = conexion.crearConexion();
 
         // Iniciar una transacción
@@ -48,8 +48,11 @@ public class PlacasDAO implements IPlacasDAO{
         EntityManager entityManager = conexion.crearConexion();
 
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
         CriteriaQuery<Placa> criteriaQuery = criteriaBuilder.createQuery(Placa.class);
+
         Root<Placa> root = criteriaQuery.from(Placa.class);
+
         criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("numeroPlacas"), placa.getNumeroPlacas()));
         // Consulta construida
         TypedQuery<Placa> query = entityManager.createQuery(criteriaQuery);
@@ -57,6 +60,7 @@ public class PlacasDAO implements IPlacasDAO{
         List<Placa> placas = query.getResultList();
 
         entityManager.close();
+
         if (placas.isEmpty()) {
             throw new PersistenciaException("No se encontraron ningunas placas con el número proporcionado");
         } else {
@@ -64,24 +68,54 @@ public class PlacasDAO implements IPlacasDAO{
             return placa;
         }
     }
-    
+
     @Override
-    public Placa vencerPlaca(Placa placa) throws PersistenciaException{        
+    public Placa buscarPlacasDuplicadas(Placa placa) {
+        EntityManager entityManager = conexion.crearConexion();
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Placa> criteriaQuery = criteriaBuilder.createQuery(Placa.class);
+
+        Root<Placa> root = criteriaQuery.from(Placa.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("numeroPlacas"), placa.getNumeroPlacas()));
+        // Consulta construida
+        TypedQuery<Placa> query = entityManager.createQuery(criteriaQuery);
+        // Obtener el resultado de la consulta
+        List<Placa> placas = query.getResultList();
+
+        entityManager.close();
+
+        if (!placas.isEmpty()) {
+            return placas.getFirst();
+        } else {
+            return null; // No se encontraron placas duplicadas
+        }
+
+    }
+
+    @Override
+    public Placa vencerPlaca(Placa placa) throws PersistenciaException {
         EntityManager eManager = conexion.crearConexion();
 
+        placa = buscarPlacasDuplicadas(placa);
+        
         // Iniciar una transacción
         eManager.getTransaction().begin();
-
+        
+        placa = eManager.find(Placa.class, placa.getId());
+        
         placa.setFechaRecepcion(new Date());
         // Actualizar la licencia en la base de datos
-        eManager.merge(placa);
+//        eManager.refresh(placa);
 
         // Confirmar la transacción
         eManager.getTransaction().commit();
 
         // Cerrar la conexión
         eManager.close();
-        
+
         return placa;
     }
 }

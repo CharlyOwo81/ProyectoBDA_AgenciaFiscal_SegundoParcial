@@ -11,7 +11,7 @@ import java.util.Date;
  * @author Roberto García
  */
 public class TramiteNuevoDTO {
-
+    private Long id;
     private Float costo;
     private Date fechaEmision;
     private ContribuyenteDTO contribuyenteDTO;
@@ -29,6 +29,13 @@ public class TramiteNuevoDTO {
         this.contribuyenteDTO = contribuyenteDTO;
     }
 
+    public TramiteNuevoDTO(Long id, Float costo, Date fechaEmision, ContribuyenteDTO contribuyenteDTO) {
+        this.id = id;
+        this.costo = costo;
+        this.fechaEmision = fechaEmision;
+        this.contribuyenteDTO = contribuyenteDTO;
+    }
+    
     /**
      * Obtiene el costo del trámite.
      *
@@ -82,6 +89,14 @@ public class TramiteNuevoDTO {
      */
     public void setContribuyenteDTO(ContribuyenteDTO contribuyenteDTO) {
         this.contribuyenteDTO = contribuyenteDTO;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

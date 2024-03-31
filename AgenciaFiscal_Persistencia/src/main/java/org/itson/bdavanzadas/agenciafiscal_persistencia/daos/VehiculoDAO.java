@@ -28,7 +28,7 @@ public class VehiculoDAO implements IVehiculoDAO {
     }    
     
     @Override
-    public Vehiculo agregarVehiculo(Vehiculo vehiculo){
+    public Vehiculo agregarVehiculo(Vehiculo vehiculo) throws Exception{
         EntityManager eManager = conexion.crearConexion();
         
         eManager.getTransaction().begin();

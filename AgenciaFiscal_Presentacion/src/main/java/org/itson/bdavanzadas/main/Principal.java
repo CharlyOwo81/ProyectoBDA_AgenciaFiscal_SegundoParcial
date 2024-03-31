@@ -1,5 +1,7 @@
 package org.itson.bdavanzadas.main;
 
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.Conexion;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.IConexion;
 import org.itson.bdavanzadas.agenciafiscal_presentacion.FramePrincipal;
 
 /**
@@ -15,6 +17,9 @@ public class Principal {
         FramePrincipal ventana = new FramePrincipal();
         ventana.cambiarPanelInicio();
         ventana.setVisible(true);
+        IConexion conexion = new Conexion();
+        conexion.crearConexion();
+
     }
 
 }

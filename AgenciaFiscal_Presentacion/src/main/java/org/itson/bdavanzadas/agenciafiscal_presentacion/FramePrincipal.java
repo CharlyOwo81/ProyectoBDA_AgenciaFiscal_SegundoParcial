@@ -23,7 +23,7 @@ public class FramePrincipal extends javax.swing.JFrame {
     private AutomovilNuevoDTO automovilNuevoDTO;
     private PlacasNuevasDTO placasNuevasDTO;
     private PlacasViejasDTO placasViejasDTO;
-    private int panelAnterior;
+    private Integer panelAnterior;
 
     /**
      * Creates new form Ventana
@@ -355,12 +355,12 @@ public class FramePrincipal extends javax.swing.JFrame {
         this.placasViejasDTO = placasViejasDTO;
     }
 
-    public int getPanelAnterior() {
+    public Integer getPanelAnterior() {
         return panelAnterior;
     }
 
     //1=panelRfc, 2=panelNombre, 3=panelfecha
-    public void setPanelAnterior(int panelAnterior) {
+    public void setPanelAnterior(Integer panelAnterior) {
         this.panelAnterior = panelAnterior;
     }
 

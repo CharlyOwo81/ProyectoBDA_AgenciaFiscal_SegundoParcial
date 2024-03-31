@@ -13,6 +13,7 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.bos.VencerPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -25,12 +26,20 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
     AutomovilNuevoDTO automovilNuevoDTO;
     ContribuyenteDTO contribuyenteDTO;
     PlacasNuevasDTO placasNuevasDTO;
+    PlacasViejasDTO placasViejasDTO;
 
     /**
      * Creates new form panelPlacasConfirmar
      */
     public PanelPlacasConfirmar(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
+        this.contribuyenteDTO = framePrincipal.getContribuyenteDTO();
+        this.automovilNuevoDTO = framePrincipal.getAutomovilNuevoDTO();
+        if (framePrincipal.getPlacasViejasDTO() == null) {
+            this.placasNuevasDTO = framePrincipal.getPlacasNuevasDTO();
+        } else {
+            this.placasViejasDTO = framePrincipal.getPlacasViejasDTO();
+        }
         initComponents();
         setTextos();
     }
@@ -93,17 +102,22 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO validar con automovilNuevoDTO
-        contribuyenteDTO = framePrincipal.getContribuyenteDTO();
-
-        if (framePrincipal.getPlacasViejasDTO() == null) {
-            registrarAuto();
-        }
+        try {
+            if (placasViejasDTO == null) {
+                registrarAuto();
+            } else {
+                vencerPlacas();
+            }
             registrarPlacas();
             framePrincipal.cambiarPanelPlacasExito();
+
+        } catch (PersistenciaException e) {
+            framePrincipal.mostrarAviso(e.getMessage());
+        }
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        if (framePrincipal.getPlacasViejasDTO() == null) {
+        if (placasViejasDTO == null) {
             framePrincipal.cambiarPanelPlacasAgregarAutomovil();
         } else {
             framePrincipal.cambiarPanelPlacasBuscarAnteriores();
@@ -112,26 +126,22 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void registrarPlacas() {
+    private void registrarPlacas() throws PersistenciaException {
         placasNuevasDTO.setContribuyenteDTO(contribuyenteDTO);
         IRegistrarPlacasBO registrarPlacasBO = new RegistrarPlacasBO(placasNuevasDTO);
-        try {
-            placasNuevasDTO = registrarPlacasBO.registrarPlacas(automovilNuevoDTO);
-            framePrincipal.setPlacasNuevasDTO(placasNuevasDTO);
-        } catch (PersistenciaException ex) {
-            framePrincipal.mostrarAviso(ex.getMessage());
-        }
+        placasNuevasDTO = registrarPlacasBO.registrarPlacas(automovilNuevoDTO);
+        framePrincipal.setPlacasNuevasDTO(placasNuevasDTO);
 
     }
 
-    private void registrarAuto() {
+    private void registrarAuto() throws PersistenciaException {
         automovilNuevoDTO = framePrincipal.getAutomovilNuevoDTO();
         IAgregarAutomovilBO agregarAutomovilBO = new AgregarAutomovilBO(automovilNuevoDTO);
         automovilNuevoDTO = agregarAutomovilBO.agregarAutomovil(contribuyenteDTO);
     }
 
     private void setTextos() {
-        if (framePrincipal.getPlacasViejasDTO() == null) {
+        if (placasViejasDTO == null) {
             lblTipoTramite.setText("Placas nuevas");
             lblCosto.setText("$1500.00");
             placasNuevasDTO = new PlacasNuevasDTO(1500.0F, new Date(), contribuyenteDTO);
@@ -143,8 +153,9 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         }
     }
 
-    private void vencerPlacas(){
-        IVencerPlacasBO vencerPlacasBO = new VencerPlacasBO(placasNuevasDTO);
+    private void vencerPlacas() throws PersistenciaException{
+        IVencerPlacasBO vencerPlacasBO = new VencerPlacasBO(placasViejasDTO);
+        placasViejasDTO = vencerPlacasBO.vencerPlacas();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

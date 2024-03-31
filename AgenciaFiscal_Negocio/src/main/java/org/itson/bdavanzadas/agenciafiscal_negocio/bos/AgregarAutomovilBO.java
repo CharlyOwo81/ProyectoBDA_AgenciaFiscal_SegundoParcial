@@ -6,6 +6,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.VehiculoDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -20,7 +21,7 @@ public class AgregarAutomovilBO implements IAgregarAutomovilBO {
     }
 
     @Override
-    public AutomovilNuevoDTO agregarAutomovil(ContribuyenteDTO contribuyenteDTO) {
+    public AutomovilNuevoDTO agregarAutomovil(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         VehiculoDAO vehiculoDAO = new VehiculoDAO();
         Contribuyente contribuyente = new Contribuyente(
                 contribuyenteDTO.getId(),
@@ -32,14 +33,18 @@ public class AgregarAutomovilBO implements IAgregarAutomovilBO {
                 contribuyenteDTO.getFechaNacimiento(),
                 contribuyenteDTO.getDiscapacidad());
         Vehiculo vehiculo = new Vehiculo(
-                automovilNuevoDTO.getNumeroSerie(), 
-                automovilNuevoDTO.getMarca(), 
-                automovilNuevoDTO.getLinea(), 
-                automovilNuevoDTO.getColor(), 
-                automovilNuevoDTO.getModelo(), 
+                automovilNuevoDTO.getNumeroSerie(),
+                automovilNuevoDTO.getMarca(),
+                automovilNuevoDTO.getLinea(),
+                automovilNuevoDTO.getColor(),
+                automovilNuevoDTO.getModelo(),
                 contribuyente);
-        Vehiculo vehiculoConId = vehiculoDAO.agregarVehiculo(vehiculo);
-        automovilNuevoDTO.setId(vehiculoConId.getId());
-        return automovilNuevoDTO;
+        try {
+            Vehiculo vehiculoConId = vehiculoDAO.agregarVehiculo(vehiculo);
+            automovilNuevoDTO.setId(vehiculoConId.getId());
+            return automovilNuevoDTO;
+        } catch (Exception e) {
+            throw new PersistenciaException("El número de serie del automóvil\nya se encentra registrado");
+        }
     }
 }

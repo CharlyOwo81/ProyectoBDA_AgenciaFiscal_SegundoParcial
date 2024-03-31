@@ -10,6 +10,6 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  * @author gamaliel
  */
 public interface IVehiculoDAO {
-    public Vehiculo agregarVehiculo(Vehiculo vehiculoNuevo);
+    public Vehiculo agregarVehiculo(Vehiculo vehiculoNuevo) throws Exception;
     public List<Vehiculo> buscarVehiculo(Vehiculo vehiculo, Contribuyente contribuyente) throws PersistenciaException;
 }

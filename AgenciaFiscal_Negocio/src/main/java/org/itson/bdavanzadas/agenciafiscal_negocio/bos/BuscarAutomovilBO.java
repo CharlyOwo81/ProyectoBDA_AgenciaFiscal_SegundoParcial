@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ITramiteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.TramiteDAO;
@@ -28,7 +28,7 @@ public class BuscarAutomovilBO implements IBuscarAutomovilBO {
     }
 
     @Override
-    public AutomovilNuevoDTO buscarAutomovil(ContribuyenteDTO contribuyenteDTO, PlacasNuevasDTO placasNuevasDTO) throws ValidacionDTOException, PersistenciaException {
+    public AutomovilNuevoDTO buscarAutomovil(ContribuyenteDTO contribuyenteDTO, PlacasViejasDTO placasViejasDTO) throws ValidacionDTOException, PersistenciaException {
         ITramiteDAO tramiteDAO = new TramiteDAO();
         Contribuyente contribuyente = new Contribuyente(contribuyenteDTO.getId());
         List<Tramite> tramites = tramiteDAO.buscarTramitesPorContribuyente(contribuyente);
@@ -40,7 +40,7 @@ public class BuscarAutomovilBO implements IBuscarAutomovilBO {
         
         //busca si en la lista de placas del contribuyente, una de ellas coincide con la proprocionada
         for (Placa placa1 : placas) {
-            if (placa1.getNumeroPlacas().equalsIgnoreCase(placasNuevasDTO.getNumeroPlacas())) {
+            if (placa1.getNumeroPlacas().equalsIgnoreCase(placasViejasDTO.getNumeroPlacas())) {
                 placa = new Placa(
                         placa1.getNumeroPlacas(),
                         placa1.getVehiculo(),

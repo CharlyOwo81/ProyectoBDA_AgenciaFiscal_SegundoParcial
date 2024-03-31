@@ -62,7 +62,7 @@ public class PanelHistorialNombre extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-
+        framePrincipal.setPanelAnterior(null);
         framePrincipal.cambiarPanelHistorialTipoBusqueda();
     }//GEN-LAST:event_btnRegresarActionPerformed
 

@@ -4,10 +4,7 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarAutomovilBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarAutomovilBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPlacasBO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IValidarPlacasBO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.bos.ValidarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
@@ -21,7 +18,6 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
     FramePrincipal framePrincipal;
     PlacasViejasDTO placasViejasDTO;
     AutomovilNuevoDTO automovilNuevoDTO;
-    PlacasNuevasDTO placasNuevasDTO;
 
     /**
      * Creates new form PanelPlacasBuscarAnteriores
@@ -29,7 +25,7 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
     public PanelPlacasBuscarAnteriores(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
-        if (placasViejasDTO != null) {
+        if (framePrincipal.getPlacasViejasDTO() != null) {
             setTextos();
         }
     }
@@ -116,7 +112,6 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        framePrincipal.setPlacasNuevasDTO(null);
         framePrincipal.setPlacasViejasDTO(null);
         framePrincipal.setAutomovilNuevoDTO(null);
         framePrincipal.cambiarPanelPlacasTipoAutomovil();// TODO add your handling code here:
@@ -129,25 +124,29 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
             // buscamos las placas anteriores a través del número de placas
             String numeroPlacas = txtPlacas.getText();
             placasViejasDTO = new PlacasViejasDTO(numeroPlacas, null, null, null);
-            IBuscarPlacasBO buscarPlacasBO =  new BuscarPlacasBO(placasViejasDTO);
-                try {
+            IBuscarPlacasBO buscarPlacasBO = new BuscarPlacasBO(placasViejasDTO);
+            try {
                 placasViejasDTO = buscarPlacasBO.buscarPlacas();
                 //creamos un autoDTO con el id del automovil de las placas encontradas
                 automovilNuevoDTO = new AutomovilNuevoDTO(placasViejasDTO.getAutomovilNuevoDTO().getId());
                 IBuscarAutomovilBO buscarAutomovilBO = new BuscarAutomovilBO(automovilNuevoDTO);
-                automovilNuevoDTO = buscarAutomovilBO.buscarAutomovil(placasViejasDTO.getContribuyenteDTO(), placasNuevasDTO);
+                //buscamos y validamos el automovil con el id de contribuyente y número de placas
+                automovilNuevoDTO = buscarAutomovilBO.buscarAutomovil(framePrincipal.getContribuyenteDTO(), placasViejasDTO);
                 framePrincipal.setAutomovilNuevoDTO(automovilNuevoDTO);
-                framePrincipal.setPlacasNuevasDTO(placasNuevasDTO);
                 framePrincipal.setPlacasViejasDTO(placasViejasDTO);
                 setTextos();
             } catch (ValidacionDTOException | PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
+                if (framePrincipal.getPlacasViejasDTO() != null) {
+                    setTextos();
+                }
+
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        if (placasNuevasDTO == null) {
+        if (placasViejasDTO == null) {
             framePrincipal.mostrarAviso("Proporciona unas placas válidas");
         } else {
             framePrincipal.cambiarPanelPlacasConfirmar();
@@ -160,7 +159,7 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
 
     private void setTextos() {
         lblAutomovil.setText("El número de placas corresponde a un: " + automovilNuevoDTO.getMarca() + " " + automovilNuevoDTO.getLinea() + " " + automovilNuevoDTO.getModelo());
-        txtPlacas.setText(placasNuevasDTO.getNumeroPlacas());
+        txtPlacas.setText(placasViejasDTO.getNumeroPlacas());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

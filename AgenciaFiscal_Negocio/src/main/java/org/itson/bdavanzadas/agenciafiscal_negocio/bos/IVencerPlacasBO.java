@@ -1,6 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -9,5 +9,5 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  */
 public interface IVencerPlacasBO {
 
-    public PlacasNuevasDTO vencerPlacas() throws PersistenciaException;
+    public PlacasViejasDTO vencerPlacas() throws PersistenciaException;
 }
