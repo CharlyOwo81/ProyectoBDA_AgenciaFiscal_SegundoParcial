@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ReporteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TipoTramiteEnum;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
@@ -14,6 +16,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.TramiteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Placa;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
@@ -22,14 +25,15 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  * @author Roberto García
  */
 public class BuscarTramitesBO implements IBuscarTramitesBO {
+//
+//    private ReporteDTO reporteDTO;
 
-    private ReporteDTO reporteDTO;
-
-    public BuscarTramitesBO(ReporteDTO reporteDTO) {
-        this.reporteDTO = reporteDTO;
+    public BuscarTramitesBO() {
+//        this.reporteDTO = reporteDTO;
     }
 
-    public List<TramiteNuevoDTO> buscarTramites() throws PersistenciaException {
+    @Override
+    public List<TramiteNuevoDTO> buscarTramites(ReporteDTO reporteDTO) throws PersistenciaException {
         Contribuyente contribuyente = new Contribuyente(
                 reporteDTO.getNombre(),
                 reporteDTO.getApellidoPaterno(),
@@ -75,6 +79,71 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
         }
 
         return listaTramitesDTO;
+    }
+
+    @Override
+    public List<LicenciaNuevaDTO> buscarLicencias(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
+        List<Tramite> tramites = buscarTramitesRfc(contribuyenteDTO);
+        List<Licencia> licencias = obtenerLicenciasDesdeTramites(tramites);
+        List<LicenciaNuevaDTO> licenciasDTO = null;
+        for (Licencia licencia : licencias) {
+            LicenciaNuevaDTO licenciaNuevaDTO = new LicenciaNuevaDTO(
+                    licencia.getVigencia(), 
+                    licencia.getTipoLicencia(),
+                    licencia.getFechaVencimiento(), 
+                    licencia.getCosto(), 
+                    licencia.getFechaEmision(), 
+                    contribuyenteDTO);
+            licenciasDTO.add(licenciaNuevaDTO);
+        }
+        return licenciasDTO;
+
+    }
+    
+    @Override
+    public List<PlacasNuevasDTO> buscarPlacas(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
+        List<Tramite> tramites = buscarTramitesRfc(contribuyenteDTO);
+        List<Licencia> licencias = obtenerLicenciasDesdeTramites(tramites);
+        List<LicenciaNuevaDTO> licenciasDTO = null;
+        for (Licencia licencia : licencias) {
+            LicenciaNuevaDTO licenciaNuevaDTO = new LicenciaNuevaDTO(
+                    licencia.getVigencia(), 
+                    licencia.getTipoLicencia(),
+                    licencia.getFechaVencimiento(), 
+                    licencia.getCosto(), 
+                    licencia.getFechaEmision(), 
+                    contribuyenteDTO);
+            licenciasDTO.add(licenciaNuevaDTO);
+        }
+        return licenciasDTO;
+
+    }
+
+    private List<Tramite> buscarTramitesRfc(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException{
+        Contribuyente contribuyente = new Contribuyente(contribuyenteDTO.getId());
+        ITramiteDAO tramiteDAO = new TramiteDAO();
+        List<Tramite> tramites = tramiteDAO.buscarTramitesPorContribuyente(contribuyente);
+        return tramites;
+    }
+    
+    private List<Licencia> obtenerLicenciasDesdeTramites(List<Tramite> tramites) {
+        List<Licencia> licencias = new ArrayList<>();
+        for (Tramite tramite : tramites) {
+            if (tramite instanceof Licencia licencia) {
+                licencias.add(licencia);
+            }
+        }
+        return licencias;
+    }
+    
+    private List<Placa> obtenerPlacasDesdeTramites(List<Tramite> tramites) {
+        List<Placa> placas = new ArrayList<>();
+        for (Tramite tramite : tramites) {
+            if (tramite instanceof Placa placa) {
+                placas.add(placa);
+            }
+        }
+        return placas;
     }
 
     private <T extends Tramite> List<T> obtenerTipoDesdeTramites(List<Tramite> tramites, Class<T> tipoDeseado) {

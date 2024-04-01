@@ -173,9 +173,6 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "MX"));
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
 
-        // Obtener la fecha y hora actual
-        Date fechaActual = new Date();
-
 // Crear un formato de fecha y hora
         SimpleDateFormat formatoFechaHora = new SimpleDateFormat("yyyyMMdd_HHmmss");
 

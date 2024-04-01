@@ -56,6 +56,7 @@ public class TramiteDAO implements ITramiteDAO {
         }
     }
 
+    @Override
     public List<Tramite> buscarTramitesFecha(Date desde, Date hasta) {
         EntityManager entityManager = this.conexion.crearConexion();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

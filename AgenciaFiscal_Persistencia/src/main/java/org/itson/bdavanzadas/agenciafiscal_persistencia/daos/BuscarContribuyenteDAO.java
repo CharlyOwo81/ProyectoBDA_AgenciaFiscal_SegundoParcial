@@ -17,7 +17,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  * @author Gamaliel Armenta
  * @author Roberto García
  */
-public class BuscarContribuyenteDAO {
+public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO{
 
     private final IConexion conexion;
 
@@ -38,6 +38,7 @@ public class BuscarContribuyenteDAO {
      * @throws PersistenciaException Si no se encuentra ningún contribuyente con
      * el RFC proporcionado.
      */
+    @Override
     public Contribuyente buscarContribuyente(String rfc) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         // Objeto constructor de consultas
@@ -75,6 +76,7 @@ public class BuscarContribuyenteDAO {
      * @throws PersistenciaException Si no se encuentra ningún contribuyente con
      * el ID proporcionado.
      */
+    @Override
     public Contribuyente buscarContribuyente(Long id) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         // Objeto constructor de consultas

@@ -31,6 +31,6 @@ public interface IBuscarContribuyenteDAO {
      */
     public Contribuyente buscarContribuyente(Long id) throws PersistenciaException;
     
-    public Integer calcularEdad(Contribuyente contribuyente) throws PersistenciaException;
+//    public Integer calcularEdad(Contribuyente contribuyente) throws PersistenciaException;
 }
 

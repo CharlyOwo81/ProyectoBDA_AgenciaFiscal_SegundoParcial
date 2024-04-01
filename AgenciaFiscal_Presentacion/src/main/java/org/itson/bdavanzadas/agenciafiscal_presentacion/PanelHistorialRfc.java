@@ -1,9 +1,14 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorRfcBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarTramitesBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPorRfcBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarTramitesBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
@@ -89,12 +94,17 @@ public class PanelHistorialRfc extends javax.swing.JPanel {
             IBuscarPorRfcBO buscarPorRfcBO = new BuscarPorRfcBO(contribuyenteRfcDto);
             try {
                 ContribuyenteDTO contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
+                IBuscarTramitesBO buscarTramitesBO = new BuscarTramitesBO();
+                List<LicenciaNuevaDTO> licenciasDTO = buscarTramitesBO.buscarLicencias(contribuyenteDTO);
+                List<PlacasNuevasDTO> placasDTO = buscarTramitesBO.buscarPlacas(contribuyenteDTO);
+                
                 framePrincipal.setContribuyenteDTO(contribuyenteDTO);
+                framePrincipal.setPanelAnterior(1);
+                framePrincipal.mostrarInformacion("Contribuyente found", "Exito");
+                framePrincipal.cambiarPanelHistorialSeleccion();
             } catch (ValidacionDTOException | PersistenciaException e) {
                 framePrincipal.mostrarAviso(e.getMessage());
             }
-            framePrincipal.setPanelAnterior(1);
-            framePrincipal.cambiarPanelHistorialSeleccion();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

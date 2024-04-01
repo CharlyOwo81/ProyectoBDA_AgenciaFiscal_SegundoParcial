@@ -4,6 +4,7 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.BuscarContribuyenteDAO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.IBuscarContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
@@ -37,7 +38,7 @@ public class BuscarPorRfcBO implements IBuscarPorRfcBO {
     @Override
     public ContribuyenteDTO buscarContribuyente() throws ValidacionDTOException, PersistenciaException{
         validarRfc();
-        BuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
+        IBuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
         
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(rfc);
         ContribuyenteDTO contribuyenteDTO = new ContribuyenteDTO(

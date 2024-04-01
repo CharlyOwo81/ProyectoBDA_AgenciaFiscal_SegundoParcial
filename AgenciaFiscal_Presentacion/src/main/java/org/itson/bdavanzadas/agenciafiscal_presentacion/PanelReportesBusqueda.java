@@ -194,9 +194,9 @@ public class PanelReportesBusqueda extends javax.swing.JPanel {
                     txtNombres.getText(),
                     txtApellidoPaterno.getText(),
                     txtApellidoMaterno.getText());
-            IBuscarTramitesBO buscarTramitesBO = new BuscarTramitesBO(reporteDTO);
+            IBuscarTramitesBO buscarTramitesBO = new BuscarTramitesBO();
             try {
-                List<TramiteNuevoDTO> tramites = buscarTramitesBO.buscarTramites();
+                List<TramiteNuevoDTO> tramites = buscarTramitesBO.buscarTramites(reporteDTO);
                 framePrincipal.setTramites(tramites);
                 framePrincipal.setTipoTramiteEnum(tipoTramiteEnum);
                 framePrincipal.setReporteDTO(reporteDTO);
