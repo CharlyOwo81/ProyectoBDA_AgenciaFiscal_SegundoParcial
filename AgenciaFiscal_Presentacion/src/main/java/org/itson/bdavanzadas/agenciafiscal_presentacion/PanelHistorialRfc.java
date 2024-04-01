@@ -1,5 +1,12 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorRfcBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPorRfcBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
+
 /**
  *
  * @author Roberto García
@@ -27,6 +34,7 @@ public class PanelHistorialRfc extends javax.swing.JPanel {
 
         btnRegresar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        txtRfc = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -57,6 +65,12 @@ public class PanelHistorialRfc extends javax.swing.JPanel {
         });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 338, 137, 40));
 
+        txtRfc.setBackground(new java.awt.Color(250, 248, 245));
+        txtRfc.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
+        txtRfc.setToolTipText("");
+        txtRfc.setName(""); // NOI18N
+        add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialRfc.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -68,9 +82,20 @@ public class PanelHistorialRfc extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        framePrincipal.cambiarPanelHistorialSeleccion();
-        framePrincipal.setPanelAnterior(1);
-
+        if (txtRfc.getText().isBlank()) {
+            framePrincipal.mostrarAviso("El campo de RFC no puede estar vacío");
+        } else {
+            BuscarContribyenteRFCDTO contribuyenteRfcDto = new BuscarContribyenteRFCDTO(txtRfc.getText());
+            IBuscarPorRfcBO buscarPorRfcBO = new BuscarPorRfcBO(contribuyenteRfcDto);
+            try {
+                ContribuyenteDTO contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
+                framePrincipal.setContribuyenteDTO(contribuyenteDTO);
+            } catch (ValidacionDTOException | PersistenciaException e) {
+                framePrincipal.mostrarAviso(e.getMessage());
+            }
+            framePrincipal.setPanelAnterior(1);
+            framePrincipal.cambiarPanelHistorialSeleccion();
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
@@ -78,6 +103,7 @@ public class PanelHistorialRfc extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTextField txtRfc;
     // End of variables declaration//GEN-END:variables
 
 }

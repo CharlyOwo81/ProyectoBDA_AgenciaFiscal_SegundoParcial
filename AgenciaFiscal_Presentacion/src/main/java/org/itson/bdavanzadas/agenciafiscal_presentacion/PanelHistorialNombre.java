@@ -27,6 +27,7 @@ public class PanelHistorialNombre extends javax.swing.JPanel {
 
         btnRegresar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        txtNombre = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -57,6 +58,12 @@ public class PanelHistorialNombre extends javax.swing.JPanel {
         });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 338, 137, 40));
 
+        txtNombre.setBackground(new java.awt.Color(250, 248, 245));
+        txtNombre.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
+        txtNombre.setToolTipText("");
+        txtNombre.setName(""); // NOI18N
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialNombre.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -77,6 +84,7 @@ public class PanelHistorialNombre extends javax.swing.JPanel {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
 }

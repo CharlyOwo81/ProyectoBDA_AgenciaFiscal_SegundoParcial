@@ -27,6 +27,7 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
 
         btnRegresar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
+        dpkFecha = new com.github.lgooddatepicker.components.DatePicker();
         lblFondo = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,6 +56,9 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
         });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 338, 137, 40));
 
+        dpkFecha.setOpaque(false);
+        add(dpkFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 278, 250, 30));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialFecha.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -74,6 +78,7 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnRegresar;
+    private com.github.lgooddatepicker.components.DatePicker dpkFecha;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 

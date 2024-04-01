@@ -5,7 +5,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
@@ -15,7 +14,6 @@ import java.awt.Component;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.URL;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,6 +23,7 @@ import java.util.Locale;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
@@ -166,22 +165,32 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         BaseColor separadorSonora = new BaseColor(137, 21, 71);
         BaseColor colorFuenteSeparador = new BaseColor(250, 248, 245);
         BaseColor colorFuenteSubtitulo = new BaseColor(155, 90, 23);
-        
+
         Font fuentePiePagina = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, colorFuenteSeparador);
         Font fuenteTituloCabecera = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
-        
+
         //Formateo de diferentes tipos de datos
         NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "MX"));
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-        
+
+        // Obtener la fecha y hora actual
+        Date fechaActual = new Date();
+
+// Crear un formato de fecha y hora
+        SimpleDateFormat formatoFechaHora = new SimpleDateFormat("yyyyMMdd_HHmmss");
+
+// Formatear la fecha y hora actual según el formato especificado
+        String fechaHoraFormateada = formatoFechaHora.format(fechaActual);
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, 
-                    new FileOutputStream(
-                            new File(
-                                    System.getProperty("user.home") 
-                                            + "/Descargas", "reporte_tramites_" 
-                                                    + System.currentTimeMillis() + ".pdf")));
-            
+
+            // Obtener la ubicación predeterminada de la carpeta de descargas del usuario
+            FileSystemView fsv = FileSystemView.getFileSystemView();
+            File escritorio = fsv.getHomeDirectory();
+
+            // Crear el archivo PDF en la carpeta de descargas
+            File archivoPDF = new File(escritorio, "reporte_tramites_" + fechaHoraFormateada + ".pdf");
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(archivoPDF));
+
             //Version para escribir el PDF
             writer.setPdfVersion(PdfWriter.VERSION_1_7);
 
@@ -192,23 +201,22 @@ public class PanelReportesResultados extends javax.swing.JPanel {
             document.addAuthor(user);
 
             document.open();
-            
+
             //Parámetros para el paginado
             Integer paginaActual = writer.getCurrentPageNumber();
             Integer totalPaginas = writer.getPageNumber();
 
             //Título y subtítulo - centrado y con diferentes tamaños
-            Paragraph titulo = new Paragraph("Ruta Única de Trámites", 
+            Paragraph titulo = new Paragraph("Ruta Única de Trámites",
                     new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD));
             titulo.setAlignment(Element.ALIGN_CENTER);
             document.add(titulo);
 
-            Paragraph subtitulo = new Paragraph("Proyecto RUTRA", 
+            Paragraph subtitulo = new Paragraph("Proyecto RUTRA",
                     new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, colorFuenteSubtitulo));
             subtitulo.setAlignment(Element.ALIGN_CENTER);
             document.add(subtitulo);
 
-            
             //TABLA DE SEPARACIÓN
             //Tabla de una sola celda que sirva como separador
             PdfPTable separador = new PdfPTable(1);
@@ -221,13 +229,12 @@ public class PanelReportesResultados extends javax.swing.JPanel {
             separador.getDefaultCell().setBorderColor(separadorSonora);
 
             //Texto del separador - centrado
-            Paragraph nombreArchivo = new Paragraph("REPORTE DE TRÁMITES REALIZADOS", 
+            Paragraph nombreArchivo = new Paragraph("REPORTE DE TRÁMITES REALIZADOS",
                     new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD, colorFuenteSeparador));
 
             separador.addCell(nombreArchivo);
             document.add(separador);
-            
-            
+
             //TABLA DE TRÁMITES
             //Tabla con los datos de los trámites realizados
             PdfPTable tablaTramites = new PdfPTable(6);
@@ -235,7 +242,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
             tablaTramites.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaTramites.setSpacingBefore(10);
             tablaTramites.setSpacingAfter(10);
-            
+
             //Encabezado de la tabla de trámites
             tablaTramites.addCell(new Phrase("TIPO DE TRÁMITE", fuenteTituloCabecera));
             tablaTramites.addCell(new Phrase("FECHA DE EMISIÓN", fuenteTituloCabecera));
@@ -259,7 +266,6 @@ public class PanelReportesResultados extends javax.swing.JPanel {
 
             document.add(tablaTramites);
 
-            
             //TABLA DE PIE DE PÁGINA
             //Tabla donde vienen los datos del solicitante
             PdfPTable piePagina = new PdfPTable(3);
@@ -271,18 +277,17 @@ public class PanelReportesResultados extends javax.swing.JPanel {
             piePagina.getDefaultCell().setBorderColor(separadorSonora);
             piePagina.getDefaultCell().setBackgroundColor(separadorSonora);
 
-
             //Celda donde viene el usuario que generó el reporte
             piePagina.addCell(new Phrase(user, fuentePiePagina));
 
             //Celda donde viene la fecha de generación del reporte
             String fechaConFormato = formatoFecha.format(fechaActual);
             piePagina.addCell(new Phrase(fechaConFormato, fuentePiePagina));
-            
+
             //Celda donde viene el número de página
             String paginado = "Página " + paginaActual + " de " + totalPaginas;
             piePagina.addCell(new Phrase(paginado, fuentePiePagina));
-            
+
             document.add(piePagina);
 
             document.close();

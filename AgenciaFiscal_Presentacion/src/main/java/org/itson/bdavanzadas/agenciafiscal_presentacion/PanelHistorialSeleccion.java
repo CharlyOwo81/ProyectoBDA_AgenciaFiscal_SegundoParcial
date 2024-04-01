@@ -1,5 +1,14 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.awt.Component;
+import java.text.SimpleDateFormat;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
+
 /**
  *
  * @author Roberto García
@@ -14,6 +23,7 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
     public PanelHistorialSeleccion(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        insertarTabla();
     }
 
     /**
@@ -25,6 +35,8 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         bntSeleccionar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
@@ -32,6 +44,38 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setBackground(new java.awt.Color(250, 248, 245));
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
+        jTable1.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(0, 0, 0));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "RFC", "Nombre", "Apellido Paterno", "Apellido Materno", "Fecha de Nacimiento", "Teléfono"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setToolTipText("");
+        jTable1.setColumnSelectionAllowed(true);
+        jTable1.setRowHeight(25);
+        jTable1.setRowMargin(1);
+        jTable1.setShowGrid(true);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable1);
+        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 214, 590, 270));
 
         bntSeleccionar.setBorder(null);
         bntSeleccionar.setBorderPainted(false);
@@ -75,10 +119,45 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
 // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void insertarTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+
+        for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
+
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaFormateada = formatoFecha.format(fila.getFechaEmision());
+            Object[] datosFila = {
+                framePrincipal.getTipoTramiteEnum(),
+                fechaFormateada,
+                fila.getContribuyenteDTO().getNombre(),
+                fila.getContribuyenteDTO().getApellidoPaterno(),
+                fila.getContribuyenteDTO().getApellidoMaterno(),
+                fila.getCosto()
+            };
+            modelo.addRow(datosFila);
+        }
+        // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
+        JTableHeader cabecera = jTable1.getTableHeader();
+        cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
+    }
+
+    class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
+                    isSelected, hasFocus, row, column);
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            return label;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntSeleccionar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblFondo;
     // End of variables declaration//GEN-END:variables
 
