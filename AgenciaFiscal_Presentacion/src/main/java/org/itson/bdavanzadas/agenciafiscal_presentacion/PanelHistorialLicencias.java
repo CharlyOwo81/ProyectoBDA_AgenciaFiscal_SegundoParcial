@@ -1,5 +1,14 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.awt.Component;
+import java.text.SimpleDateFormat;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+
 /**
  *
  * @author Roberto García
@@ -14,6 +23,7 @@ public class PanelHistorialLicencias extends javax.swing.JPanel {
     public PanelHistorialLicencias(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        setTabla();
     }
 
     /**
@@ -27,6 +37,8 @@ public class PanelHistorialLicencias extends javax.swing.JPanel {
 
         btnRegresar = new javax.swing.JButton();
         btnPlacas = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblLicencias = new javax.swing.JTable();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -57,6 +69,39 @@ public class PanelHistorialLicencias extends javax.swing.JPanel {
         });
         add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(818, 505, 119, 30));
 
+        jScrollPane1.setBackground(new java.awt.Color(250, 248, 245));
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
+        tblLicencias.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        tblLicencias.setForeground(new java.awt.Color(0, 0, 0));
+        tblLicencias.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Costo", "Fecha de Emisión", "Años de Vigencia", "Tipo de Licencia", "Fecha de Vencimiento"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblLicencias.setToolTipText("");
+        tblLicencias.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblLicencias.setColumnSelectionAllowed(true);
+        tblLicencias.setRowHeight(25);
+        tblLicencias.setRowMargin(1);
+        tblLicencias.setShowGrid(true);
+        tblLicencias.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblLicencias);
+        tblLicencias.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 264, 590, 220));
+
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialLicencias.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -70,11 +115,43 @@ public class PanelHistorialLicencias extends javax.swing.JPanel {
         framePrincipal.cambiarPanelHistorialPlacas();
     }//GEN-LAST:event_btnPlacasActionPerformed
 
+    private void setTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tblLicencias.getModel();
+        for (LicenciaNuevaDTO licenciaDTO : framePrincipal.getLicenciasDTOs()) {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaEmision = formatoFecha.format(licenciaDTO.getFechaEmision());
+            String fechaVencimiento = formatoFecha.format(licenciaDTO.getFechaVencimiento());
+            Object[] datosFila = {
+                licenciaDTO.getCosto(),
+                fechaEmision,
+                licenciaDTO.getVigencia(),
+                licenciaDTO.getTipoLicencia(),
+                fechaVencimiento
+            };
+            modelo.addRow(datosFila);
+        }
+        
+        JTableHeader cabecera = tblLicencias.getTableHeader();
+        cabecera.setDefaultRenderer(new PanelHistorialLicencias.MultiLineHeaderRenderer());
+    }
 
+    private class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
+                    isSelected, hasFocus, row, column);
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            return label;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPlacas;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTable tblLicencias;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -2,12 +2,19 @@ package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import java.awt.Component;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarTramitesBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarTramitesBO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  *
@@ -16,6 +23,7 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
 public class PanelHistorialSeleccion extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
+    ContribuyenteDTO contribuyenteDTO;
 
     /**
      * Creates new form PanelHistorialSeleccion
@@ -36,7 +44,7 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblContribuyentes = new javax.swing.JTable();
         bntSeleccionar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
@@ -48,9 +56,9 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(250, 248, 245));
         jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblContribuyentes.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        tblContribuyentes.setForeground(new java.awt.Color(0, 0, 0));
+        tblContribuyentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -66,16 +74,17 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setRowHeight(25);
-        jTable1.setRowMargin(1);
-        jTable1.setShowGrid(true);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tblContribuyentes.setToolTipText("");
+        tblContribuyentes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblContribuyentes.setColumnSelectionAllowed(true);
+        tblContribuyentes.setRowHeight(25);
+        tblContribuyentes.setRowMargin(1);
+        tblContribuyentes.setShowGrid(true);
+        tblContribuyentes.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblContribuyentes);
+        tblContribuyentes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 214, 590, 270));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 244, 590, 240));
 
         bntSeleccionar.setBorder(null);
         bntSeleccionar.setBorderPainted(false);
@@ -106,38 +115,60 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bntSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bntSeleccionarActionPerformed
-        
-        framePrincipal.cambiarPanelHistorialLicencias();
+        int indice = tblContribuyentes.getSelectedRow();
+        try {
+            contribuyenteDTO = framePrincipal.getContribuyenteDTOs().get(indice);
+
+            IBuscarTramitesBO buscarTramitesBO = new BuscarTramitesBO();
+            List<LicenciaNuevaDTO> licenciasDTO = buscarTramitesBO.buscarLicencias(contribuyenteDTO);
+            List<PlacasNuevasDTO> placasDTO = buscarTramitesBO.buscarPlacas(contribuyenteDTO);
+            if (licenciasDTO.isEmpty()
+                    && placasDTO.isEmpty()) {
+                throw new PersistenciaException("El contribuyente no tiene ningún trámite asociado");
+            }
+            framePrincipal.setContribuyenteDTO(contribuyenteDTO);
+            framePrincipal.setLicenciasDTOs(licenciasDTO);
+            framePrincipal.setPlacasDTOs(placasDTO);
+            framePrincipal.cambiarPanelHistorialLicencias();
+        } catch (IndexOutOfBoundsException e) {
+            framePrincipal.mostrarAviso("Selecciona un contribuyente de la lista");
+        } catch (PersistenciaException e) {
+            framePrincipal.mostrarAviso(e.getMessage());
+
+        }
     }//GEN-LAST:event_bntSeleccionarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         switch (framePrincipal.getPanelAnterior()) {
-            case 1 -> framePrincipal.cambiarPanelHistorialRfc();
-            case 2 -> framePrincipal.cambiarPanelHistorialNombre();
-            case 3 -> framePrincipal.cambiarPanelHistorialFecha();
+            case 1 ->
+                framePrincipal.cambiarPanelHistorialRfc();
+            case 2 ->
+                framePrincipal.cambiarPanelHistorialNombre();
+            case 3 ->
+                framePrincipal.cambiarPanelHistorialFecha();
         }
 // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void insertarTabla() {
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblContribuyentes.getModel();
 
-        for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
+        for (ContribuyenteDTO contribuyenteDTO : framePrincipal.getContribuyenteDTOs()) {
 
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaFormateada = formatoFecha.format(fila.getFechaEmision());
+            String fechaNacimiento = formatoFecha.format(contribuyenteDTO.getFechaNacimiento());
             Object[] datosFila = {
-                framePrincipal.getTipoTramiteEnum(),
-                fechaFormateada,
-                fila.getContribuyenteDTO().getNombre(),
-                fila.getContribuyenteDTO().getApellidoPaterno(),
-                fila.getContribuyenteDTO().getApellidoMaterno(),
-                fila.getCosto()
+                contribuyenteDTO.getRfc(),
+                contribuyenteDTO.getNombre(),
+                contribuyenteDTO.getApellidoPaterno(),
+                contribuyenteDTO.getApellidoMaterno(),
+                fechaNacimiento,
+                contribuyenteDTO.getTelefono()
             };
             modelo.addRow(datosFila);
         }
         // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
-        JTableHeader cabecera = jTable1.getTableHeader();
+        JTableHeader cabecera = tblContribuyentes.getTableHeader();
         cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
     }
 
@@ -157,8 +188,8 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
     private javax.swing.JButton bntSeleccionar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTable tblContribuyentes;
     // End of variables declaration//GEN-END:variables
 
 }

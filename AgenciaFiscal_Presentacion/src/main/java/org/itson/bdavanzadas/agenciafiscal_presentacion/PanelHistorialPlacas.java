@@ -1,5 +1,14 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.awt.Component;
+import java.text.SimpleDateFormat;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
+
 /**
  *
  * @author Roberto García
@@ -14,6 +23,7 @@ public class PanelHistorialPlacas extends javax.swing.JPanel {
     public PanelHistorialPlacas(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        setTabla();
     }
 
     /**
@@ -25,37 +35,112 @@ public class PanelHistorialPlacas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnPlacas = new javax.swing.JButton();
+        btnLicencias = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPlacas = new javax.swing.JTable();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnPlacas.setBorder(null);
-        btnPlacas.setBorderPainted(false);
-        btnPlacas.setContentAreaFilled(false);
-        btnPlacas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnPlacas.setOpaque(false);
-        btnPlacas.addActionListener(new java.awt.event.ActionListener() {
+        btnLicencias.setBorder(null);
+        btnLicencias.setBorderPainted(false);
+        btnLicencias.setContentAreaFilled(false);
+        btnLicencias.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnLicencias.setOpaque(false);
+        btnLicencias.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPlacasActionPerformed(evt);
+                btnLicenciasActionPerformed(evt);
             }
         });
-        add(btnPlacas, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 505, 139, 30));
+        add(btnLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 505, 139, 30));
+
+        jScrollPane1.setBackground(new java.awt.Color(250, 248, 245));
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
+        tblPlacas.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        tblPlacas.setForeground(new java.awt.Color(0, 0, 0));
+        tblPlacas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Costo", "Fecha de Emisión", "Número de Placas", "Fecha de Recepción", "Vehículo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblPlacas.setToolTipText("");
+        tblPlacas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+        tblPlacas.setColumnSelectionAllowed(true);
+        tblPlacas.setRowHeight(25);
+        tblPlacas.setRowMargin(1);
+        tblPlacas.setShowGrid(true);
+        tblPlacas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblPlacas);
+        tblPlacas.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 264, 590, 220));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialPlacas.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPlacasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlacasActionPerformed
+    private void btnLicenciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLicenciasActionPerformed
         framePrincipal.cambiarPanelHistorialLicencias();
-    }//GEN-LAST:event_btnPlacasActionPerformed
+    }//GEN-LAST:event_btnLicenciasActionPerformed
 
+    private void setTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tblPlacas.getModel();
+        for (PlacasNuevasDTO placaDTO : framePrincipal.getPlacasDTOs()) {
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaEmision = formatoFecha.format(placaDTO.getFechaEmision());
+            String fechaRecepcion;
+            if (placaDTO.getFechaRecepcion() != null) {
+                fechaRecepcion = formatoFecha.format(placaDTO.getFechaRecepcion());
+            } else {
+                fechaRecepcion = "(vigente)"; // O cualquier otro valor predeterminado que desees usar
+            }
+            String automovil = placaDTO.getAutomovilNuevoDTO().getMarca() + " "
+                    + placaDTO.getAutomovilNuevoDTO().getLinea() + " "
+                    + placaDTO.getAutomovilNuevoDTO().getModelo();
+            Object[] datosFila = {
+                placaDTO.getCosto(),
+                fechaEmision,
+                placaDTO.getNumeroPlacas(),
+                fechaRecepcion,
+                automovil
+            };
+            modelo.addRow(datosFila);
+        }
+        JTableHeader cabecera = tblPlacas.getTableHeader();
+        cabecera.setDefaultRenderer(new PanelHistorialPlacas.MultiLineHeaderRenderer());
 
+    }
+
+    private class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                boolean isSelected, boolean hasFocus, int row, int column) {
+            JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
+                    isSelected, hasFocus, row, column);
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            return label;
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPlacas;
+    private javax.swing.JButton btnLicencias;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTable tblPlacas;
     // End of variables declaration//GEN-END:variables
 
 }

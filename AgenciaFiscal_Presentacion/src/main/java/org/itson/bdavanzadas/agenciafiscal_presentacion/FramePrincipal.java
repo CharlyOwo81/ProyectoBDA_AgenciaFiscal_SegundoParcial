@@ -12,7 +12,8 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ReporteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TipoTramiteEnum;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ReporteDAO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Placa;
 
 /**
  *
@@ -30,6 +31,10 @@ public class FramePrincipal extends javax.swing.JFrame {
     private List<TramiteNuevoDTO> tramites;
     private ReporteDTO reporteDTO;
     private TipoTramiteEnum tipoTramiteEnum;
+    private List<ContribuyenteDTO> contribuyenteDTOs;
+    private List<LicenciaNuevaDTO> licenciasDTOs;
+    private List<PlacasNuevasDTO> placasDTOs;
+    
 
     /**
      * Creates new form Ventana
@@ -414,6 +419,30 @@ public class FramePrincipal extends javax.swing.JFrame {
 
     public void setTipoTramiteEnum(TipoTramiteEnum tipoTramiteEnum) {
         this.tipoTramiteEnum = tipoTramiteEnum;
+    }
+
+    public List<ContribuyenteDTO> getContribuyenteDTOs() {
+        return contribuyenteDTOs;
+    }
+
+    public void setContribuyenteDTOs(List<ContribuyenteDTO> contribuyenteDTOs) {
+        this.contribuyenteDTOs = contribuyenteDTOs;
+    }
+//
+    public List<LicenciaNuevaDTO> getLicenciasDTOs() {
+        return licenciasDTOs;
+    }
+
+    public void setLicenciasDTOs(List<LicenciaNuevaDTO> licenciasDTOs) {
+        this.licenciasDTOs = licenciasDTOs;
+    }
+
+    public List<PlacasNuevasDTO> getPlacasDTOs() {
+        return placasDTOs;
+    }
+
+    public void setPlacasDTOs(List<PlacasNuevasDTO> placasDTOs) {
+        this.placasDTOs = placasDTOs;
     }
 
 }

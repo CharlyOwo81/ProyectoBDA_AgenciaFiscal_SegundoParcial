@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
@@ -85,7 +86,7 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
     public List<LicenciaNuevaDTO> buscarLicencias(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         List<Tramite> tramites = buscarTramitesRfc(contribuyenteDTO);
         List<Licencia> licencias = obtenerLicenciasDesdeTramites(tramites);
-        List<LicenciaNuevaDTO> licenciasDTO = null;
+        List<LicenciaNuevaDTO> licenciasDTO = new ArrayList<>();
         for (Licencia licencia : licencias) {
             LicenciaNuevaDTO licenciaNuevaDTO = new LicenciaNuevaDTO(
                     licencia.getVigencia(), 
@@ -103,19 +104,26 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
     @Override
     public List<PlacasNuevasDTO> buscarPlacas(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         List<Tramite> tramites = buscarTramitesRfc(contribuyenteDTO);
-        List<Licencia> licencias = obtenerLicenciasDesdeTramites(tramites);
-        List<LicenciaNuevaDTO> licenciasDTO = null;
-        for (Licencia licencia : licencias) {
-            LicenciaNuevaDTO licenciaNuevaDTO = new LicenciaNuevaDTO(
-                    licencia.getVigencia(), 
-                    licencia.getTipoLicencia(),
-                    licencia.getFechaVencimiento(), 
-                    licencia.getCosto(), 
-                    licencia.getFechaEmision(), 
+        List<Placa> placas = obtenerPlacasDesdeTramites(tramites);
+        List<PlacasNuevasDTO> placasDTO = new ArrayList<>();
+        for (Placa placa : placas) {
+            AutomovilNuevoDTO automovilNuevoDTO = new AutomovilNuevoDTO(
+                    placa.getVehiculo().getId(), 
+                    placa.getVehiculo().getNumeroSerie(), 
+                    placa.getVehiculo().getMarca(), 
+                    placa.getVehiculo().getLinea(), 
+                    placa.getVehiculo().getColor(), 
+                    placa.getVehiculo().getModelo());
+            PlacasNuevasDTO placasNuevasDTO = new PlacasNuevasDTO(
+                    placa.getNumeroPlacas(),
+                    automovilNuevoDTO,
+                    placa.getFechaRecepcion(),
+                    placa.getCosto(),
+                    placa.getFechaEmision(),
                     contribuyenteDTO);
-            licenciasDTO.add(licenciaNuevaDTO);
+            placasDTO.add(placasNuevasDTO);
         }
-        return licenciasDTO;
+        return placasDTO;
 
     }
 

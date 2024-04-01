@@ -1,5 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorRfcBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarTramitesBO;
@@ -94,13 +95,10 @@ public class PanelHistorialRfc extends javax.swing.JPanel {
             IBuscarPorRfcBO buscarPorRfcBO = new BuscarPorRfcBO(contribuyenteRfcDto);
             try {
                 ContribuyenteDTO contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
-                IBuscarTramitesBO buscarTramitesBO = new BuscarTramitesBO();
-                List<LicenciaNuevaDTO> licenciasDTO = buscarTramitesBO.buscarLicencias(contribuyenteDTO);
-                List<PlacasNuevasDTO> placasDTO = buscarTramitesBO.buscarPlacas(contribuyenteDTO);
-                
-                framePrincipal.setContribuyenteDTO(contribuyenteDTO);
+                List<ContribuyenteDTO> contribuyenteDTOs = new ArrayList<>();
+                contribuyenteDTOs.add(contribuyenteDTO);
+                framePrincipal.setContribuyenteDTOs(contribuyenteDTOs);
                 framePrincipal.setPanelAnterior(1);
-                framePrincipal.mostrarInformacion("Contribuyente found", "Exito");
                 framePrincipal.cambiarPanelHistorialSeleccion();
             } catch (ValidacionDTOException | PersistenciaException e) {
                 framePrincipal.mostrarAviso(e.getMessage());
