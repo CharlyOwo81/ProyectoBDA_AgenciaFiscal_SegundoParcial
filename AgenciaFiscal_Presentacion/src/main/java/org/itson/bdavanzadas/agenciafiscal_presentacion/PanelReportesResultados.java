@@ -16,11 +16,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -67,7 +68,6 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
         JTableHeader cabecera = tblTramites.getTableHeader();
         cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
-
     }
 
     /**
@@ -159,70 +159,93 @@ public class PanelReportesResultados extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void imprimirPDF() {
+        //Formato de la hoja, los colores de las tipografías, las tipografías y datos a insertar
         Document document = new Document(PageSize.A4, 36, 36, 36, 36);
         String user = System.getProperty("user.name");
 
         BaseColor separadorSonora = new BaseColor(137, 21, 71);
-        BaseColor fuenteSeparador = new BaseColor(250, 248, 245);
+        BaseColor colorFuenteSeparador = new BaseColor(250, 248, 245);
+        BaseColor colorFuenteSubtitulo = new BaseColor(155, 90, 23);
+        
+        Font fuentePiePagina = new Font(Font.FontFamily.HELVETICA, 12, Font.NORMAL, colorFuenteSeparador);
+        Font fuenteTituloCabecera = new Font(Font.FontFamily.HELVETICA, 12, Font.BOLD);
+        
+        //Formateo de diferentes tipos de datos
+        NumberFormat formatoMoneda = NumberFormat.getCurrencyInstance(new Locale("es", "MX"));
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
         
         try {
-            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new File(System.getProperty("user.home") + "/Descargas", "reporte_tramites_" + System.currentTimeMillis() + ".pdf")));
+            PdfWriter writer = PdfWriter.getInstance(document, 
+                    new FileOutputStream(
+                            new File(
+                                    System.getProperty("user.home") 
+                                            + "/Descargas", "reporte_tramites_" 
+                                                    + System.currentTimeMillis() + ".pdf")));
+            
+            //Version para escribir el PDF
             writer.setPdfVersion(PdfWriter.VERSION_1_7);
 
+            //Metadatos generados
             document.addTitle("Ruta Única de Trámites");
             document.addSubject("Proyecto RUTRA");
             document.addCreationDate();
             document.addAuthor(user);
 
             document.open();
-
-            String imageUrl = "https://facturacion.siiafhacienda.gob.mx/assets/logo.png";
-            Image image = Image.getInstance(new URL(imageUrl));
-            image.scaleToFit(200, 200);
+            
+            //Parámetros para el paginado
+            Integer paginaActual = writer.getCurrentPageNumber();
+            Integer totalPaginas = writer.getPageNumber();
 
             //Título y subtítulo - centrado y con diferentes tamaños
-            Paragraph titulo = new Paragraph("Ruta Única de Trámites", new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD));
+            Paragraph titulo = new Paragraph("Ruta Única de Trámites", 
+                    new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD));
             titulo.setAlignment(Element.ALIGN_CENTER);
             document.add(titulo);
 
-            Paragraph subtitulo = new Paragraph("Proyecto RUTRA", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+            Paragraph subtitulo = new Paragraph("Proyecto RUTRA", 
+                    new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD, colorFuenteSubtitulo));
             subtitulo.setAlignment(Element.ALIGN_CENTER);
             document.add(subtitulo);
 
-//Tabla de una sola celda que sirva como separador
+            
+            //TABLA DE SEPARACIÓN
+            //Tabla de una sola celda que sirva como separador
             PdfPTable separador = new PdfPTable(1);
             separador.setWidthPercentage(100);
-            separador.setHorizontalAlignment(Element.ALIGN_CENTER);
+            separador.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             separador.setSpacingBefore(15);
             separador.setSpacingAfter(10);
-
-            separador.getDefaultCell().
-                    setBackgroundColor(separadorSonora);
+            separador.getDefaultCell().setCalculatedHeight(100);
+            separador.getDefaultCell().setBackgroundColor(separadorSonora);
+            separador.getDefaultCell().setBorderColor(separadorSonora);
 
             //Texto del separador - centrado
-            Paragraph nombreArchivo = new Paragraph("REPORTE DE TRÁMITES REALIZADOS",
-                    new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD, fuenteSeparador));
-            nombreArchivo.setAlignment(Element.ALIGN_CENTER);
+            Paragraph nombreArchivo = new Paragraph("REPORTE DE TRÁMITES REALIZADOS", 
+                    new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD, colorFuenteSeparador));
 
             separador.addCell(nombreArchivo);
             document.add(separador);
             
+            
+            //TABLA DE TRÁMITES
             //Tabla con los datos de los trámites realizados
             PdfPTable tablaTramites = new PdfPTable(6);
             tablaTramites.setWidthPercentage(100);
-            tablaTramites.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tablaTramites.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             tablaTramites.setSpacingBefore(10);
             tablaTramites.setSpacingAfter(10);
-
-            tablaTramites.addCell("Tipo Tramite");
-            tablaTramites.addCell("Fecha Emision");
-            tablaTramites.addCell("Nombre");
-            tablaTramites.addCell("Apellido Paterno");
-            tablaTramites.addCell("Apellido Materno");
-            tablaTramites.addCell("Costo");
+            
+            //Encabezado de la tabla de trámites
+            tablaTramites.addCell(new Phrase("TIPO DE TRÁMITE", fuenteTituloCabecera));
+            tablaTramites.addCell(new Phrase("FECHA DE EMISIÓN", fuenteTituloCabecera));
+            tablaTramites.addCell(new Phrase("NOMBRE", fuenteTituloCabecera));
+            tablaTramites.addCell(new Phrase("APELLIDO PATERNO", fuenteTituloCabecera));
+            tablaTramites.addCell(new Phrase("APELLIDO MATERNO", fuenteTituloCabecera));
+            tablaTramites.addCell(new Phrase("COSTO", fuenteTituloCabecera));
 
             for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
-                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+
                 String fechaFormateada = formatoFecha.format(fila.getFechaEmision());
 
                 tablaTramites.addCell(framePrincipal.getTipoTramiteEnum().toString());
@@ -230,30 +253,36 @@ public class PanelReportesResultados extends javax.swing.JPanel {
                 tablaTramites.addCell(fila.getContribuyenteDTO().getNombre());
                 tablaTramites.addCell(fila.getContribuyenteDTO().getApellidoPaterno());
                 tablaTramites.addCell(fila.getContribuyenteDTO().getApellidoMaterno());
-                tablaTramites.addCell(String.valueOf(fila.getCosto()));
+                String costoConFormato = formatoMoneda.format(fila.getCosto());
+                tablaTramites.addCell(costoConFormato);
             }
 
             document.add(tablaTramites);
 
+            
+            //TABLA DE PIE DE PÁGINA
+            //Tabla donde vienen los datos del solicitante
             PdfPTable piePagina = new PdfPTable(3);
             piePagina.setWidthPercentage(100);
-            piePagina.setHorizontalAlignment(Element.ALIGN_CENTER);
             piePagina.setSpacingBefore(10);
             piePagina.setSpacingAfter(10);
+            piePagina.getRowHeight(50);
+            piePagina.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
+            piePagina.getDefaultCell().setBorderColor(separadorSonora);
+            piePagina.getDefaultCell().setBackgroundColor(separadorSonora);
 
-            piePagina.addCell(new Phrase
-                (user, 
-                    new Font(
-                            Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
-            
 
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaFormateada = formatoFecha.format(fechaActual);
-            piePagina.addCell(fechaFormateada);
-            
-            piePagina.addCell("Blank");
-            
+            //Celda donde viene el usuario que generó el reporte
+            piePagina.addCell(new Phrase(user, fuentePiePagina));
 
+            //Celda donde viene la fecha de generación del reporte
+            String fechaConFormato = formatoFecha.format(fechaActual);
+            piePagina.addCell(new Phrase(fechaConFormato, fuentePiePagina));
+            
+            //Celda donde viene el número de página
+            String paginado = "Página " + paginaActual + " de " + totalPaginas;
+            piePagina.addCell(new Phrase(paginado, fuentePiePagina));
+            
             document.add(piePagina);
 
             document.close();
@@ -263,10 +292,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
             e.printStackTrace();
         }
     }
-    
 
-   
-    
     class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
 
         @Override
