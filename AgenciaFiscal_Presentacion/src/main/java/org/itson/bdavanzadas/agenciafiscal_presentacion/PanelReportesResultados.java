@@ -1,8 +1,28 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Component;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -16,6 +36,10 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
 public class PanelReportesResultados extends javax.swing.JPanel {
 
     FramePrincipal framePrincipal;
+    private List<TramiteNuevoDTO> tramites;
+
+    // Obtener la fecha actual
+    Date fechaActual = Calendar.getInstance().getTime();
 
     /**
      * Creates new form PanelReportesResultados
@@ -24,7 +48,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         this.framePrincipal = framePrincipal;
 
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tblTramites.getModel();
 
         for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
 
@@ -41,7 +65,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
             modelo.addRow(datosFila);
         }
         // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
-        JTableHeader cabecera = jTable1.getTableHeader();
+        JTableHeader cabecera = tblTramites.getTableHeader();
         cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
 
     }
@@ -58,7 +82,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         btnExportar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTramites = new javax.swing.JTable();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
@@ -68,7 +92,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         btnExportar.setBorder(null);
         btnExportar.setBorderPainted(false);
         btnExportar.setContentAreaFilled(false);
-        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnExportar.setOpaque(false);
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +104,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,9 +116,9 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         jScrollPane1.setBackground(new java.awt.Color(250, 248, 245));
         jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
-        jTable1.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblTramites.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        tblTramites.setForeground(new java.awt.Color(0, 0, 0));
+        tblTramites.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -110,14 +134,14 @@ public class PanelReportesResultados extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setToolTipText("");
-        jTable1.setColumnSelectionAllowed(true);
-        jTable1.setRowHeight(25);
-        jTable1.setRowMargin(1);
-        jTable1.setShowGrid(true);
-        jTable1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        tblTramites.setToolTipText("");
+        tblTramites.setColumnSelectionAllowed(true);
+        tblTramites.setRowHeight(25);
+        tblTramites.setRowMargin(1);
+        tblTramites.setShowGrid(true);
+        tblTramites.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tblTramites);
+        tblTramites.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 214, 590, 270));
 
@@ -126,6 +150,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
+        imprimirPDF();
         framePrincipal.cambiarPanelReportesExportar();
     }//GEN-LAST:event_btnExportarActionPerformed
 
@@ -133,6 +158,115 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         framePrincipal.cambiarPanelReportesBusqueda();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void imprimirPDF() {
+        Document document = new Document(PageSize.A4, 36, 36, 36, 36);
+        String user = System.getProperty("user.name");
+
+        BaseColor separadorSonora = new BaseColor(137, 21, 71);
+        BaseColor fuenteSeparador = new BaseColor(250, 248, 245);
+        
+        try {
+            PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(new File(System.getProperty("user.home") + "/Descargas", "reporte_tramites_" + System.currentTimeMillis() + ".pdf")));
+            writer.setPdfVersion(PdfWriter.VERSION_1_7);
+
+            document.addTitle("Ruta Única de Trámites");
+            document.addSubject("Proyecto RUTRA");
+            document.addCreationDate();
+            document.addAuthor(user);
+
+            document.open();
+
+            String imageUrl = "https://facturacion.siiafhacienda.gob.mx/assets/logo.png";
+            Image image = Image.getInstance(new URL(imageUrl));
+            image.scaleToFit(200, 200);
+
+            //Título y subtítulo - centrado y con diferentes tamaños
+            Paragraph titulo = new Paragraph("Ruta Única de Trámites", new Font(Font.FontFamily.HELVETICA, 24, Font.BOLD));
+            titulo.setAlignment(Element.ALIGN_CENTER);
+            document.add(titulo);
+
+            Paragraph subtitulo = new Paragraph("Proyecto RUTRA", new Font(Font.FontFamily.HELVETICA, 18, Font.BOLD));
+            subtitulo.setAlignment(Element.ALIGN_CENTER);
+            document.add(subtitulo);
+
+//Tabla de una sola celda que sirva como separador
+            PdfPTable separador = new PdfPTable(1);
+            separador.setWidthPercentage(100);
+            separador.setHorizontalAlignment(Element.ALIGN_CENTER);
+            separador.setSpacingBefore(15);
+            separador.setSpacingAfter(10);
+
+            separador.getDefaultCell().
+                    setBackgroundColor(separadorSonora);
+
+            //Texto del separador - centrado
+            Paragraph nombreArchivo = new Paragraph("REPORTE DE TRÁMITES REALIZADOS",
+                    new Font(Font.FontFamily.HELVETICA, 15, Font.BOLD, fuenteSeparador));
+            nombreArchivo.setAlignment(Element.ALIGN_CENTER);
+
+            separador.addCell(nombreArchivo);
+            document.add(separador);
+            
+            //Tabla con los datos de los trámites realizados
+            PdfPTable tablaTramites = new PdfPTable(6);
+            tablaTramites.setWidthPercentage(100);
+            tablaTramites.setHorizontalAlignment(Element.ALIGN_CENTER);
+            tablaTramites.setSpacingBefore(10);
+            tablaTramites.setSpacingAfter(10);
+
+            tablaTramites.addCell("Tipo Tramite");
+            tablaTramites.addCell("Fecha Emision");
+            tablaTramites.addCell("Nombre");
+            tablaTramites.addCell("Apellido Paterno");
+            tablaTramites.addCell("Apellido Materno");
+            tablaTramites.addCell("Costo");
+
+            for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
+                SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+                String fechaFormateada = formatoFecha.format(fila.getFechaEmision());
+
+                tablaTramites.addCell(framePrincipal.getTipoTramiteEnum().toString());
+                tablaTramites.addCell(fechaFormateada);
+                tablaTramites.addCell(fila.getContribuyenteDTO().getNombre());
+                tablaTramites.addCell(fila.getContribuyenteDTO().getApellidoPaterno());
+                tablaTramites.addCell(fila.getContribuyenteDTO().getApellidoMaterno());
+                tablaTramites.addCell(String.valueOf(fila.getCosto()));
+            }
+
+            document.add(tablaTramites);
+
+            PdfPTable piePagina = new PdfPTable(3);
+            piePagina.setWidthPercentage(100);
+            piePagina.setHorizontalAlignment(Element.ALIGN_CENTER);
+            piePagina.setSpacingBefore(10);
+            piePagina.setSpacingAfter(10);
+
+            piePagina.addCell(new Phrase
+                (user, 
+                    new Font(
+                            Font.FontFamily.HELVETICA, 12, Font.NORMAL, BaseColor.BLACK)));
+            
+
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaFormateada = formatoFecha.format(fechaActual);
+            piePagina.addCell(fechaFormateada);
+            
+            piePagina.addCell("Blank");
+            
+
+            document.add(piePagina);
+
+            document.close();
+
+            JOptionPane.showMessageDialog(this, "Documento PDF generado correctamente en la carpeta Descargas", "Documento PDF generado", JOptionPane.INFORMATION_MESSAGE);
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+
+   
+    
     class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
 
         @Override
@@ -148,8 +282,8 @@ public class PanelReportesResultados extends javax.swing.JPanel {
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnRegresar;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblFondo;
+    private javax.swing.JTable tblTramites;
     // End of variables declaration//GEN-END:variables
 
 }

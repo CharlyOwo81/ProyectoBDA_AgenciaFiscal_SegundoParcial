@@ -5,7 +5,9 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorRfcBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
@@ -211,6 +213,7 @@ public class PanelLicencia extends javax.swing.JPanel {
             String rfc = txtRfc.getText();
             BuscarContribyenteRFCDTO buscarContribyenteRFCDTO = new BuscarContribyenteRFCDTO(rfc);
             BuscarPorRfcBO buscarPorRfcBO = new BuscarPorRfcBO(buscarContribyenteRFCDTO);
+            
             try {
                 contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
                 setTextos(contribuyenteDTO);
