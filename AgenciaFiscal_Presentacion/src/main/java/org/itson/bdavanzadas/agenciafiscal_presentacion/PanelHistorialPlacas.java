@@ -1,12 +1,19 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
 
 /**
@@ -57,6 +64,8 @@ public class PanelHistorialPlacas extends javax.swing.JPanel {
         add(btnLicencias, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 505, 139, 30));
 
         jScrollPane1.setBackground(new java.awt.Color(250, 248, 245));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setToolTipText("");
         jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
         tblPlacas.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -80,8 +89,10 @@ public class PanelHistorialPlacas extends javax.swing.JPanel {
         tblPlacas.setToolTipText("");
         tblPlacas.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         tblPlacas.setColumnSelectionAllowed(true);
+        tblPlacas.setName(""); // NOI18N
         tblPlacas.setRowHeight(25);
         tblPlacas.setRowMargin(1);
+        tblPlacas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         tblPlacas.setShowGrid(true);
         tblPlacas.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblPlacas);
@@ -122,18 +133,40 @@ public class PanelHistorialPlacas extends javax.swing.JPanel {
         }
         JTableHeader cabecera = tblPlacas.getTableHeader();
         cabecera.setDefaultRenderer(new PanelHistorialPlacas.MultiLineHeaderRenderer());
+        setTamañoTitulos();
 
     }
 
     private class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
 
+//        }
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
-            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            label.setHorizontalAlignment(SwingConstants.CENTER); // Centra el texto
+            label.setVerticalAlignment(SwingConstants.NORTH);
+            Color lightGray = new Color(248, 248, 248);
+            label.setBackground(lightGray);
+            label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+//            label.setText("<html><center>" + value.toString().replaceAll("\\n", "<br>"));
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace("\\n", "<br>") + "</html>");
             return label;
+        }
+    }
+
+    private void setTamañoTitulos() {
+        TableColumnModel columnModel = tblPlacas.getColumnModel();
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            TableCellRenderer headerRenderer = column.getHeaderRenderer();
+            if (headerRenderer == null) {
+                headerRenderer = tblPlacas.getTableHeader().getDefaultRenderer();
+            }
+            Component headerComp = headerRenderer.getTableCellRendererComponent(tblPlacas, column.getHeaderValue(), false, false, 0, i);
+            int headerHeight = headerComp.getPreferredSize().height;
+            tblPlacas.getTableHeader().setPreferredSize(new Dimension(tblPlacas.getTableHeader().getPreferredSize().width, headerHeight * 2)); // Multiplica por 2 para asegurar que quepa todo el texto
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

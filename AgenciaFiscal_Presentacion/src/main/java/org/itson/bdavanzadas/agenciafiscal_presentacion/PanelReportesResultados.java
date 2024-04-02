@@ -10,7 +10,9 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -20,13 +22,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileSystemView;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
 
 /**
@@ -43,30 +50,13 @@ public class PanelReportesResultados extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelReportesResultados
+     * @param framePrincipal
      */
     public PanelReportesResultados(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
 
         initComponents();
-        DefaultTableModel modelo = (DefaultTableModel) tblTramites.getModel();
-
-        for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
-
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaFormateada = formatoFecha.format(fila.getFechaEmision());
-            Object[] datosFila = {
-                framePrincipal.getTipoTramiteEnum(),
-                fechaFormateada,
-                fila.getContribuyenteDTO().getNombre(),
-                fila.getContribuyenteDTO().getApellidoPaterno(),
-                fila.getContribuyenteDTO().getApellidoMaterno(),
-                fila.getCosto()
-            };
-            modelo.addRow(datosFila);
-        }
-        // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
-        JTableHeader cabecera = tblTramites.getTableHeader();
-        cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
+        setTabla();
     }
 
     /**
@@ -156,6 +146,30 @@ public class PanelReportesResultados extends javax.swing.JPanel {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         framePrincipal.cambiarPanelReportesBusqueda();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void setTabla() {
+        DefaultTableModel modelo = (DefaultTableModel) tblTramites.getModel();
+
+        for (TramiteNuevoDTO fila : framePrincipal.getTramites()) {
+
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaFormateada = formatoFecha.format(fila.getFechaEmision());
+            Object[] datosFila = {
+                framePrincipal.getTipoTramiteEnum(),
+                fechaFormateada,
+                fila.getContribuyenteDTO().getNombre(),
+                fila.getContribuyenteDTO().getApellidoPaterno(),
+                fila.getContribuyenteDTO().getApellidoMaterno(),
+                fila.getCosto()
+            };
+            modelo.addRow(datosFila);
+        }
+        // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
+        JTableHeader cabecera = tblTramites.getTableHeader();
+        cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
+        setTamañoTitulos();
+
+    }
 
     private void imprimirPDF() {
         //Formato de la hoja, los colores de las tipografías, las tipografías y datos a insertar
@@ -295,15 +309,36 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         }
     }
 
-    class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
+    private class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
 
+//        }
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
-            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            label.setHorizontalAlignment(SwingConstants.CENTER); // Centra el texto
+            label.setVerticalAlignment(SwingConstants.NORTH);
+            Color lightGray = new Color(248, 248, 248);
+            label.setBackground(lightGray);
+            label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+//            label.setText("<html><center>" + value.toString().replaceAll("\\n", "<br>"));
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace("\\n", "<br>") + "</html>");
             return label;
+        }
+    }
+
+    private void setTamañoTitulos() {
+        TableColumnModel columnModel = tblTramites.getColumnModel();
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            TableCellRenderer headerRenderer = column.getHeaderRenderer();
+            if (headerRenderer == null) {
+                headerRenderer = tblTramites.getTableHeader().getDefaultRenderer();
+            }
+            Component headerComp = headerRenderer.getTableCellRendererComponent(tblTramites, column.getHeaderValue(), false, false, 0, i);
+            int headerHeight = headerComp.getPreferredSize().height;
+            tblTramites.getTableHeader().setPreferredSize(new Dimension(tblTramites.getTableHeader().getPreferredSize().width, headerHeight * 2)); // Multiplica por 2 para asegurar que quepa todo el texto
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

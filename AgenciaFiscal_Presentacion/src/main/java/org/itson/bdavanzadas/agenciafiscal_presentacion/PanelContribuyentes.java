@@ -183,7 +183,7 @@ public class PanelContribuyentes extends javax.swing.JPanel {
         contribuyentesDTO.add(new ContribuyenteDTO("RFC7167436577", "Hector", "Cruz", "Dominguez", "7890123456", new Date(1960 - 1900, 7, 16), ContribuyenteDiscapacidad.NO));
         contribuyentesDTO.add(new ContribuyenteDTO("RFC0145675157", "Adriana", "Flores", "Ramirez", "8901234567", new Date(1990 - 1900, 1, 12), ContribuyenteDiscapacidad.SI));
         contribuyentesDTO.add(new ContribuyenteDTO("RFC6451375479", "Raul", "Santiago", "Guerrero", "9012345678", new Date(1976 - 1900, 4, 5), ContribuyenteDiscapacidad.NO));
-        contribuyentesDTO.add(new ContribuyenteDTO("RFC6476721470", "Carmen", "Mendez", "Ortega", "0123456789", new Date(1988 - 1900, 8, 28), ContribuyenteDiscapacidad.SI));
+        contribuyentesDTO.add(new ContribuyenteDTO("RFC6476721470", "Adriana", "Mendez", "Ortega", "0123456789", new Date(1988 - 1900, 8, 28), ContribuyenteDiscapacidad.SI));
 
         IInsercionMasivaBO insercion = new InsercionMasivaBO();
 

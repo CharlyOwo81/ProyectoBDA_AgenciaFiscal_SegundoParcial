@@ -1,5 +1,12 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorNombre;
+import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPorNombre;
+import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
+
 /**
  *
  * @author Roberto García
@@ -74,8 +81,22 @@ public class PanelHistorialNombre extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        framePrincipal.cambiarPanelHistorialSeleccion();
-        framePrincipal.setPanelAnterior(2);
+        if (txtNombre.getText().isBlank()) {
+            framePrincipal.mostrarAviso("El campo de nombre no puede estar vacío");
+        } else {
+            ContribuyenteDTO contribuyenteDTO = new ContribuyenteDTO(txtNombre.getText(), null, null);
+            IBuscarPorNombre buscarPorNombre = new BuscarPorNombre();
+            List<ContribuyenteDTO> contribuyentesDto;
+            try {
+                contribuyentesDto = buscarPorNombre.buscarContribuyente(contribuyenteDTO);
+                framePrincipal.setContribuyenteDTOs(contribuyentesDto);
+                framePrincipal.setPanelAnterior(2);
+                framePrincipal.cambiarPanelHistorialSeleccion();
+            } catch (PersistenciaException e) {
+                framePrincipal.mostrarAviso(e.getMessage());
+            }
+        }
+
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 

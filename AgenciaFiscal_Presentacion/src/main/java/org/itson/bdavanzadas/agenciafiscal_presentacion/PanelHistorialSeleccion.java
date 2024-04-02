@@ -1,19 +1,26 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarTramitesBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarTramitesBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasNuevasDTO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.TramiteNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -32,6 +39,16 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
         this.framePrincipal = framePrincipal;
         initComponents();
         insertarTabla();
+        // Obtener el modelo de selección de la tabla
+        ListSelectionModel selectionModel = tblContribuyentes.getSelectionModel();
+//
+//// Configurar el modelo de selección para seleccionar solo una fila a la vez
+//        selectionModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//
+//// Configurar el modelo de selección para permitir selección de múltiples intervalos
+//        tblContribuyentes.setColumnSelectionAllowed(true);
+//        tblContribuyentes.setRowSelectionAllowed(false);
+
     }
 
     /**
@@ -76,13 +93,13 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
         });
         tblContribuyentes.setToolTipText("");
         tblContribuyentes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-        tblContribuyentes.setColumnSelectionAllowed(true);
         tblContribuyentes.setRowHeight(25);
         tblContribuyentes.setRowMargin(1);
+        tblContribuyentes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblContribuyentes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tblContribuyentes.setShowGrid(true);
         tblContribuyentes.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblContribuyentes);
-        tblContribuyentes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 244, 590, 240));
 
@@ -153,34 +170,57 @@ public class PanelHistorialSeleccion extends javax.swing.JPanel {
     private void insertarTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tblContribuyentes.getModel();
 
-        for (ContribuyenteDTO contribuyenteDTO : framePrincipal.getContribuyenteDTOs()) {
+        for (ContribuyenteDTO contribuyenteDTO1 : framePrincipal.getContribuyenteDTOs()) {
 
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaNacimiento = formatoFecha.format(contribuyenteDTO.getFechaNacimiento());
+            String fechaNacimiento = formatoFecha.format(contribuyenteDTO1.getFechaNacimiento());
             Object[] datosFila = {
-                contribuyenteDTO.getRfc(),
-                contribuyenteDTO.getNombre(),
-                contribuyenteDTO.getApellidoPaterno(),
-                contribuyenteDTO.getApellidoMaterno(),
+                contribuyenteDTO1.getRfc(),
+                contribuyenteDTO1.getNombre(),
+                contribuyenteDTO1.getApellidoPaterno(),
+                contribuyenteDTO1.getApellidoMaterno(),
                 fechaNacimiento,
-                contribuyenteDTO.getTelefono()
+                contribuyenteDTO1.getTelefono()
             };
             modelo.addRow(datosFila);
         }
         // Dentro de tu método donde inicializas la tabla (por ejemplo, en el constructor de tu clase)
         JTableHeader cabecera = tblContribuyentes.getTableHeader();
         cabecera.setDefaultRenderer(new MultiLineHeaderRenderer());
+        setTamañoTitulos();
+
     }
 
-    class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
+    private class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
 
+//        }
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
-            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            label.setHorizontalAlignment(SwingConstants.CENTER); // Centra el texto
+            label.setVerticalAlignment(SwingConstants.NORTH);
+            Color lightGray = new Color(248, 248, 248);
+            label.setBackground(lightGray);
+            label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+//            label.setText("<html><center>" + value.toString().replaceAll("\\n", "<br>"));
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace("\\n", "<br>") + "</html>");
             return label;
+        }
+    }
+
+    private void setTamañoTitulos() {
+        TableColumnModel columnModel = tblContribuyentes.getColumnModel();
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            TableCellRenderer headerRenderer = column.getHeaderRenderer();
+            if (headerRenderer == null) {
+                headerRenderer = tblContribuyentes.getTableHeader().getDefaultRenderer();
+            }
+            Component headerComp = headerRenderer.getTableCellRendererComponent(tblContribuyentes, column.getHeaderValue(), false, false, 0, i);
+            int headerHeight = headerComp.getPreferredSize().height;
+            tblContribuyentes.getTableHeader().setPreferredSize(new Dimension(tblContribuyentes.getTableHeader().getPreferredSize().width, headerHeight * 2)); // Multiplica por 2 para asegurar que quepa todo el texto
         }
     }
 

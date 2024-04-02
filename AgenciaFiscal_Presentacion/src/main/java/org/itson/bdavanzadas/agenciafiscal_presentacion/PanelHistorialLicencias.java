@@ -1,12 +1,19 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
 
 /**
@@ -130,20 +137,43 @@ public class PanelHistorialLicencias extends javax.swing.JPanel {
             };
             modelo.addRow(datosFila);
         }
-        
+
         JTableHeader cabecera = tblLicencias.getTableHeader();
         cabecera.setDefaultRenderer(new PanelHistorialLicencias.MultiLineHeaderRenderer());
+        setTamañoTitulos();
+
     }
 
     private class MultiLineHeaderRenderer extends DefaultTableCellRenderer {
 
+//        }
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value,
                 boolean isSelected, boolean hasFocus, int row, int column) {
             JLabel label = (JLabel) super.getTableCellRendererComponent(table, value,
                     isSelected, hasFocus, row, column);
-            label.setText("<html><div style='text-align:center;'>" + value.toString().replace(" ", "<br>") + "</html>");
+            label.setHorizontalAlignment(SwingConstants.CENTER); // Centra el texto
+            label.setVerticalAlignment(SwingConstants.NORTH);
+            Color lightGray = new Color(248, 248, 248);
+            label.setBackground(lightGray);
+            label.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+//            label.setText("<html><center>" + value.toString().replaceAll("\\n", "<br>"));
+            label.setText("<html><div style='text-align:center;'>" + value.toString().replace("\\n", "<br>") + "</html>");
             return label;
+        }
+    }
+
+    private void setTamañoTitulos() {
+        TableColumnModel columnModel = tblLicencias.getColumnModel();
+        for (int i = 0; i < columnModel.getColumnCount(); i++) {
+            TableColumn column = columnModel.getColumn(i);
+            TableCellRenderer headerRenderer = column.getHeaderRenderer();
+            if (headerRenderer == null) {
+                headerRenderer = tblLicencias.getTableHeader().getDefaultRenderer();
+            }
+            Component headerComp = headerRenderer.getTableCellRendererComponent(tblLicencias, column.getHeaderValue(), false, false, 0, i);
+            int headerHeight = headerComp.getPreferredSize().height;
+            tblLicencias.getTableHeader().setPreferredSize(new Dimension(tblLicencias.getTableHeader().getPreferredSize().width, headerHeight * 2)); // Multiplica por 2 para asegurar que quepa todo el texto
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables

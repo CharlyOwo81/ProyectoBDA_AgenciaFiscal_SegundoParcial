@@ -127,6 +127,34 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO{
 
         return contribuyentes;
     }
+    
+    public List<Contribuyente> buscarContribuyenteNombre(String nombre) throws PersistenciaException{
+        EntityManager entityManager = this.conexion.crearConexion();
+        // Objeto constructor de consultas
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        // Objeto consulta que se está construyendo
+        CriteriaQuery<Contribuyente> criteria = cb.createQuery(Contribuyente.class);
+
+        Root<Contribuyente> root = criteria.from(Contribuyente.class);
+
+        // Filtrar por ID igual al parámetro proporcionado
+        criteria.select(root).where(cb.equal(root.get("nombre"), nombre));
+
+        // Consulta construida
+        TypedQuery<Contribuyente> query = entityManager.createQuery(criteria);
+
+        // Obtener el resultado de la consulta
+        List<Contribuyente> contribuyentes = query.getResultList();
+
+        entityManager.close();
+
+        // Verificar si se encontró algún contribuyente con el ID dado
+        if (contribuyentes.isEmpty()) {
+            throw new PersistenciaException("No se encontró ningún contribuyente con el nombre proporcionado");
+        } else {
+            return contribuyentes; // Devolver el primer contribuyente encontrado
+        }
+    }
 
 //    public Integer calcularEdad(Contribuyente contribuyente) {
 //        LocalDate fechaNacimiento = contribuyente.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
