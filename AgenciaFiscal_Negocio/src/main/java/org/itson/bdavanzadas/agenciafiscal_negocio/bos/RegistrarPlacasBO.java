@@ -13,17 +13,36 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Clase que implementa la interfaz IRegistrarPlacasBO para registrar nuevas
+ * placas de vehículos en el sistema. Genera un número de placas aleatorio y
+ * realiza la inserción en la base de datos.
  *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class RegistrarPlacasBO implements IRegistrarPlacasBO {
 
     private final PlacasNuevasDTO placasNuevasDTO;
 
+    /**
+     * Constructor de la clase RegistrarPlacasBO.
+     *
+     * @param placasNuevasDTO Objeto PlacasNuevasDTO que contiene los datos de
+     * las placas a registrar.
+     */
     public RegistrarPlacasBO(PlacasNuevasDTO placasNuevasDTO) {
         this.placasNuevasDTO = placasNuevasDTO;
     }
 
+    /**
+     * Método para registrar nuevas placas de vehículos en el sistema.
+     *
+     * @param automovilNuevoDTO Objeto AutomovilNuevoDTO que contiene los datos
+     * del vehículo asociado a las placas.
+     * @return El objeto PlacasNuevasDTO registrado en el sistema.
+     * @throws PersistenciaException Si ocurre un error durante la inserción de
+     * las placas en la base de datos.
+     */
     @Override
     public PlacasNuevasDTO registrarPlacas(AutomovilNuevoDTO automovilNuevoDTO) throws PersistenciaException {
         ContribuyenteDTO contribuyenteDTO = placasNuevasDTO.getContribuyenteDTO();
@@ -62,6 +81,12 @@ public class RegistrarPlacasBO implements IRegistrarPlacasBO {
         return placasNuevasDTO;
     }
 
+    /**
+     * Método privado para generar un número de placas aleatorio y único. El
+     * número de placas generado se asigna al objeto PlacasNuevasDTO. Válida que
+     * el número de placas generado no se encuentre registrado antes de
+     * devolverlo.
+     */
     private void generarNumeroPlacas() {
         Random random = new Random();
         PlacasDAO placasDAO = new PlacasDAO();

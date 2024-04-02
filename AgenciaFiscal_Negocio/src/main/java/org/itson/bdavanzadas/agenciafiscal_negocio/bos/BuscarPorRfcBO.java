@@ -9,9 +9,9 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
- * Clase que representa un objeto de negocio para buscar un contribuyente por su RFC.
- * Implementa la interfaz IBuscarPorRfcBO.
- * 
+ * Clase que representa un objeto de negocio para buscar un contribuyente por su
+ * RFC. Implementa la interfaz IBuscarPorRfcBO.
+ *
  * @author Gamaliel Armenta
  * @author Roberto García
  */
@@ -21,25 +21,27 @@ public class BuscarPorRfcBO implements IBuscarPorRfcBO {
 
     /**
      * Constructor de la clase.
-     * 
-     * @param contribuyenteRfcDto Objeto DTO que contiene el RFC del contribuyente.
+     *
+     * @param contribuyenteRfcDto Objeto DTO que contiene el RFC del
+     * contribuyente.
      */
     public BuscarPorRfcBO(BuscarContribyenteRFCDTO contribuyenteRfcDto) {
         this.rfc = contribuyenteRfcDto.getRfc();
     }
-    
+
     /**
      * Método para buscar un contribuyente por su RFC.
-     * 
+     *
      * @return ContribuyenteDTO con la información del contribuyente encontrado.
      * @throws ValidacionDTOException Si ocurre algún error de validación.
-     * @throws PersistenciaException Si ocurre algún error de persistencia.
+     * @throws PersistenciaException Si no se encuentra ningún contribuyente con
+     * el RFC proporcionado
      */
     @Override
-    public ContribuyenteDTO buscarContribuyente() throws ValidacionDTOException, PersistenciaException{
+    public ContribuyenteDTO buscarContribuyente() throws ValidacionDTOException, PersistenciaException {
         validarRfc();
         IBuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
-        
+
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(rfc);
         ContribuyenteDTO contribuyenteDTO = new ContribuyenteDTO(
                 contribuyente.getId(),
@@ -55,12 +57,12 @@ public class BuscarPorRfcBO implements IBuscarPorRfcBO {
 
     /**
      * Método para validar el RFC del contribuyente.
-     * 
+     *
      * @return true si el RFC es válido, false de lo contrario.
-     * @throws ValidacionDTOException Si el RFC no cumple con las reglas de validación.
+     * @throws ValidacionDTOException Si el RFC no cumple con las reglas de
+     * validación.
      */
-    @Override
-    public boolean validarRfc() throws ValidacionDTOException {
+    private boolean validarRfc() throws ValidacionDTOException {
         String regex = "^[a-zA-Z0-9]{13}$";
         if (rfc.length() != 13) {
             throw new ValidacionDTOException("El RFC debe contener 13 caracteres");
@@ -70,4 +72,3 @@ public class BuscarPorRfcBO implements IBuscarPorRfcBO {
         return true;
     }
 }
-

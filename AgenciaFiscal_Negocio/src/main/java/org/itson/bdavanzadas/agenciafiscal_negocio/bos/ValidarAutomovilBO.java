@@ -5,6 +5,8 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.AutomovilNuevoDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 
 /**
+ * Clase que proporciona métodos para validar los datos de un automóvil nuevo.
+ * Esta clase implementa la interfaz IValidarAutomovilBO.
  *
  * @author Roberto García
  */
@@ -12,10 +14,24 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
 
     private final AutomovilNuevoDTO automovilNuevoDTO;
 
+    /**
+     * Constructor de la clase ValidarAutomovilBO.
+     *
+     * @param automovilNuevoDTO Objeto AutomovilNuevoDTO que contiene los datos
+     * del automóvil a validar.
+     */
     public ValidarAutomovilBO(AutomovilNuevoDTO automovilNuevoDTO) {
         this.automovilNuevoDTO = automovilNuevoDTO;
     }
 
+    /**
+     * Método que realiza todas las validaciones necesarias sobre los datos del
+     * automóvil.
+     *
+     * @return true si todas las validaciones son exitosas.
+     * @throws ValidacionDTOException si alguna validación falla.
+     */
+    @Override
     public boolean validarAutomovil() throws ValidacionDTOException {
         validarNumeroSerie();
         validarMarca();
@@ -26,6 +42,13 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
         return true;
     }
 
+    /**
+     * Método para validar el número de serie del automóvil.
+     *
+     * @return true si el número de serie es válido.
+     * @throws ValidacionDTOException si el número de serie no cumple con los
+     * requisitos de validación.
+     */
     private boolean validarNumeroSerie() throws ValidacionDTOException {
         String regex = "^[A-Z0-9]{17}$";
         String numeroSerie = automovilNuevoDTO.getNumeroSerie();
@@ -37,6 +60,13 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
         return true;
     }
 
+    /**
+     * Método para validar la marca del automóvil.
+     *
+     * @return true si la marca es válida.
+     * @throws ValidacionDTOException si la marca no cumple con los requisitos
+     * de validación.
+     */
     private boolean validarMarca() throws ValidacionDTOException {
         String regex = "^[a-zA-Z\\sáéíóúÁÉÍÓÚüÜñÑ]{1,30}$";
         String marca = automovilNuevoDTO.getMarca();
@@ -48,6 +78,13 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
         return true;
     }
 
+    /**
+     * Método para validar la línea del automóvil.
+     *
+     * @return true si la línea es válida.
+     * @throws ValidacionDTOException si la línea no cumple con los requisitos
+     * de validación.
+     */
     private boolean validarLinea() throws ValidacionDTOException {
         String regex = "^[a-zA-Z\\sáéíóúÁÉÍÓÚüÜñÑ]{1,30}$";
         String linea = automovilNuevoDTO.getLinea();
@@ -59,6 +96,13 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
         return true;
     }
 
+    /**
+     * Método para validar el color del automóvil.
+     *
+     * @return true si el color es válido.
+     * @throws ValidacionDTOException si el color no cumple con los requisitos
+     * de validación.
+     */
     private boolean validarColor() throws ValidacionDTOException {
         String regex = "^[a-zA-Z\\sáéíóúÁÉÍÓÚüÜñÑ]{1,30}$";
         String color = automovilNuevoDTO.getColor();
@@ -70,6 +114,13 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
         return true;
     }
 
+    /**
+     * Método para validar el modelo del automóvil.
+     *
+     * @return true si el modelo es válido.
+     * @throws ValidacionDTOException si el modelo no cumple con los requisitos
+     * de validación.
+     */
     private boolean validarModelo() throws ValidacionDTOException {
         String regex = "^\\d{4}$";
         String modelo = automovilNuevoDTO.getModelo();
@@ -81,6 +132,13 @@ public class ValidarAutomovilBO implements IValidarAutomovilBO {
         return true;
     }
 
+    /**
+     * Método para validar la fecha del modelo del automóvil.
+     *
+     * @return true si la fecha del modelo es válida.
+     * @throws ValidacionDTOException si la fecha del modelo no cumple con los
+     * requisitos de validación.
+     */
     private boolean validarFechaModelo() throws ValidacionDTOException {
         int añoLimite = LocalDate.now().getYear() + 1;
         int añoModelo = Integer.parseInt(automovilNuevoDTO.getModelo());

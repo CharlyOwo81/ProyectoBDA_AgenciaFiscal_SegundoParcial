@@ -9,19 +9,14 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOExce
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ITramiteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.TramiteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  * Esta clase se encarga de validar la vigencia de la licencia de un
  * contribuyente. Recibe un objeto de tipo ContribuyenteDTO que contiene la
- * información de la licencia del contribuyente. Al buscar la licencia, verifica
- * si la fecha de vencimiento es posterior a la fecha actual. Si la fecha de
- * vencimiento es posterior a la fecha actual, devuelve true; de lo contrario,
- * devuelve false. La clase implementa la interfaz IValidarLicenciaBO.
+ * información de la licencia del contribuyente.
  *
  * @author Gamaliel Armenta
  * @author Roberto García
@@ -44,10 +39,13 @@ public class ValidarLicenciaBO implements IValidarLicenciaBO {
     /**
      * Busca la licencia del contribuyente y valida su vigencia.
      *
-     * @return true si la licencia está vigente (la fecha de vencimiento es
-     * posterior a la fecha actual), false en caso contrario.
-     * @throws
-     * org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException
+     * @return Un objeto LicenciaNuevaDTO si la licencia está vigente, lanzará
+     * una excepción ValidacionDTOException si la licencia está vencida o no se
+     * encontraron licencias asociadas.
+     * @throws PersistenciaException si hay un error de persistencia al buscar
+     * la licencia.
+     * @throws ValidacionDTOException si la licencia está vencida o no se
+     * encontraron licencias asociadas.
      */
     @Override
     public LicenciaNuevaDTO validarLicencia() throws PersistenciaException, ValidacionDTOException {
@@ -81,12 +79,19 @@ public class ValidarLicenciaBO implements IValidarLicenciaBO {
         return licenciaNuevaDTO;
     }
 
+    /**
+     * Método para obtener las licencias desde los trámites.
+     * 
+     * @param tramites Lista de trámites del contribuyente.
+     * @return Lista de licencias asociadas al contribuyente.
+     */
+    @Override
     public List<Licencia> obtenerLicenciasDesdeTramites(List<Tramite> tramites) {
         List<Licencia> licencias = new ArrayList<>();
 
         for (Tramite tramite : tramites) {
-            if (tramite instanceof Licencia) {
-                licencias.add((Licencia) tramite);
+            if (tramite instanceof Licencia licencia1) {
+                licencias.add(licencia1);
             }
         }
 

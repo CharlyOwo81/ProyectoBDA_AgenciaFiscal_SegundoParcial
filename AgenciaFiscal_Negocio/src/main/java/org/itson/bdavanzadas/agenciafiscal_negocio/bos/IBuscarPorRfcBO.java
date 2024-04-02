@@ -7,9 +7,9 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
 /**
  * Esta interfaz define los métodos para buscar un contribuyente por RFC y
  * validar el RFC. Los implementadores de esta interfaz deben proporcionar
- * lógica para buscar un contribuyente por su RFC y validar la estructura del
- * RFC.
+ * lógica para buscar un contribuyente por su RFC.
  *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public interface IBuscarPorRfcBO {
@@ -26,13 +26,4 @@ public interface IBuscarPorRfcBO {
      * búsqueda en la capa de persistencia.
      */
     public ContribuyenteDTO buscarContribuyente() throws ValidacionDTOException, PersistenciaException;
-
-    /**
-     * Valida la estructura del RFC.
-     *
-     * @return true si el RFC es válido, false en caso contrario.
-     * @throws ValidacionDTOException si el RFC no cumple con la estructura
-     * requerida.
-     */
-    public boolean validarRfc() throws ValidacionDTOException;
 }

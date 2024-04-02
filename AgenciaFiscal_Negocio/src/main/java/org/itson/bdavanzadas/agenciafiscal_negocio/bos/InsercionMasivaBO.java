@@ -2,16 +2,16 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.eclipse.persistence.exceptions.DatabaseException;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
- * Esta clase implementa la interfaz IInsercionMasivaBO y proporciona funcionalidad para insertar una lista masiva de contribuyentes en el sistema.
- * Convierte los objetos DTO de contribuyentes en entidades Contribuyente y los inserta en la base de datos utilizando el DAO correspondiente.
- * 
+ * Esta clase implementa la interfaz IInsercionMasivaBO y proporciona
+ * funcionalidad para insertar una lista masiva de contribuyentes en el sistema.
+ * Convierte los objetos DTO de contribuyentes en entidades Contribuyente y los
+ * inserta en la base de datos utilizando el DAO correspondiente.
+ *
  * @author Gamaliel Armenta
  * @author Roberto García
  */
@@ -19,11 +19,15 @@ public class InsercionMasivaBO implements IInsercionMasivaBO {
 
     /**
      * Inserta una lista masiva de contribuyentes en el sistema.
-     * 
-     * @param contribuyentesDTO La lista de contribuyentes en forma de objetos DTO que se insertarán.
+     *
+     * @param contribuyentesDTO La lista de contribuyentes en forma de objetos
+     * DTO que se insertarán.
+     * @throws Exception Si los contribuyentes ya han sido ingresados a la base
+     * de datos, se usa Exception general ya que es la única que nos permite
+     * manejar la excepcion de DatabaseException de eclipse.
      */
     @Override
-    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) throws Exception{
+    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) throws Exception {
         // Convertir DTO a entidades Contribuyente
         List<Contribuyente> contribuyentes = new ArrayList<>();
         for (ContribuyenteDTO dto : contribuyentesDTO) {
@@ -48,4 +52,3 @@ public class InsercionMasivaBO implements IInsercionMasivaBO {
     }
 
 }
-

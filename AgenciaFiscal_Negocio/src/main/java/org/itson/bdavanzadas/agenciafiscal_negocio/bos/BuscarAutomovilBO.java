@@ -16,17 +16,49 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Clase que implementa la interfaz IBuscarAutomovilBO para buscar un automóvil
+ * asociado a un contribuyente a partir de un número de placas.
  *
+ * La búsqueda se realiza consultando los trámites asociados al contribuyente
+ * para obtener las placas registradas. Luego se busca la placa proporcionada en
+ * la lista de placas obtenida y se recupera el vehículo asociado a esa placa.
+ * Si se encuentra un vehículo asociado a la placa proporcionada, se crea un DTO
+ * con los datos del vehículo y se retorna.
+ *
+ * Si no se encuentra la placa o no se encuentra un vehículo asociado a la
+ * placa, se lanzan excepciones correspondientes.
+ *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class BuscarAutomovilBO implements IBuscarAutomovilBO {
 
     private AutomovilNuevoDTO automovilNuevoDTO;
 
+    /**
+     * Constructor de la clase BuscarAutomovilBO.
+     *
+     * @param automovilNuevoDTO El DTO que representa al automóvil buscado.
+     */
     public BuscarAutomovilBO(AutomovilNuevoDTO automovilNuevoDTO) {
         this.automovilNuevoDTO = automovilNuevoDTO;
     }
 
+    /**
+     * Método que busca un automóvil asociado a un contribuyente a partir de un
+     * número de placas.
+     *
+     * @param contribuyenteDTO El DTO que representa al contribuyente asociado
+     * al automóvil.
+     * @param placasViejasDTO El DTO que representa las placas del automóvil a
+     * buscar.
+     * @return El DTO que representa al automóvil encontrado.
+     * @throws ValidacionDTOException Si no se encuentra el número de placas
+     * proporcionado o si no se encuentra un automóvil asociado a ese número de
+     * placas.
+     * @throws PersistenciaException Si ocurre un error al realizar la búsqueda
+     * en la base de datos.
+     */
     @Override
     public AutomovilNuevoDTO buscarAutomovil(ContribuyenteDTO contribuyenteDTO, PlacasViejasDTO placasViejasDTO) throws ValidacionDTOException, PersistenciaException {
         ITramiteDAO tramiteDAO = new TramiteDAO();
@@ -37,39 +69,39 @@ public class BuscarAutomovilBO implements IBuscarAutomovilBO {
             throw new ValidacionDTOException("El contribuyente no tiene placas asociadas");
         }
         Placa placa = null;
-        
-        //busca si en la lista de placas del contribuyente, una de ellas coincide con la proprocionada
+
+        // Busca si en la lista de placas del contribuyente, una de ellas coincide con la proporcionada
         for (Placa placa1 : placas) {
             if (placa1.getNumeroPlacas().equalsIgnoreCase(placasViejasDTO.getNumeroPlacas())) {
                 placa = new Placa(
                         placa1.getNumeroPlacas(),
                         placa1.getVehiculo(),
-                        placa1.getCosto(), 
+                        placa1.getCosto(),
                         placa1.getFechaEmision(),
                         placa1.getContribuyente()
                 );
                 break;
             }
         }
-        //si no es el caso, lanza excepcion y se termina el método
+        // Si no se encuentra la placa, se lanza una excepción
         if (placa == null) {
             throw new ValidacionDTOException("El contribuyente no cuenta con ese número de placas");
         }
         VehiculoDAO vehiculoDAO = new VehiculoDAO();
         Vehiculo vehiculo = new Vehiculo(automovilNuevoDTO.getId());
         List<Vehiculo> vehiculos = vehiculoDAO.buscarVehiculo(vehiculo, contribuyente);
-        
-        //compara si un vehiculo de la lista del contribuyente es igual a uno con el número de placas
+
+        // Compara si un vehículo de la lista del contribuyente es igual a uno con el número de placas
         for (Vehiculo vehiculo1 : vehiculos) {
             if (vehiculo1.equals(placa.getVehiculo())) {
                 vehiculo = vehiculo1;
             }
         }
-        //si no existe igual se acaba el método
+        // Si el vehículo asociado a la placa proporcionada no le corresponde al contribuyente, se lanza una excepción
         if (vehiculo.getMarca() == null) {
             throw new ValidacionDTOException("El contribuyente no tiene un\nautomóvil con ese número de placas");
         }
-        //si todo sale bien, regresa un DTO con los datos del vehículo encontrado
+        // Si todo sale bien, se crea un DTO con los datos del vehículo encontrado y se retorna
         automovilNuevoDTO = new AutomovilNuevoDTO(
                 vehiculo.getId(),
                 vehiculo.getNumeroSerie(),
@@ -81,11 +113,19 @@ public class BuscarAutomovilBO implements IBuscarAutomovilBO {
         return automovilNuevoDTO;
     }
 
+    /**
+     * Método que obtiene las placas asociadas a los trámites de un
+     * contribuyente.
+     *
+     * @param tramites La lista de trámites asociados al contribuyente.
+     * @return Una lista de objetos Placa que representan las placas asociadas a
+     * los trámites del contribuyente.
+     */
     private List<Placa> obtenerPlacasDesdeTramites(List<Tramite> tramites) {
         List<Placa> placas = new ArrayList<>();
         for (Tramite tramite : tramites) {
-            if (tramite instanceof Placa) {
-                placas.add((Placa) tramite);
+            if (tramite instanceof Placa placa) {
+                placas.add(placa);
             }
         }
         return placas;

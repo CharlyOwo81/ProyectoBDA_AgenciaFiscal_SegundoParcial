@@ -11,17 +11,34 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Vehiculo;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Esta clase se encarga de vencer las placas viejas de un vehículo. Recibe un
+ * objeto de tipo PlacasViejasDTO que contiene la información de las placas
+ * viejas y del vehículo asociado.
  *
  * @author Roberto García
  */
 public class VencerPlacasBO implements IVencerPlacasBO {
 
-    private PlacasViejasDTO placasViejasDTO;
+    private final PlacasViejasDTO placasViejasDTO;
 
+    /**
+     * Constructor de la clase VencerPlacasBO.
+     *
+     * @param placasViejasDTO El objeto PlacasViejasDTO que contiene la
+     * información de las placas viejas y del vehículo asociado.
+     */
     public VencerPlacasBO(PlacasViejasDTO placasViejasDTO) {
         this.placasViejasDTO = placasViejasDTO;
     }
 
+    /**
+     * Vence las placas viejas del vehículo asociado.
+     *
+     * @return El objeto PlacasViejasDTO actualizado después de vencer las
+     * placas.
+     * @throws PersistenciaException Si hay un error al interactuar con la capa
+     * de persistencia.
+     */
     @Override
     public PlacasViejasDTO vencerPlacas() throws PersistenciaException {
         ContribuyenteDTO contribuyenteDTO = placasViejasDTO.getContribuyenteDTO();

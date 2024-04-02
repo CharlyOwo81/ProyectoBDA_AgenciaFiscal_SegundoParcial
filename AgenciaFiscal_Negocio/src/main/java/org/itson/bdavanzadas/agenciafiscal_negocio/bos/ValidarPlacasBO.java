@@ -8,19 +8,38 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Placa;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Esta clase se encarga de validar el formato y la existencia de placas nuevas.
+ * Recibe un objeto de tipo PlacasNuevasDTO que contiene la información de las
+ * placas a validar. Lanza una excepción ValidacionDTOException si el formato de
+ * las placas es inválido o si no se encuentran en la base de datos.
  *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class ValidarPlacasBO implements IValidarPlacasBO {
 
     private PlacasNuevasDTO placasNuevasDTO;
 
+    /**
+     * Constructor de la clase ValidarPlacasBO.
+     *
+     * @param placasNuevasDTO El objeto PlacasNuevasDTO que contiene la
+     * información de las placas a validar.
+     */
     public ValidarPlacasBO(PlacasNuevasDTO placasNuevasDTO) {
         this.placasNuevasDTO = placasNuevasDTO;
     }
 
-    
-    
+    /**
+     * Valida el formato y la existencia de las placas.
+     *
+     * @return El objeto PlacasNuevasDTO si las placas son válidas y existen en
+     * la base de datos.
+     * @throws ValidacionDTOException si el formato de las placas es inválido o
+     * si no se encuentran en la base de datos.
+     * @throws PersistenciaException si hay un error al buscar las placas en la
+     * base de datos.
+     */
     @Override
     public PlacasNuevasDTO validarPlacas() throws ValidacionDTOException, PersistenciaException {
         String regex = "^[A-Z]{3}-\\d{3}$";

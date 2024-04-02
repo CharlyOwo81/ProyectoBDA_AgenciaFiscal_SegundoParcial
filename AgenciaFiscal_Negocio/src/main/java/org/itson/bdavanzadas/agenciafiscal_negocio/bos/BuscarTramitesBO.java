@@ -17,22 +17,32 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.TramiteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Licencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Placa;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Clase que implementa la interfaz IBuscarTramitesBO y proporciona la
+ * funcionalidad para buscar trámites en la base de datos.
  *
+ * Si no se encuentran trámites que coincidan con los criterios de búsqueda, se
+ * lanzan excepciones PersistenciaException con un mensaje descriptivo.
+ *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class BuscarTramitesBO implements IBuscarTramitesBO {
-//
-//    private ReporteDTO reporteDTO;
 
-    public BuscarTramitesBO() {
-//        this.reporteDTO = reporteDTO;
-    }
-
+    /**
+     * Método para buscar trámites en la base de datos según los criterios
+     * especificados en el objeto ReporteDTO.
+     *
+     * @param reporteDTO Objeto ReporteDTO que contiene los criterios de
+     * búsqueda de trámites.
+     * @return Una lista de objetos TramiteNuevoDTO que representan los trámites
+     * encontrados.
+     * @throws PersistenciaException Si no se encuentran trámites que coincidan
+     * con los criterios de búsqueda.
+     */
     @Override
     public List<TramiteNuevoDTO> buscarTramites(ReporteDTO reporteDTO) throws PersistenciaException {
         Contribuyente contribuyente = new Contribuyente(
@@ -82,6 +92,16 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
         return listaTramitesDTO;
     }
 
+    /**
+     * Método para buscar licencias de un contribuyente en la base de datos.
+     *
+     * @param contribuyenteDTO Objeto ContribuyenteDTO que contiene los datos
+     * del contribuyente.
+     * @return Una lista de objetos LicenciaNuevaDTO que representan las
+     * licencias encontradas para el contribuyente.
+     * @throws PersistenciaException Si no se encuentran licencias para el
+     * contribuyente especificado.
+     */
     @Override
     public List<LicenciaNuevaDTO> buscarLicencias(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         List<Tramite> tramites = buscarTramitesRfc(contribuyenteDTO);
@@ -89,18 +109,28 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
         List<LicenciaNuevaDTO> licenciasDTO = new ArrayList<>();
         for (Licencia licencia : licencias) {
             LicenciaNuevaDTO licenciaNuevaDTO = new LicenciaNuevaDTO(
-                    licencia.getVigencia(), 
+                    licencia.getVigencia(),
                     licencia.getTipoLicencia(),
-                    licencia.getFechaVencimiento(), 
-                    licencia.getCosto(), 
-                    licencia.getFechaEmision(), 
+                    licencia.getFechaVencimiento(),
+                    licencia.getCosto(),
+                    licencia.getFechaEmision(),
                     contribuyenteDTO);
             licenciasDTO.add(licenciaNuevaDTO);
         }
         return licenciasDTO;
 
     }
-    
+
+    /**
+     * Método para buscar placas de un contribuyente en la base de datos.
+     *
+     * @param contribuyenteDTO Objeto ContribuyenteDTO que contiene los datos
+     * del contribuyente.
+     * @return Una lista de objetos PlacasNuevasDTO que representan las placas
+     * encontradas para el contribuyente.
+     * @throws PersistenciaException Si no se encuentran placas para el
+     * contribuyente especificado.
+     */
     @Override
     public List<PlacasNuevasDTO> buscarPlacas(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         List<Tramite> tramites = buscarTramitesRfc(contribuyenteDTO);
@@ -108,11 +138,11 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
         List<PlacasNuevasDTO> placasDTO = new ArrayList<>();
         for (Placa placa : placas) {
             AutomovilNuevoDTO automovilNuevoDTO = new AutomovilNuevoDTO(
-                    placa.getVehiculo().getId(), 
-                    placa.getVehiculo().getNumeroSerie(), 
-                    placa.getVehiculo().getMarca(), 
-                    placa.getVehiculo().getLinea(), 
-                    placa.getVehiculo().getColor(), 
+                    placa.getVehiculo().getId(),
+                    placa.getVehiculo().getNumeroSerie(),
+                    placa.getVehiculo().getMarca(),
+                    placa.getVehiculo().getLinea(),
+                    placa.getVehiculo().getColor(),
                     placa.getVehiculo().getModelo());
             PlacasNuevasDTO placasNuevasDTO = new PlacasNuevasDTO(
                     placa.getNumeroPlacas(),
@@ -127,13 +157,13 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
 
     }
 
-    private List<Tramite> buscarTramitesRfc(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException{
+    private List<Tramite> buscarTramitesRfc(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
         Contribuyente contribuyente = new Contribuyente(contribuyenteDTO.getId());
         ITramiteDAO tramiteDAO = new TramiteDAO();
         List<Tramite> tramites = tramiteDAO.buscarTramitesPorContribuyente(contribuyente);
         return tramites;
     }
-    
+
     private List<Licencia> obtenerLicenciasDesdeTramites(List<Tramite> tramites) {
         List<Licencia> licencias = new ArrayList<>();
         for (Tramite tramite : tramites) {
@@ -143,7 +173,7 @@ public class BuscarTramitesBO implements IBuscarTramitesBO {
         }
         return licencias;
     }
-    
+
     private List<Placa> obtenerPlacasDesdeTramites(List<Tramite> tramites) {
         List<Placa> placas = new ArrayList<>();
         for (Tramite tramite : tramites) {
