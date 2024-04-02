@@ -46,26 +46,26 @@ public class Placa extends Tramite implements Serializable {
     }
 
     /**
-     * Constructor de la clase Placas que inicializa todos los campos.
+     * Constructor de la clase Placas que inicializa el número de placas, el
+     * costo, la fecha de emisión y el contribuyente asociado.
      *
      * @param numeroPlacas El número de placas.
-     * @param fechaRecepcion La fecha de recepción de las placas.
-     * @param vehiculo
      * @param costo El costo del trámite de las placas.
      * @param fechaEmision La fecha de emisión del trámite de las placas.
      * @param contribuyente El contribuyente asociado al trámite de las placas.
      */
-    public Placa(String numeroPlacas, Date fechaRecepcion, Vehiculo vehiculo, Float costo, Date fechaEmision, Contribuyente contribuyente) {
+    public Placa(String numeroPlacas, Float costo, Date fechaEmision, Contribuyente contribuyente) {
         super(costo, fechaEmision, contribuyente);
         this.numeroPlacas = numeroPlacas;
-        this.fechaRecepcion = fechaRecepcion;
-        this.vehiculo = vehiculo;
     }
+
     /**
-     * Constructor de la clase Placas que inicializa todos los campos.
+     * Constructor de la clase Placas que inicializa el número de placas, el
+     * vehículo asociado, el costo, la fecha de emisión y el contribuyente
+     * asociado.
      *
      * @param numeroPlacas El número de placas.
-     * @param vehiculo
+     * @param vehiculo El vehículo asociado al trámite de las placas.
      * @param costo El costo del trámite de las placas.
      * @param fechaEmision La fecha de emisión del trámite de las placas.
      * @param contribuyente El contribuyente asociado al trámite de las placas.
@@ -75,18 +75,24 @@ public class Placa extends Tramite implements Serializable {
         this.numeroPlacas = numeroPlacas;
         this.vehiculo = vehiculo;
     }
+
     /**
-     * Constructor de la clase Placas que inicializa todos los campos.
+     * Constructor de la clase Placas que inicializa el número de placas, la
+     * fecha de recepción, el vehículo asociado, el costo, la fecha de emisión y
+     * el contribuyente asociado.
      *
      * @param numeroPlacas El número de placas.
-     * @param vehiculo
+     * @param fechaRecepcion La fecha de recepción de las placas.
+     * @param vehiculo El vehículo asociado al trámite de las placas.
      * @param costo El costo del trámite de las placas.
      * @param fechaEmision La fecha de emisión del trámite de las placas.
      * @param contribuyente El contribuyente asociado al trámite de las placas.
      */
-    public Placa(String numeroPlacas, Float costo, Date fechaEmision, Contribuyente contribuyente) {
+    public Placa(String numeroPlacas, Date fechaRecepcion, Vehiculo vehiculo, Float costo, Date fechaEmision, Contribuyente contribuyente) {
         super(costo, fechaEmision, contribuyente);
         this.numeroPlacas = numeroPlacas;
+        this.fechaRecepcion = fechaRecepcion;
+        this.vehiculo = vehiculo;
     }
 
     /**
@@ -156,8 +162,7 @@ public class Placa extends Tramite implements Serializable {
     }
 
     /**
-     * Compara este objeto Placa con otro objeto para determinar si son
- iguales.
+     * Compara este objeto Placa con otro objeto para determinar si son iguales.
      *
      * @param obj El objeto a comparar con este Placa.
      * @return true si los objetos son iguales, false en caso contrario.
@@ -179,7 +184,7 @@ public class Placa extends Tramite implements Serializable {
 
     /**
      * Devuelve una representación en forma de cadena de este objeto Placa,
- incluyendo los datos del trámite.
+     * incluyendo los datos del trámite.
      *
      * @return Una cadena que representa el objeto Placa.
      */

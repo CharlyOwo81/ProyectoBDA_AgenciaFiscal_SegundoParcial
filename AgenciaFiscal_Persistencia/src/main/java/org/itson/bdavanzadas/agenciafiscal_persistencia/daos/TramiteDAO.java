@@ -13,17 +13,35 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Tramite;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Clase que implementa la interfaz ITramiteDAO y proporciona funcionalidades
+ * para buscar trámites en la base de datos. Esta clase se encarga de realizar
+ * consultas de trámites relacionados con los contribuyentes y entre fechas
+ * específicas.
  *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class TramiteDAO implements ITramiteDAO {
 
     private final IConexion conexion;
 
+    /**
+     * Constructor de la clase TramiteDAO. Crea una nueva instancia de
+     * TramiteDAO y establece la conexión a la base de datos.
+     */
     public TramiteDAO() {
         this.conexion = new Conexion();
     }
 
+    /**
+     * Busca los trámites de un contribuyente en la base de datos.
+     *
+     * @param contribuyente El contribuyente del cual se desean buscar los
+     * trámites.
+     * @return Una lista de trámites asociados al contribuyente.
+     * @throws PersistenciaException Si no se encuentran trámites asociados al
+     * contribuyente.
+     */
     @Override
     public List<Tramite> buscarTramitesPorContribuyente(Contribuyente contribuyente) throws PersistenciaException {
         EntityManager entityManager = conexion.crearConexion();
@@ -38,15 +56,6 @@ public class TramiteDAO implements ITramiteDAO {
         TypedQuery<Tramite> query = entityManager.createQuery(criteriaQuery);
         List<Tramite> tramites = query.getResultList();
 
-//
-//        String jpql = "SELECT t FROM Tramite t WHERE t.id_contribuyente = :id_contribuyente";
-//
-//        // Crear la consulta TypedQuery
-//        TypedQuery<Tramite> query = entityManager.createQuery(jpql, Tramite.class);
-//
-//        query.setParameter("id_contribuyente", contribuyente.getId());
-//
-//        List<Tramite> tramites = query.getResultList();
         entityManager.close();
 
         if (tramites.isEmpty()) {
@@ -56,6 +65,14 @@ public class TramiteDAO implements ITramiteDAO {
         }
     }
 
+    /**
+     * Busca los trámites en la base de datos que fueron emitidos entre las
+     * fechas especificadas.
+     *
+     * @param desde La fecha desde la cual se desea buscar los trámites.
+     * @param hasta La fecha hasta la cual se desea buscar los trámites.
+     * @return Una lista de trámites emitidos entre las fechas especificadas.
+     */
     @Override
     public List<Tramite> buscarTramitesFecha(Date desde, Date hasta) {
         EntityManager entityManager = this.conexion.crearConexion();

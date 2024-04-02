@@ -31,10 +31,10 @@ public class ContribuyenteDAO implements IContribuyenteDAO {
      *
      * @param contribuyente El contribuyente a agregar.
      * @return El contribuyente agregado.
-     * @throws java.lang.Exception
+     * @throws Exception Si el contribuyente ya está registrado.
      */
     @Override
-    public Contribuyente agregarContribuyente(Contribuyente contribuyente) throws Exception{
+    public Contribuyente agregarContribuyente(Contribuyente contribuyente) throws Exception {
         // Obtener una conexión a la base de datos
         EntityManager eManager = conexion.crearConexion();
 

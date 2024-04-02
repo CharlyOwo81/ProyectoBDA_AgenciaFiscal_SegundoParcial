@@ -11,8 +11,12 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
- * Clase DAO para buscar contribuyentes en la base de datos. Permite realizar
- * búsquedas de contribuyentes por su RFC o por su ID.
+ *
+ * Clase que implementa la interfaz IBuscarContribuyenteDAO para buscar
+ * contribuyentes en la base de datos. Proporciona métodos para buscar
+ * contribuyentes por su RFC, ID, nombre, apellido y año de nacimiento. Utiliza
+ * una implementación de IConexion para establecer la conexión con la base de
+ * datos.
  *
  * @author Gamaliel Armenta
  * @author Roberto García
@@ -63,11 +67,10 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
         if (contribuyentes.isEmpty()) {
             throw new PersistenciaException("No se encontró ningún contribuyente con el RFC proporcionado");
         } else {
-            return contribuyentes.get(0); // Devolver el primer contribuyente encontrado
+            return contribuyentes.get(0); // Devolver el primer contribuyente encontrado aprovechando que RFC es UK
         }
     }
 
-    //TODO, este método aún no funciona
     /**
      * Busca un contribuyente en la base de datos por su ID.
      *
@@ -105,7 +108,18 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
         }
     }
 
-    public List<Contribuyente> buscarContribuyentes(Contribuyente contribuyente) {
+    /**
+     * Busca contribuyentes en la base de datos por su nombre, apellido paterno
+     * y apellido materno.
+     *
+     * @param contribuyente El contribuyente con los datos de nombre y apellidos
+     * a buscar.
+     * @return Una lista de contribuyentes que coinciden con los criterios de
+     * búsqueda.
+     * @throws PersistenciaException Si no se encuentra ningún contribuyente con
+     * los nombres específicados.
+     */
+    public List<Contribuyente> buscarContribuyentes(Contribuyente contribuyente) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Contribuyente> criteria = cb.createQuery(Contribuyente.class);
@@ -125,9 +139,23 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
 
         entityManager.close();
 
-        return contribuyentes;
+        if (contribuyentes.isEmpty()) {
+            throw new PersistenciaException("No se encontró ningún contribuyente con los nombres específicados");
+        } else {
+            return contribuyentes;
+        }
     }
 
+    /**
+     * Busca contribuyentes en la base de datos por su nombre.
+     *
+     * @param nombre El nombre del contribuyente a buscar.
+     * @return Una lista de contribuyentes que coinciden con el nombre
+     * proporcionado.
+     * @throws PersistenciaException Si no se encuentra ningún contribuyente con
+     * el nombre proporcionado.
+     */
+    @Override
     public List<Contribuyente> buscarContribuyenteNombre(String nombre) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         // Objeto constructor de consultas
@@ -137,7 +165,7 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
 
         Root<Contribuyente> root = criteria.from(Contribuyente.class);
 
-        // Filtrar por ID igual al parámetro proporcionado
+        // Filtrar por nombre igual al parámetro proporcionado
         criteria.select(root).where(cb.equal(root.get("nombre"), nombre));
 
         // Consulta construida
@@ -147,28 +175,35 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
         List<Contribuyente> contribuyentes = query.getResultList();
 
         entityManager.close();
-
-        // Verificar si se encontró algún contribuyente con el ID dado
+        
         if (contribuyentes.isEmpty()) {
-            throw new PersistenciaException("No se encontró ningún contribuyente con el nombre proporcionado");
+            throw new PersistenciaException("No se encontró ningún contribuyente\ncon el nombre proporcionado");
         } else {
-            return contribuyentes; // Devolver el primer contribuyente encontrado
+            return contribuyentes;
         }
     }
 
+    /**
+     * Busca contribuyentes en la base de datos por su año de nacimiento.
+     *
+     * @param anio El año de nacimiento de los contribuyentes a buscar.
+     * @return Una lista de contribuyentes que nacieron en el año especificado.
+     * @throws PersistenciaException Si no se encuentra ningún contribuyente con
+     * el año de nacimiento proporcionado.
+     */
     @Override
     public List<Contribuyente> buscarContribuyente(Integer anio) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
+        //Consulta JPQL
         String jpqlQuery = "SELECT c FROM Contribuyente c WHERE FUNCTION('YEAR', c.fechaNacimiento) = :anioBuscado";
 
         TypedQuery<Contribuyente> query = entityManager.createQuery(jpqlQuery, Contribuyente.class);
         query.setParameter("anioBuscado", anio);
-        
+
         List<Contribuyente> contribuyentes = query.getResultList();
 
         entityManager.close();
 
-        // Verificar si se encontró algún contribuyente con el ID dado
         if (contribuyentes.isEmpty()) {
             throw new PersistenciaException("No se encontró ningún contribuyente\ncon el año de nacimiento proporcionado");
         } else {
@@ -176,14 +211,4 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
         }
     }
 
-//    public Integer calcularEdad(Contribuyente contribuyente) {
-//        LocalDate fechaNacimiento = contribuyente.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-//        LocalDate ahora = LocalDate.now();
-//
-//        Period periodo = Period.between(fechaNacimiento, ahora);
-//        long edadEnDias = ChronoUnit.DAYS.between(fechaNacimiento, ahora);
-//
-//        int anos = periodo.getYears();
-//        return anos;
-//    }    
 }

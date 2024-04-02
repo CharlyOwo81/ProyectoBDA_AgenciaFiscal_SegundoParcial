@@ -73,6 +73,28 @@ public class Contribuyente implements Serializable {
     }
 
     /**
+     * Constructor de la clase Contribuyente que acepta el ID del contribuyente.
+     *
+     * @param id El ID del contribuyente.
+     */
+    public Contribuyente(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Constructor de la clase Contribuyente que acepta nombre y apellidos.
+     *
+     * @param nombre El nombre del contribuyente.
+     * @param apellidoPaterno El apellido paterno del contribuyente.
+     * @param apellidoMaterno El apellido materno del contribuyente.
+     */
+    public Contribuyente(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    /**
      * Constructor de la clase Contribuyente que permite inicializar todos los
      * campos.
      *
@@ -94,11 +116,12 @@ public class Contribuyente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.discapacidad = discapacidad;
     }
-    
+
     /**
      * Constructor de la clase Contribuyente que permite inicializar todos los
      * campos.
      *
+     * @param id El ID del contribuyente.
      * @param rfc El RFC del contribuyente.
      * @param nombre El nombre del contribuyente.
      * @param apellidoPaterno El apellido paterno del contribuyente.
@@ -118,18 +141,6 @@ public class Contribuyente implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.discapacidad = discapacidad;
     }
-
-    public Contribuyente(Long id) {
-        this.id = id;
-    }
-
-    public Contribuyente(String nombre, String apellidoPaterno, String apellidoMaterno) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-    }
-    
-    
 
     /**
      * Método para obtener el ID del contribuyente.

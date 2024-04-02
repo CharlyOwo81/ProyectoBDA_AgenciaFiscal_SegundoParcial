@@ -63,6 +63,15 @@ public class Vehiculo implements Serializable {
     }
 
     /**
+     * Constructor de la clase Vehiculo que acepta el ID del vehículo.
+     *
+     * @param id El ID del vehículo.
+     */
+    public Vehiculo(Long id) {
+        this.id = id;
+    }
+
+    /**
      * Constructor de la clase Vehiculo.
      *
      * Crea un nuevo objeto Vehiculo con los atributos especificados.
@@ -82,12 +91,13 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
         this.contribuyente = contribuyente;
     }
+
     /**
      * Constructor de la clase Vehiculo.
      *
      * Crea un nuevo objeto Vehiculo con los atributos especificados.
      *
-     * @param id
+     * @param id El ID del vehículo.
      * @param numeroSerie El número de serie del vehículo.
      * @param marca La marca del vehículo.
      * @param linea La línea del vehículo.
@@ -104,12 +114,6 @@ public class Vehiculo implements Serializable {
         this.modelo = modelo;
         this.contribuyente = contribuyente;
     }
-
-    public Vehiculo(Long id) {
-        this.id = id;
-    }
-    
-    
 
     /**
      * Devuelve el ID del vehículo.

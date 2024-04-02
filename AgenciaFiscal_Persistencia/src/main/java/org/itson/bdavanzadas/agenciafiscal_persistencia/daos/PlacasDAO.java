@@ -11,7 +11,10 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Placa;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
+ * Clase que implementa la interfaz IPlacasDAO y proporciona funcionalidades
+ * para registrar, buscar y gestionar placas en la base de datos.
  *
+ * @author Gamaliel Armenta
  * @author Roberto García
  */
 public class PlacasDAO implements IPlacasDAO {
@@ -19,13 +22,19 @@ public class PlacasDAO implements IPlacasDAO {
     private final IConexion conexion;
 
     /**
-     * Constructor de la clase PlacasDAO.
-     *
+     * Constructor de la clase PlacasDAO. Crea una nueva instancia de PlacasDAO
+     * y establece la conexión a la base de datos.
      */
     public PlacasDAO() {
         this.conexion = new Conexion();
     }
 
+    /**
+     * Registra las placas en la base de datos.
+     *
+     * @param placa La placa a registrar.
+     * @throws Exception Si las placas ya están registradas
+     */
     @Override
     public void registrarPlacas(Placa placa) throws Exception {
         EntityManager eManager = conexion.crearConexion();
@@ -43,6 +52,14 @@ public class PlacasDAO implements IPlacasDAO {
         eManager.close();
     }
 
+    /**
+     * Busca las placas en la base de datos por su número de placas.
+     *
+     * @param placa La placa a buscar.
+     * @return La placa encontrada.
+     * @throws PersistenciaException Si no se encuentra ninguna placa con el
+     * número proporcionado.
+     */
     @Override
     public Placa buscarPlacas(Placa placa) throws PersistenciaException {
         EntityManager entityManager = conexion.crearConexion();
@@ -69,6 +86,14 @@ public class PlacasDAO implements IPlacasDAO {
         }
     }
 
+    /**
+     * Busca las placas vigentes en la base de datos por su número de placas.
+     *
+     * @param placa La placa a buscar.
+     * @return La placa vigente encontrada.
+     * @throws PersistenciaException Si no se encuentra ninguna placa vigente
+     * con el número proporcionado.
+     */
     @Override
     public Placa buscarPlacasVigentes(Placa placa) throws PersistenciaException {
         EntityManager entityManager = conexion.crearConexion();
@@ -101,6 +126,12 @@ public class PlacasDAO implements IPlacasDAO {
         }
     }
 
+    /**
+     * Busca placas duplicadas en la base de datos por su número de placas.
+     *
+     * @param placa La placa a buscar.
+     * @return La placa duplicada encontrada.
+     */
     @Override
     public Placa buscarPlacasDuplicadas(Placa placa) {
         EntityManager entityManager = conexion.crearConexion();
@@ -127,6 +158,13 @@ public class PlacasDAO implements IPlacasDAO {
 
     }
 
+    /**
+     * Vence las placas en la base de datos asignandole una fecha de recepción.
+     *
+     * @param placa La placa a vencer.
+     * @return La placa vencida.
+     * @throws PersistenciaException Si ocurre algún error inesperado.
+     */
     @Override
     public Placa vencerPlaca(Placa placa) throws PersistenciaException {
         EntityManager eManager = conexion.crearConexion();
@@ -139,8 +177,6 @@ public class PlacasDAO implements IPlacasDAO {
         placa = eManager.find(Placa.class, placa.getId());
 
         placa.setFechaRecepcion(new Date());
-        // Actualizar la licencia en la base de datos
-//        eManager.refresh(placa);
 
         // Confirmar la transacción
         eManager.getTransaction().commit();

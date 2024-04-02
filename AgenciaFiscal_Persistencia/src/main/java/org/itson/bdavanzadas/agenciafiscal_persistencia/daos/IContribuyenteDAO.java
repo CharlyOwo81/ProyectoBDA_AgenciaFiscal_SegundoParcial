@@ -1,7 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_persistencia.daos;
 
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
-import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
  * Interfaz que define el método para agregar un contribuyente a la base de datos.

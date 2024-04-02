@@ -56,8 +56,19 @@ public class Tramite implements Serializable {
     }
 
     /**
+     * Constructor de la clase Tramite que inicializa el costo y la fecha de
+     * emisión del trámite.
+     *
+     * @param costo El costo del trámite.
+     * @param fechaEmision La fecha de emisión del trámite.
+     */
+    public Tramite(Float costo, Date fechaEmision) {
+        this.costo = costo;
+        this.fechaEmision = fechaEmision;
+    }
+
+    /**
      * Constructor de la clase Tramite que inicializa todos los campos excepto
-     * fecha_recepcion.
      *
      * @param costo El costo del trámite.
      * @param fechaEmision La fecha de emisión del trámite.
@@ -67,18 +78,6 @@ public class Tramite implements Serializable {
         this.costo = costo;
         this.fechaEmision = fechaEmision;
         this.contribuyente = contribuyente;
-    }
-
-    /**
-     * Constructor de la clase Tramite que inicializa el costo y la fecha de
-     * emisión del trámite. El contribuyente asociado se inicializa como null.
-     *
-     * @param costo El costo del trámite.
-     * @param fechaEmision La fecha de emisión del trámite.
-     */
-    public Tramite(Float costo, Date fechaEmision) {
-        this.costo = costo;
-        this.fechaEmision = fechaEmision;
     }
 
     /**
