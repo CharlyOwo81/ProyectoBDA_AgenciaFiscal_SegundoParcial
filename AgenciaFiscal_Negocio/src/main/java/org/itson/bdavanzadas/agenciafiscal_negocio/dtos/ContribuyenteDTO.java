@@ -34,6 +34,29 @@ public class ContribuyenteDTO {
     private List<Vehiculo> vehiculos;
 
     /**
+     * Crea una nueva instancia de ContribuyenteDTO con el ID del contribuyente.
+     *
+     * @param id El ID del contribuyente.
+     */
+    public ContribuyenteDTO(Long id) {
+        this.id = id;
+    }
+
+    /**
+     * Crea una nueva instancia de ContribuyenteDTO con los nombres y apellidos
+     * de un contribuyente.
+     *
+     * @param nombre El nombre del contribuyente.
+     * @param apellidoPaterno El apellido paterno del contribuyente.
+     * @param apellidoMaterno El apellido materno del contribuyente.
+     */
+    public ContribuyenteDTO(String nombre, String apellidoPaterno, String apellidoMaterno) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    /**
      * Crea una nueva instancia de ContribuyenteDTO con los datos básicos de un
      * contribuyente.
      *
@@ -55,11 +78,12 @@ public class ContribuyenteDTO {
         this.fechaNacimiento = fechaNacimiento;
         this.discapacidad = discapacidad;
     }
+
     /**
      * Crea una nueva instancia de ContribuyenteDTO con los datos básicos de un
-     * contribuyente.
+     * contribuyente incluyendo su ID.
      *
-     * @param id
+     * @param id El ID del contribuyente.
      * @param rfc El RFC del contribuyente.
      * @param nombre El nombre del contribuyente.
      * @param apellidoPaterno El apellido paterno del contribuyente.
@@ -80,16 +104,13 @@ public class ContribuyenteDTO {
         this.discapacidad = discapacidad;
     }
 
-    public ContribuyenteDTO(Long id) {
-        this.id = id;
-    }
-
-    public ContribuyenteDTO(String nombre, String apellidoPaterno, String apellidoMaterno) {
-        this.nombre = nombre;
-        this.apellidoPaterno = apellidoPaterno;
-        this.apellidoMaterno = apellidoMaterno;
-    }
-
+    /**
+     * Crea una nueva instancia de ContribuyenteDTO a partir de un objeto
+     * Contribuyente.
+     *
+     * @param contribuyente El contribuyente del cual se inicializarán los datos
+     * del ContribuyenteDTO.
+     */
     public ContribuyenteDTO(Contribuyente contribuyente) {
         this.id = contribuyente.getId();
         this.rfc = contribuyente.getRfc();
@@ -102,7 +123,7 @@ public class ContribuyenteDTO {
         this.tramites = contribuyente.getTramites();
         this.vehiculos = contribuyente.getVehiculos();
     }
-    
+
     /**
      * Obtiene el ID del contribuyente.
      *
@@ -247,18 +268,38 @@ public class ContribuyenteDTO {
         this.discapacidad = discapacidad;
     }
 
+    /**
+     * Obtiene la lista de trámites asociados al contribuyente.
+     *
+     * @return La lista de trámites asociados al contribuyente.
+     */
     public List<Tramite> getTramites() {
         return tramites;
     }
 
+    /**
+     * Establece la lista de trámites asociados al contribuyente.
+     *
+     * @param tramites La lista de trámites a establecer.
+     */
     public void setTramites(List<Tramite> tramites) {
         this.tramites = tramites;
     }
 
+    /**
+     * Obtiene la lista de vehículos asociados al contribuyente.
+     *
+     * @return La lista de vehículos asociados al contribuyente.
+     */
     public List<Vehiculo> getVehiculos() {
         return vehiculos;
     }
 
+    /**
+     * Establece la lista de vehículos asociados al contribuyente.
+     *
+     * @param vehiculos La lista de vehículos a establecer.
+     */
     public void setVehiculos(List<Vehiculo> vehiculos) {
         this.vehiculos = vehiculos;
     }

@@ -1,6 +1,5 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.excepciones;
 
-
 /**
  * Excepción personalizada para manejar errores relacionados con la validación de DTO (Data Transfer Objects).
  * Esta excepción puede ser lanzada cuando ocurren errores durante la validación de los datos dentro de un DTO.
