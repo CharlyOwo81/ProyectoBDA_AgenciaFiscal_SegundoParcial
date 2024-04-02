@@ -17,7 +17,7 @@ import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.Persistencia
  * @author Gamaliel Armenta
  * @author Roberto García
  */
-public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO{
+public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO {
 
     private final IConexion conexion;
 
@@ -127,8 +127,8 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO{
 
         return contribuyentes;
     }
-    
-    public List<Contribuyente> buscarContribuyenteNombre(String nombre) throws PersistenciaException{
+
+    public List<Contribuyente> buscarContribuyenteNombre(String nombre) throws PersistenciaException {
         EntityManager entityManager = this.conexion.crearConexion();
         // Objeto constructor de consultas
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -153,6 +153,26 @@ public class BuscarContribuyenteDAO implements IBuscarContribuyenteDAO{
             throw new PersistenciaException("No se encontró ningún contribuyente con el nombre proporcionado");
         } else {
             return contribuyentes; // Devolver el primer contribuyente encontrado
+        }
+    }
+
+    @Override
+    public List<Contribuyente> buscarContribuyente(Integer anio) throws PersistenciaException {
+        EntityManager entityManager = this.conexion.crearConexion();
+        String jpqlQuery = "SELECT c FROM Contribuyente c WHERE FUNCTION('YEAR', c.fechaNacimiento) = :anioBuscado";
+
+        TypedQuery<Contribuyente> query = entityManager.createQuery(jpqlQuery, Contribuyente.class);
+        query.setParameter("anioBuscado", anio);
+        
+        List<Contribuyente> contribuyentes = query.getResultList();
+
+        entityManager.close();
+
+        // Verificar si se encontró algún contribuyente con el ID dado
+        if (contribuyentes.isEmpty()) {
+            throw new PersistenciaException("No se encontró ningún contribuyente\ncon el año de nacimiento proporcionado");
+        } else {
+            return contribuyentes;
         }
     }
 

@@ -23,7 +23,7 @@ public class BuscarPlacasBO implements IBuscarPlacasBO{
     public PlacasViejasDTO buscarPlacas() throws PersistenciaException{
         PlacasDAO placasDAO = new PlacasDAO();
         Placa placa = new Placa(placasViejasDTO.getNumeroPlacas(), null, null, null);
-        placa = placasDAO.buscarPlacas(placa);
+        placa = placasDAO.buscarPlacasVigentes(placa);
         AutomovilNuevoDTO automovilNuevoDTO = new AutomovilNuevoDTO(placa.getVehiculo().getId());
         ContribuyenteDTO contribuyenteDTO = new ContribuyenteDTO(placa.getContribuyente().getId());
         placasViejasDTO = new PlacasViejasDTO(

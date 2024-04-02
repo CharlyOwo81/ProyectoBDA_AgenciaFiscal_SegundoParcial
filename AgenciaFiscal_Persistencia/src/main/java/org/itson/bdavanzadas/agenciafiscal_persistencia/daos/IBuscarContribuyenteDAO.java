@@ -34,5 +34,7 @@ public interface IBuscarContribuyenteDAO {
     
 //    public Integer calcularEdad(Contribuyente contribuyente) throws PersistenciaException;
      public List<Contribuyente> buscarContribuyenteNombre(String nombre) throws PersistenciaException;
+     
+     public List<Contribuyente> buscarContribuyente(Integer anio) throws PersistenciaException;
 }
 

@@ -70,6 +70,38 @@ public class PlacasDAO implements IPlacasDAO {
     }
 
     @Override
+    public Placa buscarPlacasVigentes(Placa placa) throws PersistenciaException {
+        EntityManager entityManager = conexion.crearConexion();
+
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+
+        CriteriaQuery<Placa> criteriaQuery = criteriaBuilder.createQuery(Placa.class);
+
+        Root<Placa> root = criteriaQuery.from(Placa.class);
+
+        criteriaQuery.select(root)
+                .where(
+                        criteriaBuilder.and(
+                                criteriaBuilder.equal(root.get("numeroPlacas"), placa.getNumeroPlacas()),
+                                criteriaBuilder.isNull(root.get("fechaRecepcion"))
+                        )
+                );
+        // Consulta construida
+        TypedQuery<Placa> query = entityManager.createQuery(criteriaQuery);
+        // Obtener el resultado de la consulta
+        List<Placa> placas = query.getResultList();
+
+        entityManager.close();
+
+        if (placas.isEmpty()) {
+            throw new PersistenciaException("No se encontraron ningunas placas\nvigentes con el número proporcionado");
+        } else {
+            placa = placas.getFirst();
+            return placa;
+        }
+    }
+
+    @Override
     public Placa buscarPlacasDuplicadas(Placa placa) {
         EntityManager entityManager = conexion.crearConexion();
 
@@ -100,12 +132,12 @@ public class PlacasDAO implements IPlacasDAO {
         EntityManager eManager = conexion.crearConexion();
 
         placa = buscarPlacasDuplicadas(placa);
-        
+
         // Iniciar una transacción
         eManager.getTransaction().begin();
-        
+
         placa = eManager.find(Placa.class, placa.getId());
-        
+
         placa.setFechaRecepcion(new Date());
         // Actualizar la licencia en la base de datos
 //        eManager.refresh(placa);

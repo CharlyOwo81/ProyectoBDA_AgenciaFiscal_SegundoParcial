@@ -11,6 +11,7 @@ public interface IPlacasDAO {
 
     public void registrarPlacas(Placa placa) throws Exception;
     public Placa buscarPlacas(Placa placa) throws PersistenciaException;
+    public Placa buscarPlacasVigentes(Placa placa) throws PersistenciaException;
     public Placa vencerPlaca(Placa placa) throws PersistenciaException;
     public Placa buscarPlacasDuplicadas(Placa placa);
 }
