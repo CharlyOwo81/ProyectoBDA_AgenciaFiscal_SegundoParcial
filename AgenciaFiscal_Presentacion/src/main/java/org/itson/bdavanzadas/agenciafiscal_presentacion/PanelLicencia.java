@@ -5,9 +5,7 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import javax.swing.JOptionPane;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorRfcBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
@@ -46,13 +44,13 @@ public class PanelLicencia extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnCancelar = new javax.swing.JButton();
-        btnContinuar = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
         btnTramites = new javax.swing.JButton();
         btnConsultas = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnContribuyentes = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         txtRfc = new javax.swing.JTextField();
         lblNombre = new javax.swing.JLabel();
         lblApellidoPaterno = new javax.swing.JLabel();
@@ -66,42 +64,6 @@ public class PanelLicencia extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setPreferredSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnCancelar.setBorder(null);
-        btnCancelar.setBorderPainted(false);
-        btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.setOpaque(false);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 485, 137, 40));
-
-        btnContinuar.setBorder(null);
-        btnContinuar.setBorderPainted(false);
-        btnContinuar.setContentAreaFilled(false);
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnContinuar.setOpaque(false);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 485, 137, 40));
-
-        btnBuscar.setBorder(null);
-        btnBuscar.setBorderPainted(false);
-        btnBuscar.setContentAreaFilled(false);
-        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnBuscar.setOpaque(false);
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 273, 137, 40));
 
         btnTramites.setBorder(null);
         btnTramites.setBorderPainted(false);
@@ -150,6 +112,42 @@ public class PanelLicencia extends javax.swing.JPanel {
             }
         });
         add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
+
+        btnCancelar.setBorder(null);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setOpaque(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 485, 137, 40));
+
+        btnContinuar.setBorder(null);
+        btnContinuar.setBorderPainted(false);
+        btnContinuar.setContentAreaFilled(false);
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContinuar.setOpaque(false);
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
+        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 485, 137, 40));
+
+        btnBuscar.setBorder(null);
+        btnBuscar.setBorderPainted(false);
+        btnBuscar.setContentAreaFilled(false);
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setOpaque(false);
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 273, 137, 40));
 
         txtRfc.setBackground(new java.awt.Color(250, 248, 245));
         txtRfc.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
@@ -213,7 +211,7 @@ public class PanelLicencia extends javax.swing.JPanel {
             String rfc = txtRfc.getText();
             BuscarContribyenteRFCDTO buscarContribyenteRFCDTO = new BuscarContribyenteRFCDTO(rfc);
             BuscarPorRfcBO buscarPorRfcBO = new BuscarPorRfcBO(buscarContribyenteRFCDTO);
-            
+
             try {
                 contribuyenteDTO = buscarPorRfcBO.buscarContribuyente();
                 setTextos(contribuyenteDTO);
@@ -222,27 +220,37 @@ public class PanelLicencia extends javax.swing.JPanel {
                 framePrincipal.mostrarAviso(ex.getMessage());
             } catch (PersistenciaException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
-                if (contribuyenteDTO != null) txtRfc.setText(contribuyenteDTO.getRfc());
+                if (contribuyenteDTO != null) {
+                    txtRfc.setText(contribuyenteDTO.getRfc());
+                }
             }
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas regresar?")) {            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.cambiarPanelTramites();
+        }
     }//GEN-LAST:event_btnTramitesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.cambiarPanelHistorialTipoBusqueda();
+        }
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.cambiarPanelReportesBusqueda();
+        }
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
         if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
             framePrincipal.setContribuyenteDTO(null);
-            framePrincipal.setLicenciaNuevaDTO(null);
             framePrincipal.cambiarPanelContribuyentes();
         }
 // TODO add your handling code here:

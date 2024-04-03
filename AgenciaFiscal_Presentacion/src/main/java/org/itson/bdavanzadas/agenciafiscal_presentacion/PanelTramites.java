@@ -224,7 +224,6 @@ public class PanelTramites extends javax.swing.JPanel {
         framePrincipal.cambiarPanelPlacasValidarLicencia();        // TODO add your handling code here:
     }//GEN-LAST:event_btnPlacasActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnContribuyentes;

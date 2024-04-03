@@ -164,22 +164,31 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
-        framePrincipal.cambiarPanelTramites();
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas regresar?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.cambiarPanelTramites();
+        }
     }//GEN-LAST:event_btnTramitesActionPerformed
 
     private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
-        // TODO add your handling code here:
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.cambiarPanelHistorialTipoBusqueda();
+        }
     }//GEN-LAST:event_btnConsultasActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
-        // TODO add your handling code here:
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.cambiarPanelReportesBusqueda();
+        }
     }//GEN-LAST:event_btnReportesActionPerformed
 
     private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
         if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
             framePrincipal.setContribuyenteDTO(null);
             framePrincipal.cambiarPanelContribuyentes();
-        }      // TODO add your handling code here:
+        }
     }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
@@ -191,9 +200,6 @@ public class PanelPlacasValidarLicencia extends javax.swing.JPanel {
     }//GEN-LAST:event_btnContinuarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
-        
-        
         framePrincipal.setContribuyenteDTO(null);
         framePrincipal.cambiarPanelTramites();        // TODO add your handling code here:
     }//GEN-LAST:event_btnRegresarActionPerformed

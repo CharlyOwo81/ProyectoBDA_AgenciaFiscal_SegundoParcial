@@ -1,5 +1,6 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.BuscarPorAnio;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IBuscarPorAnio;
@@ -20,6 +21,10 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
     public PanelHistorialFecha(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
         initComponents();
+        if (framePrincipal.getContribuyenteDTOs() != null) {
+            SimpleDateFormat formatoAnio = new SimpleDateFormat("yyyy");
+            txtAnio.setText(formatoAnio.format(framePrincipal.getContribuyenteDTOs().getFirst().getFechaNacimiento()));
+        }
     }
 
     /**
@@ -31,12 +36,64 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnTramites = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnContribuyentes = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
         txtAnio = new javax.swing.JTextField();
         lblFondo = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTramites.setBorder(null);
+        btnTramites.setBorderPainted(false);
+        btnTramites.setContentAreaFilled(false);
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setOpaque(false);
+        btnTramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTramitesActionPerformed(evt);
+            }
+        });
+        add(btnTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 261, 186, 47));
+
+        btnConsultas.setBorder(null);
+        btnConsultas.setBorderPainted(false);
+        btnConsultas.setContentAreaFilled(false);
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setOpaque(false);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
+        add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 308, 186, 47));
+
+        btnReportes.setBorder(null);
+        btnReportes.setBorderPainted(false);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setOpaque(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 355, 186, 47));
+
+        btnContribuyentes.setBorder(null);
+        btnContribuyentes.setBorderPainted(false);
+        btnContribuyentes.setContentAreaFilled(false);
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
+        add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
 
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
@@ -74,7 +131,6 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         framePrincipal.setPanelAnterior(null);
-
         framePrincipal.cambiarPanelHistorialTipoBusqueda();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -90,10 +146,9 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
                 framePrincipal.setContribuyenteDTOs(contribuyenteDTOs);
                 framePrincipal.setPanelAnterior(3);
                 framePrincipal.cambiarPanelHistorialSeleccion();
-            }catch(NumberFormatException e){
-                framePrincipal.mostrarAviso("El campode texto solo puede tener números");
-            } 
-            catch (PersistenciaException e) {
+            } catch (NumberFormatException e) {
+                framePrincipal.mostrarAviso("El campo de texto solo puede tener números");
+            } catch (PersistenciaException e) {
                 framePrincipal.mostrarAviso(e.getMessage());
             }
 
@@ -102,10 +157,48 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTOs(null);
+            framePrincipal.setPanelAnterior(null);
+
+            framePrincipal.cambiarPanelTramites();
+        }
+    }//GEN-LAST:event_btnTramitesActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas regresar?")) {
+            framePrincipal.setContribuyenteDTOs(null);
+            framePrincipal.setPanelAnterior(null);
+            framePrincipal.cambiarPanelHistorialTipoBusqueda();
+        }
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTOs(null);
+            framePrincipal.setPanelAnterior(null);
+            framePrincipal.cambiarPanelReportesBusqueda();
+        }
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTOs(null);
+            framePrincipal.setPanelAnterior(null);
+            framePrincipal.cambiarPanelContribuyentes();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnContribuyentes;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnReportes;
+    private javax.swing.JButton btnTramites;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JTextField txtAnio;
     // End of variables declaration//GEN-END:variables

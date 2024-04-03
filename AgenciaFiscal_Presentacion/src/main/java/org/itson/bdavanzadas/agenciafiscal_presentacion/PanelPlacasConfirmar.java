@@ -1,11 +1,8 @@
 package org.itson.bdavanzadas.agenciafiscal_presentacion;
 
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.AgregarAutomovilBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IAgregarAutomovilBO;
-import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IRegistrarLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IRegistrarPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.IVencerPlacasBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.RegistrarPlacasBO;
@@ -30,6 +27,8 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     /**
      * Creates new form panelPlacasConfirmar
+     *
+     * @param framePrincipal
      */
     public PanelPlacasConfirmar(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
@@ -53,6 +52,10 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnTramites = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnContribuyentes = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         lblTipoTramite = new javax.swing.JLabel();
@@ -62,6 +65,54 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTramites.setBorder(null);
+        btnTramites.setBorderPainted(false);
+        btnTramites.setContentAreaFilled(false);
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setOpaque(false);
+        btnTramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTramitesActionPerformed(evt);
+            }
+        });
+        add(btnTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 261, 186, 47));
+
+        btnConsultas.setBorder(null);
+        btnConsultas.setBorderPainted(false);
+        btnConsultas.setContentAreaFilled(false);
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setOpaque(false);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
+        add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 308, 186, 47));
+
+        btnReportes.setBorder(null);
+        btnReportes.setBorderPainted(false);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setOpaque(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 355, 186, 47));
+
+        btnContribuyentes.setBorder(null);
+        btnContribuyentes.setBorderPainted(false);
+        btnContribuyentes.setContentAreaFilled(false);
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
+        add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
 
         btnConfirmar.setBorder(null);
         btnConfirmar.setBorderPainted(false);
@@ -126,6 +177,45 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas regresar?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+            framePrincipal.setPlacasViejasDTO(null);
+            framePrincipal.setPlacasNuevasDTO(null);
+            framePrincipal.cambiarPanelTramites();
+        }
+    }//GEN-LAST:event_btnTramitesActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+            framePrincipal.setPlacasViejasDTO(null);
+            framePrincipal.setPlacasNuevasDTO(null);
+            framePrincipal.cambiarPanelHistorialTipoBusqueda();
+        }
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+            framePrincipal.setPlacasViejasDTO(null);
+            framePrincipal.setPlacasNuevasDTO(null);
+            framePrincipal.cambiarPanelReportesBusqueda();
+        }
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+            framePrincipal.setPlacasViejasDTO(null);
+            framePrincipal.cambiarPanelContribuyentes();
+        }
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
+
     private void registrarPlacas() throws PersistenciaException {
         placasNuevasDTO.setContribuyenteDTO(contribuyenteDTO);
         IRegistrarPlacasBO registrarPlacasBO = new RegistrarPlacasBO(placasNuevasDTO);
@@ -153,14 +243,18 @@ public class PanelPlacasConfirmar extends javax.swing.JPanel {
         }
     }
 
-    private void vencerPlacas() throws PersistenciaException{
+    private void vencerPlacas() throws PersistenciaException {
         IVencerPlacasBO vencerPlacasBO = new VencerPlacasBO(placasViejasDTO);
         placasViejasDTO = vencerPlacasBO.vencerPlacas();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnContribuyentes;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnReportes;
+    private javax.swing.JButton btnTramites;
     private javax.swing.JLabel lblCosto;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblTipoTramite;

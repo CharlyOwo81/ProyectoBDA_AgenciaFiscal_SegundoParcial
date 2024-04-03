@@ -130,7 +130,7 @@ public class PanelHistorialTipoBusqueda extends javax.swing.JPanel {
                 btnFechaActionPerformed(evt);
             }
         });
-        add(btnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 348, 315, 20));
+        add(btnFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 348, 299, 20));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/panelHistorialTipoBusqueda.png"))); // NOI18N
         add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

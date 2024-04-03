@@ -38,19 +38,95 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnTramites = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnContribuyentes = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         txtNumeroSerie = new javax.swing.JTextField();
         txtMarca = new javax.swing.JTextField();
         txtLinea = new javax.swing.JTextField();
         txtModelo = new javax.swing.JTextField();
         txtColor = new javax.swing.JTextField();
-        btnContinuar = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
         lblCaracteresNumSerie = new javax.swing.JLabel();
         lblFondo = new javax.swing.JLabel();
 
         setMaximumSize(new java.awt.Dimension(1000, 580));
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnTramites.setBorder(null);
+        btnTramites.setBorderPainted(false);
+        btnTramites.setContentAreaFilled(false);
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setOpaque(false);
+        btnTramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTramitesActionPerformed(evt);
+            }
+        });
+        add(btnTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 261, 186, 47));
+
+        btnConsultas.setBorder(null);
+        btnConsultas.setBorderPainted(false);
+        btnConsultas.setContentAreaFilled(false);
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setOpaque(false);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
+        add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 308, 186, 47));
+
+        btnReportes.setBorder(null);
+        btnReportes.setBorderPainted(false);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setOpaque(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 355, 186, 47));
+
+        btnContribuyentes.setBorder(null);
+        btnContribuyentes.setBorderPainted(false);
+        btnContribuyentes.setContentAreaFilled(false);
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
+        add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
+
+        btnContinuar.setBorder(null);
+        btnContinuar.setBorderPainted(false);
+        btnContinuar.setContentAreaFilled(false);
+        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContinuar.setOpaque(false);
+        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContinuarActionPerformed(evt);
+            }
+        });
+        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 463, 137, 40));
+
+        btnCancelar.setBorder(null);
+        btnCancelar.setBorderPainted(false);
+        btnCancelar.setContentAreaFilled(false);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setOpaque(false);
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 463, 137, 40));
 
         txtNumeroSerie.setBackground(new java.awt.Color(250, 248, 245));
         txtNumeroSerie.setFont(new java.awt.Font("Montserrat Medium", 0, 16)); // NOI18N
@@ -81,30 +157,6 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
         txtColor.setToolTipText("");
         txtColor.setName(""); // NOI18N
         add(txtColor, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 408, 201, 30));
-
-        btnContinuar.setBorder(null);
-        btnContinuar.setBorderPainted(false);
-        btnContinuar.setContentAreaFilled(false);
-        btnContinuar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnContinuar.setOpaque(false);
-        btnContinuar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnContinuarActionPerformed(evt);
-            }
-        });
-        add(btnContinuar, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 463, 137, 40));
-
-        btnCancelar.setBorder(null);
-        btnCancelar.setBorderPainted(false);
-        btnCancelar.setContentAreaFilled(false);
-        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCancelar.setOpaque(false);
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(345, 463, 137, 40));
 
         lblCaracteresNumSerie.setFont(new java.awt.Font("Montserrat", 0, 16)); // NOI18N
         lblCaracteresNumSerie.setForeground(new java.awt.Color(77, 77, 77));
@@ -139,6 +191,41 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
         framePrincipal.cambiarPanelPlacasTipoAutomovil();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas regresar?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+            framePrincipal.cambiarPanelTramites();
+        }
+    }//GEN-LAST:event_btnTramitesActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+
+            framePrincipal.cambiarPanelHistorialTipoBusqueda();
+        }
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+
+            framePrincipal.cambiarPanelReportesBusqueda();
+        }
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setContribuyenteDTO(null);
+            framePrincipal.setAutomovilNuevoDTO(null);
+
+            framePrincipal.cambiarPanelContribuyentes();
+        }
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
+
     private boolean validarCamposVacios() {
         JTextField[] campos = {txtNumeroSerie, txtMarca, txtLinea, txtColor, txtModelo};
 
@@ -159,7 +246,7 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
                 txtModelo.getText());
     }
 
-    private void agregarListener(){
+    private void agregarListener() {
         txtNumeroSerie.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -182,19 +269,23 @@ public class PanelPlacasAgregarAutomovil extends javax.swing.JPanel {
             }
         });
     }
-    
-    private void setTextos(){
+
+    private void setTextos() {
         txtNumeroSerie.setText(automovilNuevoDTO.getNumeroSerie());
         txtMarca.setText(automovilNuevoDTO.getMarca());
         txtLinea.setText(automovilNuevoDTO.getLinea());
         txtModelo.setText(automovilNuevoDTO.getModelo());
         txtColor.setText(automovilNuevoDTO.getColor());
-        
+
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnConsultas;
     private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnContribuyentes;
+    private javax.swing.JButton btnReportes;
+    private javax.swing.JButton btnTramites;
     private javax.swing.JLabel lblCaracteresNumSerie;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JTextField txtColor;
