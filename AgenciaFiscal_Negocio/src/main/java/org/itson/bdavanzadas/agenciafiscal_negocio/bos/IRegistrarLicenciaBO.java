@@ -1,6 +1,7 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -22,5 +23,5 @@ public interface IRegistrarLicenciaBO {
      * @throws PersistenciaException Si ocurre algún error durante el proceso de
      * persistencia.
      */
-    public void registrarLicencia(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException;
+    public void registrarLicencia(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException, ValidacionDTOException;
 }

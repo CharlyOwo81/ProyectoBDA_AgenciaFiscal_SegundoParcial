@@ -1,7 +1,9 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
+import java.util.Date;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.BuscarContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.RegistrarLicenciaDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
@@ -43,15 +45,17 @@ public class RegistrarLicenciaBO implements IRegistrarLicenciaBO {
      * persistencia.
      */
     @Override
-    public void registrarLicencia(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException {
+    public void registrarLicencia(ContribuyenteDTO contribuyenteDTO) throws PersistenciaException, ValidacionDTOException {
         BuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
 
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(contribuyenteDTO.getRfc());
-//        Integer edadContribuyente = buscarContribuyenteDAO.calcularEdad(contribuyente);
 
-//        if (edadContribuyente < 18) {
-//            throw new PersistenciaException("El contribuyente es menor de edad para obtener la licencia");
-//        }
+        // Validación de edad mínima
+        Integer edadMinimaRequerida = 18;
+        Date fechaNacimiento = contribuyente.getFechaNacimiento();
+        Integer edad = CalcularEdadContribuyente.calcularEdad(fechaNacimiento);
+        CalcularEdadContribuyente.validarEdad(edad, edadMinimaRequerida);
+
         Licencia licencia = new Licencia(
                 licenciaNuevaDTO.getVigencia(),
                 licenciaNuevaDTO.getTipoLicencia(),
@@ -59,7 +63,6 @@ public class RegistrarLicenciaBO implements IRegistrarLicenciaBO {
                 licenciaNuevaDTO.getCosto(),
                 licenciaNuevaDTO.getFechaEmision(),
                 contribuyente);
-
         RegistrarLicenciaDAO registrarLicenciaDAO = new RegistrarLicenciaDAO();
         registrarLicenciaDAO.registrarLicencia(licencia);
     }

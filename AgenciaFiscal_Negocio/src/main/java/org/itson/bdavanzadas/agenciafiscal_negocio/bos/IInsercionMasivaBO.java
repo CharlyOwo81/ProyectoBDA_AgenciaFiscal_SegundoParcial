@@ -22,5 +22,5 @@ public interface IInsercionMasivaBO {
      * de datos, se usa Exception general ya que es la única que nos permite
      * manejar la excepcion de DatabaseException de eclipse.
      */
-    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) throws Exception;
+    public void insertar(List<ContribuyenteDTO> contribuyentesDTO);
 }

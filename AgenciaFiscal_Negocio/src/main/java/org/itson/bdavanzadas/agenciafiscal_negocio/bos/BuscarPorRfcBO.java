@@ -3,6 +3,7 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.BuscarContribyenteRFCDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.cifrado.AlgoritmoEncriptacion;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.BuscarContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.IBuscarContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
@@ -43,13 +44,17 @@ public class BuscarPorRfcBO implements IBuscarPorRfcBO {
         IBuscarContribuyenteDAO buscarContribuyenteDAO = new BuscarContribuyenteDAO();
 
         Contribuyente contribuyente = buscarContribuyenteDAO.buscarContribuyente(rfc);
+
+        // Desencriptar el teléfono
+        String telefonoDesencriptado = AlgoritmoEncriptacion.desencriptar(contribuyente.getTelefono());
+
         ContribuyenteDTO contribuyenteDTO = new ContribuyenteDTO(
                 contribuyente.getId(),
                 contribuyente.getRfc(),
                 contribuyente.getNombre(),
                 contribuyente.getApellidoPaterno(),
                 contribuyente.getApellidoMaterno(),
-                contribuyente.getTelefono(),
+                telefonoDesencriptado,
                 contribuyente.getFechaNacimiento(),
                 contribuyente.getDiscapacidad());
         return contribuyenteDTO;

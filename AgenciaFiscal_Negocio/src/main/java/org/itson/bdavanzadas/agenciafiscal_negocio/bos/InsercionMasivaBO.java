@@ -3,6 +3,7 @@ package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 import java.util.ArrayList;
 import java.util.List;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
+import org.itson.bdavanzadas.agenciafiscal_persistencia.cifrado.AlgoritmoEncriptacion;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.daos.ContribuyenteDAO;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.Contribuyente;
 
@@ -27,16 +28,18 @@ public class InsercionMasivaBO implements IInsercionMasivaBO {
      * manejar la excepcion de DatabaseException de eclipse.
      */
     @Override
-    public void insertar(List<ContribuyenteDTO> contribuyentesDTO) throws Exception {
+    public void insertar(List<ContribuyenteDTO> contribuyentesDTO){
         // Convertir DTO a entidades Contribuyente
         List<Contribuyente> contribuyentes = new ArrayList<>();
         for (ContribuyenteDTO dto : contribuyentesDTO) {
+        String telefonoEncriptado = AlgoritmoEncriptacion.encriptar(dto.getTelefono());
+
             Contribuyente contribuyente = new Contribuyente(
                     dto.getRfc(),
                     dto.getNombre(),
                     dto.getApellidoPaterno(),
                     dto.getApellidoMaterno(),
-                    dto.getTelefono(),
+                    telefonoEncriptado,
                     dto.getFechaNacimiento(),
                     dto.getDiscapacidad()
             );
