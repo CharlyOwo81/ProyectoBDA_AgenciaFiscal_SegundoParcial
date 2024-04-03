@@ -6,6 +6,7 @@ import org.itson.bdavanzadas.agenciafiscal_negocio.bos.CalcularCostoLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.bos.RegistrarLicenciaBO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.ContribuyenteDTO;
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.LicenciaNuevaDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.ContribuyenteDiscapacidad;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.dominio.TipoLicencia;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
@@ -206,6 +207,8 @@ public class PanelLicenicaAnios extends javax.swing.JPanel {
                 framePrincipal.setLicenciaNuevaDTO(licenciaNuevaDTO);
                 framePrincipal.cambiarPanelLicenciaExito();
             } catch (PersistenciaException ex) {
+                framePrincipal.mostrarAviso(ex.getMessage());
+            } catch (ValidacionDTOException ex) {
                 framePrincipal.mostrarAviso(ex.getMessage());
             }
         }
