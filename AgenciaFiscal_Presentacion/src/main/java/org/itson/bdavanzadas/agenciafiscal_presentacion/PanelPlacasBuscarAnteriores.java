@@ -24,6 +24,8 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
      */
     public PanelPlacasBuscarAnteriores(FramePrincipal framePrincipal) {
         this.framePrincipal = framePrincipal;
+        this.automovilNuevoDTO = framePrincipal.getAutomovilNuevoDTO();
+        this.placasViejasDTO= framePrincipal.getPlacasViejasDTO();
         initComponents();
         if (framePrincipal.getPlacasViejasDTO() != null) {
             setTextos();
@@ -247,7 +249,7 @@ public class PanelPlacasBuscarAnteriores extends javax.swing.JPanel {
 
     private void setTextos() {
         lblAutomovil.setText("El número de placas corresponde a un: " + automovilNuevoDTO.getMarca() + " " + automovilNuevoDTO.getLinea() + " " + automovilNuevoDTO.getModelo());
-        txtPlacas.setText(placasViejasDTO.getNumeroPlacas());
+        txtPlacas.setText(framePrincipal.getPlacasViejasDTO().getNumeroPlacas());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;

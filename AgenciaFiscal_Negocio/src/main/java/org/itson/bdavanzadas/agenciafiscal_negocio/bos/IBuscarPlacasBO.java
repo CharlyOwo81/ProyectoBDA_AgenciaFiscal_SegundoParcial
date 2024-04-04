@@ -1,6 +1,7 @@
 package org.itson.bdavanzadas.agenciafiscal_negocio.bos;
 
 import org.itson.bdavanzadas.agenciafiscal_negocio.dtos.PlacasViejasDTO;
+import org.itson.bdavanzadas.agenciafiscal_negocio.excepciones.ValidacionDTOException;
 import org.itson.bdavanzadas.agenciafiscal_persistencia.excepciones.PersistenciaException;
 
 /**
@@ -24,5 +25,5 @@ public interface IBuscarPlacasBO {
      * @throws PersistenciaException Si no se encuentran placas vigentes
      * asociadas al número de placas proporcionado.
      */
-    public PlacasViejasDTO buscarPlacas() throws PersistenciaException;
+    public PlacasViejasDTO buscarPlacas() throws PersistenciaException, ValidacionDTOException;
 }
