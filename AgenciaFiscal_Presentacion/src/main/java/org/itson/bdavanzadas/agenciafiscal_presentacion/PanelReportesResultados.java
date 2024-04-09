@@ -50,6 +50,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
 
     /**
      * Creates new form PanelReportesResultados
+     *
      * @param framePrincipal
      */
     public PanelReportesResultados(FramePrincipal framePrincipal) {
@@ -68,6 +69,10 @@ public class PanelReportesResultados extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnTramites = new javax.swing.JButton();
+        btnConsultas = new javax.swing.JButton();
+        btnReportes = new javax.swing.JButton();
+        btnContribuyentes = new javax.swing.JButton();
         btnExportar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,10 +83,58 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(1000, 580));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnTramites.setBorder(null);
+        btnTramites.setBorderPainted(false);
+        btnTramites.setContentAreaFilled(false);
+        btnTramites.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnTramites.setOpaque(false);
+        btnTramites.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTramitesActionPerformed(evt);
+            }
+        });
+        add(btnTramites, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 261, 186, 47));
+
+        btnConsultas.setBorder(null);
+        btnConsultas.setBorderPainted(false);
+        btnConsultas.setContentAreaFilled(false);
+        btnConsultas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConsultas.setOpaque(false);
+        btnConsultas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultasActionPerformed(evt);
+            }
+        });
+        add(btnConsultas, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 308, 186, 47));
+
+        btnReportes.setBorder(null);
+        btnReportes.setBorderPainted(false);
+        btnReportes.setContentAreaFilled(false);
+        btnReportes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnReportes.setOpaque(false);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
+        add(btnReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 355, 186, 47));
+
+        btnContribuyentes.setBorder(null);
+        btnContribuyentes.setBorderPainted(false);
+        btnContribuyentes.setContentAreaFilled(false);
+        btnContribuyentes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnContribuyentes.setOpaque(false);
+        btnContribuyentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnContribuyentesActionPerformed(evt);
+            }
+        });
+        add(btnContribuyentes, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 402, 186, 47));
+
         btnExportar.setBorder(null);
         btnExportar.setBorderPainted(false);
         btnExportar.setContentAreaFilled(false);
-        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnExportar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnExportar.setOpaque(false);
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,7 +146,7 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         btnRegresar.setBorder(null);
         btnRegresar.setBorderPainted(false);
         btnRegresar.setContentAreaFilled(false);
-        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegresar.setOpaque(false);
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,6 +199,44 @@ public class PanelReportesResultados extends javax.swing.JPanel {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         framePrincipal.cambiarPanelReportesBusqueda();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnTramitesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTramitesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setReporteDTO(null);
+            framePrincipal.setTipoTramiteEnum(null);
+            framePrincipal.setTramites(null);
+
+            framePrincipal.cambiarPanelTramites();
+        }
+    }//GEN-LAST:event_btnTramitesActionPerformed
+
+    private void btnConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultasActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+             framePrincipal.setReporteDTO(null);
+            framePrincipal.setTipoTramiteEnum(null);
+            framePrincipal.setTramites(null);
+            framePrincipal.cambiarPanelHistorialTipoBusqueda();
+        }
+    }//GEN-LAST:event_btnConsultasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas regresar?")) {
+             framePrincipal.setReporteDTO(null);
+            framePrincipal.setTipoTramiteEnum(null);
+            framePrincipal.setTramites(null);
+            framePrincipal.cambiarPanelReportesBusqueda();
+        }
+    }//GEN-LAST:event_btnReportesActionPerformed
+
+    private void btnContribuyentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContribuyentesActionPerformed
+        if (framePrincipal.mostrarConfirmacion("Perderás el progreso del trámite actual", "¿Deseas cambiar de módulo?")) {
+            framePrincipal.setReporteDTO(null);
+            framePrincipal.setTipoTramiteEnum(null);
+            framePrincipal.setTramites(null);
+            framePrincipal.cambiarPanelContribuyentes();
+        }
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnContribuyentesActionPerformed
 
     private void setTabla() {
         DefaultTableModel modelo = (DefaultTableModel) tblTramites.getModel();
@@ -303,9 +394,9 @@ public class PanelReportesResultados extends javax.swing.JPanel {
 
             document.close();
 
-            JOptionPane.showMessageDialog(this, "Documento PDF generado correctamente en la carpeta Descargas", "Documento PDF generado", JOptionPane.INFORMATION_MESSAGE);
+//            JOptionPane.showMessageDialog(this, "Documento PDF generado correctamente en la carpeta Descargas", "Documento PDF generado", JOptionPane.INFORMATION_MESSAGE);
         } catch (DocumentException | IOException e) {
-            e.printStackTrace();
+            framePrincipal.mostrarAviso(e.getMessage());
         }
     }
 
@@ -342,8 +433,12 @@ public class PanelReportesResultados extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultas;
+    private javax.swing.JButton btnContribuyentes;
     private javax.swing.JButton btnExportar;
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnReportes;
+    private javax.swing.JButton btnTramites;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JTable tblTramites;

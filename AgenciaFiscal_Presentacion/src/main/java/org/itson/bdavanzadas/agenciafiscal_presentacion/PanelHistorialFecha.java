@@ -131,6 +131,7 @@ public class PanelHistorialFecha extends javax.swing.JPanel {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         framePrincipal.setPanelAnterior(null);
+        framePrincipal.setContribuyenteDTOs(null);
         framePrincipal.cambiarPanelHistorialTipoBusqueda();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
